@@ -81,7 +81,7 @@ The use of computer graphics software, however, is becoming increasing popular a
 Perspective and lighting effects, for instance, are automatically handled by the software leaving more time to the artist to work on other aspects such as color coding, composition, animation or storytelling.
 The storytelling is a key element of an illustration as it is responsible of conveying the core message.
 
-Animation is a great asset for storytelling as it is great way to engage the viewer into a story and to ensure a maximum degree of comprehension.
+Animation is also widely used by scientific illustrators as it is great way to engage the viewer into a story and to ensure a maximum degree of comprehension.
 %Animated content is very powerful in illustration because it efficiently engages the viewer into the story (stupid comparison of people preferring movies to books).
 Due to the popularity of digital effects used in the movie industry over the last decades, 3D animation packages and online training became widely available thus popularizing the use of these tools by scientific illustrators.
 One notorious animated educational material is "The Inner Life of the Cell" realized in 2008 by the XVIVO medical illustration studio and appointed by Harward University.
@@ -126,7 +126,7 @@ c. Faster tools to generate story telling
 
 \section{Background}
 
-\textbf{Computational Biology to Assist Storytelling}
+\textbf{Computational Biology to Assist Scientific Illustration}
 
 %In biology the cost of wet lab experiments is significantly higher than the cost of computer-based simulations.
 %
@@ -174,17 +174,137 @@ This might be the technology that would revolutionize how to effectively communi
 
 \textbf{What is a process ? how to model it ?}
 
-The goal of a model is to describe an a complete or partial \textit{biochemical} biological process in order to simulate and analyse its functioning in more details.
-The scientist who simulate such models interested in the properties of certain species, such as concentration, reaction rates and sometimes their spatial distribution.
+One important aspect to consider if we wish to improve how visual communication is made is the storytelling creation process.
+The creation of animated illustration is a very time-consuming enterprise, it demands a lot of knowledge acquisition about physiology to come up with an accurate and satisfying storyboard.
+Moreover, this process is not streamlined and it could greatly benefit from better and more automated tools.
+For example there are several procedural descriptions of life function and some of these descriptions are also available in computerized form as simulations.
+The procedural descriptions provide information about how a given system works and this information is typically used by illustrator to manually animate the cascade of reactions that describe of process (see apoptosis).
+However the simulated data contains additionally information about how would the species actually behave throughout time, given a set of initial parameters such as which elements are present, in which quantities and also the reaction rate which may depend on the location or temperature.
+We are therefore convinced that efficiently using available data from computational biology could be the key to automatize the challenging task of storyboarding.
+The branch of biology which focuses of the study of procedural models is system biology.
+System biology models describe a complete or partial \textit{biochemical} biological process in order to simulate and analyse its functioning in more details.
+The scientist who simulate those models are interested in studying the evolution in concentration of certain species, and also sometimes their spatial distribution.
 Most commonly they use computer-based simulation programs to gauge how those properties change over time.
 Based on this information and their own knowledge they are able to formulate hypothesis which helps them to broaden their understanding of the machinery of life. 
 The models, as we understand them, describe the different interaction between species, which elements react with each other, what is the product of the reaction, and how fast do they react.
 Additionally the concentration of each individual species defines the initial state of the simulation.
-It is common to describe these interactions as a reaction network, called pathway, to visually communicate given processes in biology books for instance.
-A complete description of the reaction network can also be represented with a custom markup language (such as SBML) and then stored in a digital file and easily shared with other researchers.
+%It is common to describe these interactions as a reaction network, called pathway, to visually communicate given processes in biology books for instance.
+Complex reaction networks can also be described with a custom markup language (such as SBML) and then stored in a digital file and easily shared with other researchers.
 Digital models descriptions are also widely supported by simulation programs to facilitate the initialization procedure.
 
-The computational method employed by the simulation program can either be deterministic or non-deterministic...
+It exists several simulation methods to compute the number of species present in a system at a given time, they can be classified into two groups according to their modus operanti which can be either deterministic or stochastic.
+The deterministic methods relies on the use of differential equation solvers to deduce the concentration at a given time. 
+The result depends mostly on initial species concentration and the reaction rates.
+This type of simulation was first introduced and still remains very popular among system biologists because it is easy to compute and reliable also.
+Another type of simulation method is agent-based modeling.
+This computational method quite differs from the strictly mathematical approach, as it aims at reproducing the original reaction-diffusion behaviour of biochemical agents in three dimensional space.
+This technology was primarily developed to study and understand complex migration pattern among animal of human population.
+This concept was naturally transposed study the behaviour of chemical species as more capable computer hardware became available and affordable.
+
+With agent-based modeling, actors of the studied physiochemical phenomenon are virtually represented as a 3D point in space and subject to constant diffusion motion inspired from the diffusion speeds which was observed in vitro.
+New elements are introduced or removed following reaction events, and the scientific analysis are based on the current number of species at a given time.
+The reaction between two potential reactant is based on their local proximity and the reaction rate.
+When an elements is located closely enough, the system would evaluate the reaction probability based on the reaction rate which was observed in-vitro.
+Should a reaction event happen between one, two or more potential actors of a reaction the resulting species of the reaction will be introduced and the reactants removed.
+\textbf{(show figure)}
+In few cases also, such as modeling of signalling processes, deterministic methods do not produce reliable results because of the very low concentration of reactive agents, and agents-based modeling would be preferred.
+However a disadvantage of agent-based modeling, is the complexity of the computation.
+While solving a ordinary differential equation system if very straightforward, agent-based models take into account and simulate each single reacting entity.
+The results of such simulation can take up to days or week for larger systems, even of super computer and for this reason this methods still remain less popular than the simpler quantitative models.
+An advantage of agent-based modelling for automated storytelling however, is the availability of spatial information, which quantitative does not provide.
+In the following sections we will introduce two different techniques especially developed for automated storytelling and which make use of simulated data from deterministic and stochastic models, respectively.
+
+\subsection{Biological Structures}
+
+Structural biology is the branch of molecular biology which mainly focuses on studying the structure of proteins and nucleic acids (the form, how they look), and how they acquire their form.
+Data acquisition methods such as x-ray crystallography are widely used to read in details the atomic structure of proteins, i.e, the positions or atoms, their type and the type of bonds between them.
+Based on this information it is possible to decrypt the sequence of amino acids that forms a protein.
+The PDB was created to facilitate the sharing crystallography results of proteins, and now features an impressive collection of protein structures which is easily available to anyone for free.
+This information is vital to biologist as it allows them to understand the functioning of proteins, the structure is also to run molecular dynamics, which aims are reproducing in a computer simulation the interactions and forces that drive atom behaviour in reality.
+The shapes of proteins are tightly related to their function and therefore accurate atomic structure is also important for scientific illustrators to accurately depict the shapes of proteins.
+A few set of tools, (in the form of plugins to amination package) were developed to streamline the illustration process and generate a mesh-based representation simply from a protein description file.
+X-ray crystallography is limited in a sense that it is not capable of capturing large and complex structures such as organelles, viruses of cells in their entirety.
+Electron microscopy imaging on the other hand still does not offer enough resolution to capture the type of individual atoms which make the segmentation task between proteins extremely challenging.
+So far the spatial arrangement of protein that form greater structures such as organelles, viruses and cells was a manual a cumbersome task. 
+To fill the mesoscale gap between atomic level data acquisition, and cell level data acquisition, scientists from the Scripps Institute in San Diego have developed new sets of tools that able to procedurally construct large mesoscale structures based on input parameters, such as the shape and location of the compartment, and important information about the proteins that are present such as the shape, the number, the location and the spatial distribution.
+Their goal is to generate multi-scale models that could be used an input to run large simulation (MD or BD) for a complete or partial organism.
+Additionally the generated structure can also be used to generate accurate 3D models in animation packages, thus preventing illustrator to manually place and arrange proteins when depicting a larger protein ensemble.
+This project was a step in the direction of our vision which is to improve how visual communication of molecular biology is done.
+However the overwhelmingly large number of elements that compose large mesoscale structures begin to truly challenge animation packages, that were not design with such constraint in mind.
+While it is still possible to render still images in very high quality, real-time visualization of these models is challenging, even with simplified protein structures meshes. 
+This affects the productivity or those create the models, as well as those who are using it for illustration purposes.
+Also it this limitation somehow compromise the transition to the next generation of interactive scientific illustrations for molecular biology as current visualization fail at delivery the minimum requirement in terms of frame rates for showcasing interactive content.
+In the following sections we will present two work that aim at enabling real-time rendering and compositing of large mesoscale models using state of the art computer graphics and GPGPU techniques.
+
+\section{Related Work}
+
+Our vision is to improve visual communication for molecular biology and ultimately to implement interactive showcasing as a new media for educating the masses
+
+In the visualization literature it a exists several works that are going in a similar direction.
+
+Firstly in terms of rendering molecular structures.
+
+To begin with molecular visualization is it important to mention the different types of representations that are commonly employed.
+
+The simplest representation is the sticks model, where each bonds are represented with as line and color coding is used to indicate the atom type at the line extremities or joints.
+
+A representation which is commonly understood by a larger audience is the Van der Waals representation also known as space filling. 
+Atom are simply represented as spheres where the spherical radius correspond to the atomic radius.
+
+Molecular surface representation were introduced to reveal information that were usually not very salient in other representation, such as the presence of pockets and cavities.
+The output is usually a mesh that enclose small holes between atoms which are not accessible by solvent molecules.
+This way it is easier to identify important reaction locations that are buried inside the proteins and accessible by small reactants.
+Another popular representation is the secondary structure or cartoon representation which is highlights the properties of the proteins chains such as sheets or helices.
+
+When representing chemical elements on the mesoscale level it might not always be necessary to show too much information about the proteins such as the bonds of the secondary structure as it would introduce too much visual clutter, the shape information however is important.
+
+As polygon mesh-based data is the standard in computer graphics scientific illustrator like to use the molecular surface representation as it is compatible with their tools.
+It is also possible to set the degree of smoothness of the surface and thus reduce the high frequency details while preserving overall shape and reducing the polygon count.
+
+\textbf{(Bioblender, molecular maya, PMV, tools for illustration traditionally use meshes)}
+
+While it would be theoretically possible to use a mesh to represent all the spheres using the Van der Waals representation, the polygon count would be overly high compared to a simplified molecular surface.
+
+In most standard animation package that are supporting molecular biology mesh-based representations are used.
+
+However, in standalone and more bleeding edge molecular visualization packages, such as QuteMol is it possible to show the highly detailed Van der Waals representation with much better performance than with mesh data.
+
+Tariny et al where the first to introduce the technique of impostors for rendering molecular datasets. 
+
+The principle inspires from the well-known billboarding technique borrowed from computer graphics and games. 
+
+This method only requires two triangles to draw a perfectly smooth sphere while with the mesh-based option a few hundreds of polygons would be needed for drawing a sphere with a decent level of smoothness.
+
+
+
+
+
+
+
+
+
+
+As the size of the molecular datasets increased, new visualization methods were specifically developed to keep up with the progress. 
+
+Traditionally molecules 
+
+
+Lampe et al. [8] 
+
+The development of new modelling techniques for three dimensional molecular structures led to a rapid increase in size of the studied datasets. 
+
+To keep up with the progress, 
+pioneered real-time rendering of large-scale atomic data on consumer
+level hardware. They extended the fast billboard-based approach
+introduced by QuteMol [19], by rendering the structures per residues
+rather than per atom, thus reducing the memory bandwidth usage
+and the GPU driver overhead. Lindow et al. [11] followed-up by
+using instanced rendering to draw entire structures instead. For each
+molecule type, they generate a 3D grid of the atoms which is stored on
+the GPU, and then ray-casted upon rendering. Falk et al. [3] further
+refined the method with improved depth culling and hierarchical ray
+casting to achieve faster rendering performance for even larger scenes
+
 
 %It exists several modeling techniques that were developed to study the dynamism of a given process.
 %
@@ -217,13 +337,7 @@ The computational method employed by the simulation program can either be determ
 %
 %On the other hands kinetic modeling is very fast to compute but does no provide spatial information.
 
-\subsection{Biological Structures}
 
-Our cells are composed principally of proteins, lipids and nucleic acids bathing of a sea of very small reactants.
-They all are made of single atoms, and the way atom are assembled together defines their structures.
-Structural biologist have made gigantic efforts over the decade to capture protein and fiber structures and to make the results available in public online databases (PDB).
-Acquisition method are still unable to precisely capture large structures such are entire organelles and cells (mesoscale gap).
-Using simulation methods experts are attempting to reproduce the structure of larger elements based on the observation of the quantities and locations of given proteins.
 
 %In biology an increasing number of experiments are conducted in silico because of the gain in time and running costs of in vivo experiements.
 %
