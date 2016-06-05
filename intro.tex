@@ -238,72 +238,68 @@ In the following sections we will present two work that aim at enabling real-tim
 
 \section{Related Work}
 
-Our vision is to improve visual communication for molecular biology and ultimately to implement interactive showcasing as a new media for educating the masses
+Our vision is to improve visual communication for molecular biology, and ultimately to promote interactive showcasing as the best media for educating the masses about biology.
+In the visualization literature it a exists several works that are going in a similar direction both in the field visualization of molecular structures and processes also.
 
-In the visualization literature it a exists several works that are going in a similar direction.
+To begin with related work about molecular visualization as a structure is it important to firstly mention the different types of representations that are most commonly used by scientists.
+The simplest representation is the sticks model, where each bonds are represented as a line and color coding is used to indicate the atom type at the line extremities or joints.
+A representation which is commonly understood by a larger audience is the Van der Waals surface also known as space filling. 
+Atom are simply represented as spheres whose spherical radius corresponds to the atomic radius.
+Another popular representation among structural biologists is the secondary structure or ribbon diagram, and is it used to reveal properties of the proteins backbone such as sheets or helices.
+Finally, the molecular surface is used to show a continuous surface that closely surround the atoms of a proteins but that also close small holes between atoms which are not accessible by small solvent molecules.
+This method was first introduced to reveal information that is not salient enough with other types of representation, such as the presence of pockets and cavities buried in the protein structure that can potentially host and important reaction site.
+Several molecular surfaces techniques have been developed, each one with their own drawbacks and advantages.
+SAS[] and Gaussian[] are easy to compute but offer less informative details.
+SES[] and MSS[] are more complex to compute and also provide more surface details which can facilitate the cavity and pocket exploration.
+In molecular visualization packages, molecular surfaces are often stored as polygon meshes, for the simple reason that it is the standard shape representation in computer graphics.
+Scientific illustrators also like to use surface meshes in their work because they can easily import and render the data with 3D animation packages.
+BioBlender[], Molecular Maya[], ePMV[], are examples of plugins for animation packages that were specifically developed to ease the loading and rendering of molecular surface meshes.
+%\textit{and also because smooth surfaces have a much lower overhead than highly tessellated Van-der-Waals surfaces}
+While meshes are often used because of practical reason, they also have a significant computational overhead when featuring a high level of asperity details such as with SES or Van-der-Walls because of the large number of polygon needed to smoothly discretize a complex surface.
+In the visualization literature it exists a few techniques that were developed to overcome this limitation by using a ray-casting approach and grid-based supporting structures.
+Since the recent democratization of domestic and massively parallel computing processors (GPU) it has been possible to implement efficient SES computing and rendering methods [LBPH10,KGE11].
+These methods are able to render the SES for dynamic data sets of around 100k atoms interactively on current hardware.
+Subsequently, Krone et al. implemented a method allowing smooth rendering of Gaussian surfaces for large and dynamic molecular data based on a massively parallel GPU algorithm. 
+%Atoms are stored in a 3D grid, which allows fast accumulation of Gaussian density for each voxel.
+While their technique only supports Gaussian surfaces, which offer less details than SES, they are also able to render much larger dynamic datasets composed of several million atoms.
+Based on the idea that highly detailed molecular surfaces are only needed when closely observing a protein, Parulek et al. introduced the concept of continuous level-of-detail for molecular surfaces.
+They seamlessly transit from highly detailed (SES) to less detailed (Gaussian) surface rendering based on the distance to the camera.
+Because the most complex operation is only performed for a small region of the overall protein this method provides faster rendering speeds while also reducing visual complexity caused by reduce unnecessary surface details the context area.
 
-Firstly in terms of rendering molecular structures.
-
-To begin with molecular visualization is it important to mention the different types of representations that are commonly employed.
-
-The simplest representation is the sticks model, where each bonds are represented with as line and color coding is used to indicate the atom type at the line extremities or joints.
-
-A representation which is commonly understood by a larger audience is the Van der Waals representation also known as space filling. 
-Atom are simply represented as spheres where the spherical radius correspond to the atomic radius.
-
-Molecular surface representation were introduced to reveal information that were usually not very salient in other representation, such as the presence of pockets and cavities.
-The output is usually a mesh that enclose small holes between atoms which are not accessible by solvent molecules.
-This way it is easier to identify important reaction locations that are buried inside the proteins and accessible by small reactants.
-Another popular representation is the secondary structure or cartoon representation which is highlights the properties of the proteins chains such as sheets or helices.
-
-When representing chemical elements on the mesoscale level it might not always be necessary to show too much information about the proteins such as the bonds of the secondary structure as it would introduce too much visual clutter, the shape information however is important.
-
-As polygon mesh-based data is the standard in computer graphics scientific illustrator like to use the molecular surface representation as it is compatible with their tools.
-It is also possible to set the degree of smoothness of the surface and thus reduce the high frequency details while preserving overall shape and reducing the polygon count.
-
-\textbf{(Bioblender, molecular maya, PMV, tools for illustration traditionally use meshes)}
-
-While it would be theoretically possible to use a mesh to represent all the spheres using the Van der Waals representation, the polygon count would be overly high compared to a simplified molecular surface.
-
-In most standard animation package that are supporting molecular biology mesh-based representations are used.
-
-However, in standalone and more bleeding edge molecular visualization packages, such as QuteMol is it possible to show the highly detailed Van der Waals representation with much better performance than with mesh data.
-
-Tariny et al where the first to introduce the technique of impostors for rendering molecular datasets. 
-
-The principle inspires from the well-known billboarding technique borrowed from computer graphics and games. 
-
-This method only requires two triangles to draw a perfectly smooth sphere while with the mesh-based option a few hundreds of polygons would be needed for drawing a sphere with a decent level of smoothness.
+The trend in recent molecular surface visualization methods clearly leans towards faster and highly optimized GPU implementations.
+The supporting structures are three dimensional grids because operations performed on such structures can be easily parallelized, thus more efficient.
+The use of uniform spatial partitioning schemes however limits the overall size of the scene, as the complexity and memory usage increases exponentially as the resolution of 3D grid increases, which is why such techniques were not implemented in 3D animation packages and employed by scientific illustrators.
+To overcome this size limitation of the scene, De Hera Chomski[] implemented a CPU-based ray tracing software based on a bounding volume hierarchy (BVH) instead.
+The use of such acceleration structure enable real-time rendering of large and complex scenes, however dynamic data requires constant update of the BVH which adds additional complex work on top of the rendering and limits the real-time capability of the method.
 
 
+Compared to highly detailed molecular surfaces, the Van der Waals representation also provides important information about atomic composition of proteins which is not clearly visible with molecular surfaces.
+While it is perfectly possible to use a mesh to represent the surface of every atoms of a protein, the resulting polygon count would have to be very high in order to get a smooth surface with decent quality, which may overload the rendering pipeline and affect real-time performance.
+% which is why illustrators often use smooth and simpler surface representations such as the Gaussian instead.
+However, a few bleeding edge molecular visualization tools, such as QuteMol[] are able the render highly detailed Van der Waals protein structures at a much lower cost than even simple Gaussian surface meshes.
+The rendering method is inspired from 2D billboards, widely used in computer graphics and games, and consists of drawing camera-facing 2D sphere impostors rather than tessellated 3D spheres when rendering individual atoms.
+Impostors only require two triangles to draw a perfectly smooth sphere, while with the mesh-based option a few hundreds of polygons are usually needed to draw a sphere with a decent level of smoothness.
+With this method it was possible to interactively render large datasets (up to xxxk atoms) with very high quality details.
+While the performance gain of using sphere impostors compared to mesh-data was a game changer for real-time rendering of protein structures, the overwhelmingly increasing size of available datasets is constantly calling for more efficient rendering methods.
+Lampe et al. [8] pioneered real-time rendering of large-scale atomic data on consumer level hardware. 
+They extended the fast billboard-based approach introduced by QuteMol [19], and used the geometry shader to instantiate entire residues rather than single atom, thus reducing the memory bandwidth usage and the GPU driver overhead. 
+
+Grottel at al suggested to improve the rendering speed of large particle-based dataset by subdividing the space and performing occlusion culling to particle chunks that currently garanteed to be hidden, based on the depth information optained in the previous frame.
+
+Lindow et al. [11] followed-up the work of Lampe et al. by using instanced rendering of entire protein structures instead. 
+For each molecule type, they precompute a 3D grid containing the atomic structure and which is stored on the GPU.
+Upon the drawing of a protein the bounding box is drawn first, then during the per-fragment operation rays are cast through the grid, in order to find first atom which is hit by the ray.
+
+Falk et al. [3] further refined the method by introducing depth culling and level-of-detail for the grid structures to achieve faster rendering performance for even larger scenes.
+
+Up to this point the size of the supported datasets was up to several billion atoms large, for interactive frame rates (4 fps).
+
+While this was already a great achievement, the low-frequency refresh rates still do not allow to offer a comfortable user experience as the minimum requirement in terms of refresh rates is set to be between 20 and 60 Hz on average for games, and up to 75 Hz for VR content.
 
 
+Also, most of the techniques presented so far are specificaly designed for protein information, however nucleic acids and fibers are essential components of the machinery of life also.
 
-
-
-
-
-
-As the size of the molecular datasets increased, new visualization methods were specifically developed to keep up with the progress. 
-
-Traditionally molecules 
-
-
-Lampe et al. [8] 
-
-The development of new modelling techniques for three dimensional molecular structures led to a rapid increase in size of the studied datasets. 
-
-To keep up with the progress, 
-pioneered real-time rendering of large-scale atomic data on consumer
-level hardware. They extended the fast billboard-based approach
-introduced by QuteMol [19], by rendering the structures per residues
-rather than per atom, thus reducing the memory bandwidth usage
-and the GPU driver overhead. Lindow et al. [11] followed-up by
-using instanced rendering to draw entire structures instead. For each
-molecule type, they generate a 3D grid of the atoms which is stored on
-the GPU, and then ray-casted upon rendering. Falk et al. [3] further
-refined the method with improved depth culling and hierarchical ray
-casting to achieve faster rendering performance for even larger scenes
+DNA project french guys
 
 
 %It exists several modeling techniques that were developed to study the dynamism of a given process.
