@@ -241,6 +241,8 @@ In the following sections we will present two work that aim at enabling real-tim
 Our vision is to improve visual communication for molecular biology, and ultimately to promote interactive showcasing as the best media for educating the masses about biology.
 In the visualization literature it a exists several works that are going in a similar direction both in the field visualization of molecular structures and processes also.
 
+\textbf{Structures}
+
 To begin with related work about molecular visualization as a structure is it important to firstly mention the different types of representations that are most commonly used by scientists.
 The simplest representation is the sticks model, where each bonds are represented as a line and color coding is used to indicate the atom type at the line extremities or joints.
 A representation which is commonly understood by a larger audience is the Van der Waals surface also known as space filling. 
@@ -266,40 +268,73 @@ Based on the idea that highly detailed molecular surfaces are only needed when c
 They seamlessly transit from highly detailed (SES) to less detailed (Gaussian) surface rendering based on the distance to the camera.
 Because the most complex operation is only performed for a small region of the overall protein this method provides faster rendering speeds while also reducing visual complexity caused by reduce unnecessary surface details the context area.
 
-The trend in recent molecular surface visualization methods clearly leans towards faster and highly optimized GPU implementations.
-The supporting structures are three dimensional grids because operations performed on such structures can be easily parallelized, thus more efficient.
-The use of uniform spatial partitioning schemes however limits the overall size of the scene, as the complexity and memory usage increases exponentially as the resolution of 3D grid increases, which is why such techniques were not implemented in 3D animation packages and employed by scientific illustrators.
-To overcome this size limitation of the scene, De Hera Chomski[] implemented a CPU-based ray tracing software based on a bounding volume hierarchy (BVH) instead.
-The use of such acceleration structure enable real-time rendering of large and complex scenes, however dynamic data requires constant update of the BVH which adds additional complex work on top of the rendering and limits the real-time capability of the method.
-
+%The trend in recent molecular surface visualization methods clearly leans towards faster and highly optimized GPU implementations.
+%The supporting structures are three dimensional grids because operations performed on such structures can be easily parallelized, thus more efficient.
+%The use of uniform spatial partitioning schemes however limits the overall size of the scene, as the complexity and memory usage increases exponentially as the resolution of 3D grid increases, which is why such techniques were not implemented in 3D animation packages and employed by scientific illustrators.
+%To overcome this size limitation of the scene, De Hera Chomski[] implemented a CPU-based ray tracing software based on a bounding volume hierarchy (BVH) instead.
+%The use of such acceleration structure enable real-time rendering of large and complex scenes, however dynamic data requires constant update of the BVH which adds additional complex work on top of the rendering and limits the real-time capability of the method.
 
 Compared to highly detailed molecular surfaces, the Van der Waals representation also provides important information about atomic composition of proteins which is not clearly visible with molecular surfaces.
-While it is perfectly possible to use a mesh to represent the surface of every atoms of a protein, the resulting polygon count would have to be very high in order to get a smooth surface with decent quality, which may overload the rendering pipeline and affect real-time performance.
+Although it is possible to use a mesh to represent the surface of every atoms of a protein, the resulting polygon count would have to be very high in order to get a smooth surface with decent quality, which may overload the rendering pipeline and affect real-time performance.
 % which is why illustrators often use smooth and simpler surface representations such as the Gaussian instead.
-However, a few bleeding edge molecular visualization tools, such as QuteMol[] are able the render highly detailed Van der Waals protein structures at a much lower cost than even simple Gaussian surface meshes.
-The rendering method is inspired from 2D billboards, widely used in computer graphics and games, and consists of drawing camera-facing 2D sphere impostors rather than tessellated 3D spheres when rendering individual atoms.
-Impostors only require two triangles to draw a perfectly smooth sphere, while with the mesh-based option a few hundreds of polygons are usually needed to draw a sphere with a decent level of smoothness.
-With this method it was possible to interactively render large datasets (up to xxxk atoms) with very high quality details.
-While the performance gain of using sphere impostors compared to mesh-data was a game changer for real-time rendering of protein structures, the overwhelmingly increasing size of available datasets is constantly calling for more efficient rendering methods.
+To overcome this limitation, Tarini et al. introduced a novel visualization technique that is able the render highly detailed Van der Waals protein structures at a much lower cost than even simple Gaussian surface meshes.
+They were able to interactively render large datasets (up to xxxk atoms) with very high quality details.
+The rendering method is inspired from 2D billboards, widely used in computer graphics and games, and consists of drawing camera-facing 2D sphere impostors rather than tessellated 3D spheres when rendering individual atoms, thus reducing considerable the polygon count.
+This method inspired several follow-up work that address the challenge of the constantly increasing size of available datasets in molecular biology.
 Lampe et al. [8] pioneered real-time rendering of large-scale atomic data on consumer level hardware. 
-They extended the fast billboard-based approach introduced by QuteMol [19], and used the geometry shader to instantiate entire residues rather than single atom, thus reducing the memory bandwidth usage and the GPU driver overhead. 
-
-Grottel at al suggested to improve the rendering speed of large particle-based dataset by subdividing the space and performing occlusion culling to particle chunks that currently garanteed to be hidden, based on the depth information optained in the previous frame.
-
+They extended the fast billboard-based approach introduced by Tarini et al. [19], and used the geometry shader to instantiate entire residues rather than single atom, thus reducing the memory bandwidth usage and the GPU driver overhead. 
+Grottel at al. proposed to improve the rendering speed of large particle-based datasets by implementing occlusion culling to discard hidden particle chunks from the rendering pipeline, based on the depth information obtained in the previous frame.
 Lindow et al. [11] followed-up the work of Lampe et al. by using instanced rendering of entire protein structures instead. 
 For each molecule type, they precompute a 3D grid containing the atomic structure and which is stored on the GPU.
 Upon the drawing of a protein the bounding box is drawn first, then during the per-fragment operation rays are cast through the grid, in order to find first atom which is hit by the ray.
-
 Falk et al. [3] further refined the method by introducing depth culling and level-of-detail for the grid structures to achieve faster rendering performance for even larger scenes.
-
 Up to this point the size of the supported datasets was up to several billion atoms large, for interactive frame rates (4 fps).
+Up to this point, the rendering methods presented in the literature have reached unprecedented levels of performance, in terms of size of supported dataset or rendering speed.
+However, the minimum requirement for a comfortable user experience is between 20 and 60 Hz on average games, and higher than 60 Hz for VR content, which is still out of reach for very large datasets (10 billions atoms at 4 fps).
 
-While this was already a great achievement, the low-frequency refresh rates still do not allow to offer a comfortable user experience as the minimum requirement in terms of refresh rates is set to be between 20 and 60 Hz on average for games, and up to 75 Hz for VR content.
+Moreover, most of the supported methods are specifically designed for efficient rendering of macro molecules such as protein
+None of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit much more complex organization, such as lipid membranes, nucleic acids or fibers, which ought to be taken into account for a truer depiction of molecular landscapes.
+Indeed, the properties of these structures can represent a challenge, especially for dynamic data because the assembling blocks or these structures are considerable smaller and also more numerous than with protein data.
+Several work focus on the modelling and visualization of such structures, life explorer [] is a visualization software designed for interactive modelling and viewing of DNA strands, lipid wrapper is a tool designed to generate lipid membranes based on arbitrary meshes.
+However, none of these tools feature a visualization method that has the ambition to support overwhelmingly large datasets such as entire cells and which we deem crucial to achieve interactive and explanatory visualization of molecular biology.
+
+This review of the literature about molecular structure visualization highlights the needs to design new solutions that would:
+
+a) Support very large datasets up to the size of a single cell
+b) Support all type of molecular structures efficiently
+c) Offer true real-time performances necessary for interactive showcases
+d) Provide tools that are potentially embedded with animation packages or game engine creation package for optimized transition with various actors of the illustration process.
 
 
-Also, most of the techniques presented so far are specificaly designed for protein information, however nucleic acids and fibers are essential components of the machinery of life also.
+\textbf{Processes}
 
-DNA project french guys
+%Modeling systems biology processes 
+% calls for efficient visualization methods to cope with the complexity nature of the data resulting from the simulation.
+
+The principle of systems biology is to reproduce complex physiological processes \textit{in silico} in order to better understand how living organisms work.
+Firstly, the models are designed, throughout descriptions of molecular interactions are laid down in 2D reaction networks and digitalized.
+Subsequently, the models are used as input for computational simulations and finally simulation results are processes and used for further analysis.
+In the case of complex processes with a large number of different species, the input model representation could represent a challenge for manual simulation data processing due to the high visual complexity of the reaction network, which naturally calls for integrated visualization solution.
+It exists a few popular visualization software that aim at connecting the modeling, simulation, and data analysis in a single framework to facilitate the task of biologists such as CellDesigner[] TinkerCell[] or VCell[].
+These tools usually cover non-spatial models (kinetic modelling), except VCell which also supports the use of external particle-based simulation module such as Smlodyn[].
+Although the simulation data may feature 3D particle trajectories, the framework do not include a visualization module for observing the behaviour of individual 3D particles, simply because it would have only very little value for the experts, that are rather interested in studying the species concentration over time.
+In some special cases, however, (which cases ?) the 3D visualization of particle-based simulation results is deemed to be informative for scientists interested in studying the spatial distribution of species.
+To a certain extent this information could also be information for laymen because it depicts complex processes in the form of 3D animation rather than static 2D pathway diagrams.
+A few visualization tools where developed produce 3D animations out of such particle-based simulations, supporting playback of pre-computed data [CellBlender][Falk] or in-situ visualization of simulated data in real-time[ZigCell].
+
+The playback of particle-based simulation allow to track single elements throughout the time-line and to trace the reaction cascade in the case of signalling pathways.
+
+Displaying the raw data however may result in overly clustered results, and we deem that it is important to present the data in the most intuitive way to ensure a maximum degree of comprehension from the viewer.
+For instance when playing the simulation in fast forward it is impossible to observe individual reaction events because of the prevailing chaos.
+On the other hand when playing the simulation slow enough to track individual elements and witness individual reactions then the viewing of the overall simulated process could take up to several hours
+There are time scale discrepancies between individual reaction events and entire processes that make the viewing of 3D particle-based simulation difficult to understand for non-expert viewer and we believe that this limitation should be addresses.
+
+Furthermore, the simulation of particle-based system is very time consuming and it is quite usual to precompute the simulation before hand which prohibit online interaction with the simulation parameters and educational exploration of multiple simulation scenario.
+Most-optimized simulation tools leveral the power of GPU computing to speed-up the computation and enable in-situ visualization [ZigCell].
+However, even most optimized simulation particle-based simulation method are still not able to compute complex models in a reasonable time to enable a smooth interactive experience.
+
+Other types of simulation such as kinetic modeling, do not feature 3D dimensional data but are fast enough to compute in real-time alongside with 3D complex visualization and have therefore a much greater potential for truly interactive visualization.
+We will therefore explore the use of kinectic simulation data to emulate a 3D particle animation solely based on quantitative information obtained from the simulation.
 
 
 %It exists several modeling techniques that were developed to study the dynamism of a given process.
