@@ -18,7 +18,7 @@ This is where the first chapter begins...
 
 This is where the first chapter begins...
 
-\chapter{Introduction}
+\chapter{Overview}
 
 %\textbf{Importance of visualisation in the physiology}
 %Physiology describes how livings organism work, and it spans across multiple scientific fields.
@@ -38,6 +38,8 @@ This is where the first chapter begins...
 %Due to the , 3D animation packages and online training became widely available thus popularizing the use of these tools by scientific illustrators.
 %which became widely available thanks to the popularity of digital effects used in the movie industry over the last decades
 %In order to understand how we work we must first understand the complete cascade of events down from atomic level and up to microscopic and macroscopic levels.
+
+\section{Introduction}
 
 \textbf{Importance of Visualisation in Biology} \\
 Biochemistry lies at the root of complex biological systems that describe the machinery of life, and in order to understand how we work we must first understand the complete cascade of events that is taking place at the atomic level.
@@ -163,6 +165,8 @@ As the production of animated and interactive educational content is often prohi
 %\textit{Isolate a single part of the entire machinery to easily study its mechanism.}%
 %These experiments are widely criticized because often deemed too approximative due to human knowledge or computational limitations.
 
+\section{Background and Related Work}
+
 \textbf{Computational Biology to Assist Scientific Illustration}\\
 In biochemistry, it exists two distinct experimental protocols, respectively called dry and wet laboratories.
 Wet laboratories are where chemical agents are physically manipulated and then observed.
@@ -185,7 +189,8 @@ Structural biology informs us about how things look, i.e., what is the atomic st
 %It contains thorough description about how things look (structures) and how things work (processes), and we intend to make extensive use of this data to enable the next generation of scientific illustration.
 %The visualization literature already comprises a few work that are going in a similar direction and we will distinguish between the related work related to structural visualization in the first section and follow-up with related work about visualization of biochemical processes.
 
-\textbf{The Structures}\\
+\subsection{Visualization of Biological Structures}
+
 Structural biology is concerned by the structure of biological macromolecules (proteins and nucleic acids), and the relationship between molecular structure and function.
 Data acquisition methods such as x-ray crystallography are traditionally used to read in details the atomic structure of proteins, i.e, the positions or atoms, their type and the type of bonds between them.
 Acquired atomic structures are often stored in digital files and shared via public data bases such as the Protein Data Bank[] to facilitate collaboration among biologists.
@@ -201,55 +206,51 @@ In scientific illustrations the shape of a protein is an important aspect to con
 Furthermore, VdW spheres and molecular surfaces can easily be stored as polygon meshes which are supported by 3D animation packages.
 BioBlender[], Molecular Maya[], ePMV[], are examples of plugins for animation packages that were specifically developed to ease the loading and rendering of molecular surface meshes.
 
-\textbf{More details about cellpack,
-what are compartments, structures, combined into a recipe ... bla, bla
-collision-based packing algorithm blablabla...}
-
-
-
 X-ray crystallography is limited in a sense that it is not capable of capturing large and complex structures such as organelles, viruses, or cells in their entirety.
 Electron microscopy imaging, on the other hand, still does not offer enough resolution to capture individual atoms which make the segmentation task between proteins extremely challenging.
 So far, only little is known about spatial arrangement of proteins that form greater structures and their modeling would be a cumbersome and manual task.
-To fill the mesoscale gap between atoms and cells, scientists from the Scripps Institute in San Diego have developed cellPACK[], a tool to procedurally construct large mesoscale structures based on input parameters, such as the shape and location of compartments, and important information about the proteins that are present such as the shape, the number, the location and the spatial distribution.
-Their goal is to generate large atomic structures that could then serve as input to run large dynamics simulation for a complete or partial organism.
-Additionally, the generated structures can also be used to create accurate 3D meshes of mesoscale structures in animation packages for illustration purposes.
+To fill the mesoscale gap between atoms and cells, scientists from the Scripps Institute in San Diego have developed cellPACK[], a tool to procedurally construct large mesoscale structures, such as viruses, or entire cells at atomic resolution.
+cellPACK incorporates the most recent knowledge obtained from biology to generate these models such as proteins structures obtained from crystallography, concentrations and spatial distribution observed \textit{in vitro}, and 3D shape of compartments acquired from electronic microscopy.
+They summarize all this data in structural descriptions which they call a recipe, and which is then used as input to generate entire models of viruses and cells via a packing method based on collisions constraints.
+Their packing algorithm uses a spatial partitioning scheme to prevent structures from overlapping with each others.
+As an output their tool generates a list which contains the position, rotation, and type of all the proteins that compose the organism.
+Additionally their method also supports packing of fiber data such as DNA or RNA and is stored as control points in the resulting file.
+The initial goal of cellPACK was to generate valid protein ensemble that forms an organism, that would also comprise atomic data in order to serve as input for large-scale molecular dynamics simulation.
+Additionally, the generated structures can also be loaded in 3D rendering and animation packages for illustration purposes.
 %, thus preventing illustrator to manually place and arrange proteins when depicting a larger protein ensemble.
 These large models are highly valuable to us, as they comprise complex data that would have to be modeled manually otherwise, thus compromising the production of illustrative content.
+They are also publicly available and can be easily updated with the most recent knowledge of cell biology.
 However, the overwhelmingly large number of elements that compose these mesoscale structures begin to truly challenge animation packages that were not design with such constraints in mind.
 While it is still possible to render still images in very high quality, real-time visualization of these models is simply not possible, even with simplified meshes. 
 This affects the productivity of those who create the models, as well as those who are using it for illustration purposes and it also compromises the transition to the next generation of interactive scientific illustrations.
 
-To keep up with the increasing size of atomic datasets, Tarini et al.[] introduced a novel visualization technique inspired from 2D billboards, a popular concept in computer games.
-The technique consists of drawing camera-facing 2D sphere impostors rather than tessellated 3D spheres when rendering individual atoms, thus considerably reducing the polygon count.
+Although the polygon mesh is currently the most commonly used shape representation supported by animation packages and game creation software, it might not always provide the best performances for large and complex datasets.
+Indeed to render highly detailed information meshes require an overwhelmingly large number of polygons which can stress the rendering pipeline and video memory usage.
+To keep up with the increasing size of atomic datasets visualization experts developed new cutting edge techniques which do not rely on mesh data.
+Tarini et al.[] introduced a novel visualization technique inspired from 2D billboards, a popular concept in computer games.
+The technique consists of drawing camera-facing 2D sphere impostors rather than tessellated 3D spheres for rendering individual atoms.
+As a result, to render a structure which comprise 1000 atoms only 4000 vertices would then be needed, which is rather low for the resulting image quality.
 With their approach, they were able to interactively render large datasets (up to xxxk atoms) with very high quality details at a much lower cost than meshes.
 Shortly afterwards, Lampe et al. [8] extended the billboard technique by leveraging the GPU rendering pipeline to reduce memory bandwidth usage and GPU driver overhead. 
 Grottel at al. proposed to improve the rendering speed of large particle-based datasets by implementing occlusion culling to discard hidden particle chunks from the rendering pipeline, based on the depth information obtained in the previous frame.
-Lindow et al. [11] followed-up the work of Lampe et al.[] by using instanced drawing of proteins structures.
-The protein structures are priorly stored in small unique 3D grids and ray-traced in the fragment shader upon rendering.
-Falk et al. [3] further refined the method by introducing depth culling and level-of-detail for the grid structures to achieve faster rendering performance for even larger scenes.
+Hence, only the sphere impostors that are garanteed to be visible will be processed by the graphics pipeline, thus increasing rendering performances greatly for very dense datasets.
+Lindow et al. [11], subsequently presented a novel approach which is rely on ray-casting instead.
+For each protein structure they store the individual atoms in small and fitting 3D grids and upload the protein grid on the video memory.
+Upon the rendering they first draw the bounding box of the grid, and subsequently, in the per-fragment operation they cast ray for each single fragment in order to find the first hit with the atoms.
+Their method supports rendering of very large structures with up to xxx atoms.
+Mesoscale landscapes usually feature a high number of individual proteins that share the same structure.
+In order to spare video memory usage which is usually restricted in size, they also use the principle of instancing, popular in computer games.
+Instead of storing every single atoms on the video memory, they only upload the position and rotation of individual proteins to the video memory and upload each unique protein structure only once.
+Falk et al. [3] further refined the method by introducing depth culling similarly to Grottel et al.[] and used level-of-detail for the grid structures to reduce computing for proteins that are located far away from the camera.
+They reported being able to render large datasets representing cytoskeleton of a cell, with up to xx atoms at xx fps.
 While the presented methods only support the VdW representation, a few techniques were also developed to improve the rendering of large and highly detailed molecular surfaces using GPU ray-casting and efficient supporting structures instead of meshes[][][]. 
-However, these methods implement grid-based space partitioning to accelerate the rendering, and their usage is thus limited to rather small scenes, which is impractical for illustration.
-Up to this point, the rendering methods presented in the literature have reached unprecedented levels of performance, in terms of size of supported dataset and rendering speed, thus enabling real-time rendering of large mesoscale models created with cellPACK[].
-However, the minimum requirement for a comfortable user experience is between 20 and 60 Hz on average for games, and higher than 60 Hz for VR content, which is still out of reach for very large datasets as the state-of-the-art method is capable of rendering 10 billions atom at 4 fps, which additionally leaves little to no room for other type of computation such as animation or physics simulations.
+However, none of these surface-based methods is yet able to compete in terms of performance with the most recent VdW methods which we previously presented .
 
-Moreover, the presented solutions were specifically designed for efficient rendering of proteins data only.
-None of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit much more complex organization, such as lipid membranes, nucleic acids or fibers, which ought to be taken into account for a truer depiction of molecular landscapes.
-Indeed, the properties of these structures can represent a challenge, especially for dynamic data because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
-Several work focus on the modelling and visualization of such structures, such as life explorer[] or lipid wrapper[].
-However, none of these tools feature a visualization method that has the ambition to support overwhelmingly large datasets such as entire cells and which we deem crucial to achieve interactive and explanatory visualization of molecular biology.
-Furthermore, macro-molecular elements are usually densely arranged inside compartments (see figure), which may results in serious occlusion problems when interactively exploring a dataset.
-This visualization challenge has not yet been explored in the context of molecular visualization although it is crucial to address it to improve the quality of the user experience.
-It is also important to mention that none of the presented method above has been integrated into an animation or game creation package, which makes impossible for content creators to use it is a practical scenario.
-This review of the literature clearly underlines the lack of an efficient and integrated solution that would:
-a) Allow real-time rendering of datasets up to the size of a single cell
-b) Support all type of molecular structures efficiently
-c) Implement efficient occlusion management
-d) Provide tools that are embedded with animation or game creation package for optimized collaboration with various actors of the illustration process.
+\subsection{Visualization of Biological Systems}
 
-\textbf{Systems}\\
 Systems biology is the branch of biology concerned with computational or mathematical modeling of complex biological systems.
-The organization of biological systems spans several scales, on the molecular level they consists of reaction network between molecular agents such as enzymes, metabolites, or proteins, also known as pathway.
-Those systems describe the multitude of functions that are carried out by living cells, such as energy production, gene expression, and ability to divide or die.
+The organization of biological systems spans several scales; on the level of single cells they typically describe signalling or regulatory functions of living cells, such as energy production, gene expression, and ability to divide or die.
+Such systems consists of reaction network between molecular agents such as enzymes, metabolites, or proteins, also known as pathway.
 Based on the pathway description, scientists reproduce the dynamics of a system \textit{in silico}, via simulation tools, and observe the changes in species concentration over time.
 The results of the simulation are then further analysed to predict and understand how these systems change over time and under varying conditions, and potentially develop solutions to health issues.
 The complex reaction networks are usually described with a custom markup language, such as SBML[], and used as input for the simulation tools.
@@ -280,18 +281,65 @@ Even when the simulation method produce potentially interesting 3D trajectory da
 Such a visual form is hard to relate to what is visually observed in wet-lab experiments. 
 In interdisciplinary physiological sciences this might hamper communication of results. 
 However, the underlying data present in the models contains thorough dynamic descriptions of how these biological systems work.
-These models comprise, for instance, which elements are presents, with whom do they react, a which rates, and even sometimes there location is also provided.
-When associated with corresponding structural information this data could potentially be used to automatically generate explanatory animated illustrations.
+These models informs us about the species present in a system, their quantities, location, diffusion speed, reaction partners, and reaction rates.
+When associated with corresponding structural information this data could potentially to digitally reproduce and illustrative and dynamic model of a cell.
 Biology, medicine, and other sciences can strongly profit from a visualization of physiology in order to gain, verify, and communicate the knowledge and the hypotheses in this field.
-Additionally, dynamics simulations, when computed along with the visualization could enable online changes of simulation parameters, such as species quantities or temperature, and directly observe how it would affect the system.
+%Additionally, dynamics simulations, when computed along with the visualization could enable online changes of simulation parameters, such as species quantities or temperature, and directly observe how it would affect the system.
+While the visualization of spatial trajectory data is often not relevant for the study of metabolic pathways, in specific cases, such as signalling pathways for example, such visualization might be informative to scientists that are interested in observing the spatial distribution of small signalling molecules overtime.
+Few specific tools feature three dimensional visualization of particle trajectories obtained from agent-based simulation results.
+CellBlender[] is a software conceived as a plug-in for the 3D animation package Blender, and which allow model design and visualization of particle-based models computed with MCell[].
+%Via the user interface, it is possible to manually setup the model parameters, which are then fed to the external simulation module.
+The cell compartments of a given model are represented as 3D meshes and can be modeled or loaded via the Blender interface.
+Via the custom interface of the tool, expert users can specify the models parameters such as the species types, initial quantities, and diffusion speed.
+MCell also supports 3D and 2D diffusion models for the particles.
+3D diffusion is applied to elements diffusing freely inside a volume, while 2D diffusion is applied to elements that are embedded in a membrane and only diffuse along the compartment surface, such as channel proteins.
+Users must then input the reactions of the model by specifying the participants, the products and the reaction probability.
+Particles diffusing in 3D are also able to diffuse outside their initial compartment, and these crossing events must also be defined.
+The user interface also features a multitude of advanced parameters to fine tune the modeling.
+Finally, the user must specifies the duration of single step in nanosecond, and the desired number of steps. 
+The duration of one simulation step will determine the precision of the simulation.
+MCell then runs the computation offline based on the models properties setup in CellBlender, and produces large files that contain trajectory data for each single particle and for the given number of simulation steps.
+%An additional file is also produced and contains the list of all reaction events, including the ID of participating elements, the reaction location and the corresponding time step.
+The trajectory data is then converted to a key-frame particle animation format which is readable in Blender.
+The simulation may then be played back for real-time exploration or rendered in movies.
+Additionally, it is also possible to use custom meshes to visually encode the species type.
+%The simulation approach, however, does not take into account the shape of the molecular structures, which are represented a simple 3D points, and thus the visualization of particle data using custom protein meshes will result in unwanted overlapping artefacts.
+%To a certain extent, this information could also have an informative value for the laymen because it depicts complex processes in the form of a 3D animations.
+%The viewing of actual three dimensional molecular interactions, such as the ones observed in scientific animations, could then be used as a mean to automatically generate expressive illustration of the simulated system.
+Such trajectory data could potentially be used as such, to digitally reproduce the functioning of entire cells.
+The resulting visualization would thus have an important informative value as it depict complex biological systems in the form of 3D diffusion and reaction animations embedded in their molecular environment.
+A naive visualization of the raw trajectory data, however, may often results in an overly cluttered view due to the large number of elements randomly moving in every directions.
+Although the display of trajectory data is valuable to expert users, it is almost incomprehensible for non-experts viewers.
+Therefore, it is crucial to provide guidance to ensure that the underlying information, i.e., which elements react with each others and in which order, is perceived by the viewer.
+Falk et al.[] proposed to enhance the playback particle trajectories with additional overlaid information to trace the history of individual particles, such as trajectory and previously undergone reactions.
 
-Few specific tools feature three dimensional visualization of particle trajectories obtained from agent-based simulation results, supporting either playback of pre-computed data [CellBlender][Falk] or in-situ visualization of simulation computed in real-time [ZigCell].
-In the case of signalling pathways modeling, for example, such visualization may be informative to scientists that are interested in observing the spatial distribution of certain species over time.
-To a certain extent, this information could also have an informative value for the laymen because it depicts complex processes in the form of a 3D animation.
-The viewing of actual three dimensional molecular interactions, such as the ones observed in scientific animations, could then be used as a mean to automatically generate expressive illustration of the simulated system.
-Naive visualization of the raw trajectory data, however, may often results in an overly cluttered view due to the large number of elements randomly moving in every directions.
-To ensure a maximum degree of clarity it is therefore crucial to provide the means for guiding the viewer in such complex scenes. 
-Falk et al.[] added to the raw visualization the possibility to track single elements throughout time, by tracing the trajectory of a particle and highlight the cascade of reactions which is relevant for the study of signalling pathways.
+
+\subsection{Limitations of Related Work}
+
+No real-time performace, only proteins
+No occlusion management
+
+Time scale discrepencies
+No real-time preformance, plus lack of camera guidance.
+
+
+Up to this point, the rendering methods presented in the literature have reached unprecedented levels of performance, in terms of size of supported dataset and rendering speed, thus enabling real-time rendering of large mesoscale models created with cellPACK[].
+However, the minimum requirement for a comfortable user experience is between 20 and 60 Hz on average for games, and higher than 60 Hz for VR content, which is still out of reach for very large datasets as the state-of-the-art method is capable of rendering 10 billions atom at 4 fps, which additionally leaves little to no room for other type of computation such as animation or physics simulations.
+
+Moreover, the presented solutions were specifically designed for efficient rendering of proteins data only.
+None of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit much more complex organization, such as lipid membranes, nucleic acids or fibers, which ought to be taken into account for a truer depiction of molecular landscapes.
+Indeed, the properties of these structures can represent a challenge, especially for dynamic data because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
+Several work focus on the modelling and visualization of such structures, such as life explorer[] or lipid wrapper[].
+However, none of these tools feature a visualization method that has the ambition to support overwhelmingly large datasets such as entire cells and which we deem crucial to achieve interactive and explanatory visualization of molecular biology.
+Furthermore, macro-molecular elements are usually densely arranged inside compartments (see figure), which may results in serious occlusion problems when interactively exploring a dataset.
+This visualization challenge has not yet been explored in the context of molecular visualization although it is crucial to address it to improve the quality of the user experience.
+It is also important to mention that none of the presented method above has been integrated into an animation or game creation package, which makes impossible for content creators to use it is a practical scenario.
+This review of the literature clearly underlines the lack of an efficient and integrated solution that would:
+a) Allow real-time rendering of datasets up to the size of a single cell
+b) Support all type of molecular structures efficiently
+c) Implement efficient occlusion management
+d) Provide tools that are embedded with animation or game creation package for optimized collaboration with various actors of the illustration process.
+
 Although previous works attempted to improve the raw visualization of particle-based visualization, there is still left to address the several grand challenges such as occlusion management for dense scenes or the issues that are due to time-scale discrepancies between entire processes and individual reactions, and which is described as follows: 
 On the one hand, observing the particle-based simulation at a slow pace to be able to keep track of individual elements and see interactions would require hours to explore the entire process.
 On the other hand, observing the simulation in fast-forward would shorten the viewing length but it would become impossible to observe important reaction events because of the fast pace at which elements would be moving.
@@ -302,6 +350,9 @@ This limitation thus prohibits online interaction with the simulation parameters
 Even most-optimized simulation tools that leverage the power of GPU computing [][], specifically developed for \textit{in-situ} visualization are still not able to deliver a true real-time user experience.
 Quantitative modeling methods do not feature 3D dimensional data but are also much faster to compute, and could easily be simulated along with a complex 3D visualization.
 Therefore it would also be interesting to explore the use of real-time quantitative information to animated 3D particle based on real simulation data but at a much lower cost than agent-based methods.
+
+
+
 
 
 \section{Section 1}
