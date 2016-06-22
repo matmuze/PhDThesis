@@ -375,17 +375,16 @@ Falk et al.[] proposed to enhance the playback particle trajectories with additi
 
 \section{Rendering and Composition of Molecular Landscapes}
 
-Up to this point, the rendering methods presented in the visualization literature have reached unprecedented levels of performance, in terms of size of supported dataset and rendering speed, thus enabling real-time rendering of large molecular structures such as those created with cellPACK[].
+Up to this point, the rendering methods presented in the visualization literature have reached unprecedented levels of performance, in terms of size of supported datasets and rendering speed, thus enabling real-time rendering of large molecular structures with cellPACK[].
 The most recent presented solution is capable of rendering 25 billion atom at 3.6 fps in HD resolution.
-However, the rendering approach still fails to provide a comfortable user experience.
-One expects between 24 and 60 Hz on average for interactive entertainment, and at least 60 Hz for dome and VR content.
-The computation should also free enough resources for remaining computation, as for instance the physics simulation of the molecular bodies.
-None of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit much more complex organization, such as lipid membranes, nucleic acids or fibers, which ought to be taken into account for a truer depiction of molecular landscapes.
-Indeed, these structures are much more challenging to render, because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
+However, the rendering approach fails to provide a comfortable user experience as one expects between 24 and 60 Hz on average for interactive entertainment, and at least 60 Hz for dome and VR content.
+The computation should also free enough resources for eventual additional computation, as for instance, the physics simulation of the molecular bodies for real-time animation.
+Moreover, none of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit much more complex organization, such as lipid membranes, nucleic acids or fibers, which ought to be taken into account for a truer depiction of molecular landscapes.
+These structures are much more challenging to render, because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
 In order to provide a true real-time experience we decided to investigate new rendering approaches that would address all these limitations.
-We finally opted for a impostor-based method for the design of our rendering pipeline, which follows-up directly the work of De Lampe et al.[].
+We opted for a impostor-based method for the design of our rendering pipeline, which directly follows-up the work of De Lampe et al.[].
 An advantage of sphere impostors is that they do not require additional supporting structures for the rendering[] and are also much simpler to render than surfaces while providing high quality surface details.
-The optimizations which we developed to increase the performances are inspired from well known computer graphics technique often used in games such as level-of-detail, instancing and occlusion culling.
+The optimizations which we developed are inspired from well known computer graphics technique often used in games such as level-of-detail, instancing and occlusion culling, which have been adapted to support macromolecular datasets efficiently.
 
 \textbf{Level-of-detail}
 
@@ -544,95 +543,243 @@ Therefore we developed a custom clipping pipeline using GPU computing to guarant
 Macro-molecules that are set as OI are first rendered in a separate off-line depth texture and used as input to perform image-based occlusion queries for each of the remaining elements and detect occluders.
 Additionally to our quantitative approach for occlusion management we also provide support traditional clipping objects such as planes, cube or sphere that can are manually placed in the 3D scene.
 
+% imitating the reaction and diffusion process for 
+%
+%
+%spatial behaviour of the molecular diffusion and reaction in three dimensions in order to study the 
+%
+%
+%The principle
+%
+%It also exists 
+%
+%
+%
+%
+%In order to be able to compute 
+%
+%
+%such simulation in a reasonable amount of time, the behaviours of the macromoelcules is simplified.
+%
+%
+%Similarly to MD or BD ind
+%
+%In particle-based modeling each molecular agent is represented as a 3D no matter its size.
+%
+%[Show diagram]
+%
+%results are very cluttered.
+%
+%Although previous works attempted to improve the raw visualization of particle-based visualization, there is still left to address the several major grand challenges.
+%
+%Visual guidance, temporal close-ups, bladibla.
+%Interactivity.
+%
+%
+%%However, these simulation methods are still too complex to reproduce complete biological systems for entire cells because these systems are simply too large and would require too many simulation steps.
+%
+%
+%
+%
+% because it would simply require too many simulation time steps and elements you be too
+%
+%
+% computationally demanding to reproduce and entire processes 
+%complex 
+%
+%
+%initialize s
+%
+%
+%as input for dynamic simulation tools that require as input an initial macromolecular arrangement without
+%
+%
+%The models were initialy developed to serve as input for dynamic simulations tools such as molecular dynamics or brownian dynamics that require an initial structure which is valid, i.e., a logical arrangement of proteins without overlapping structures.
+%
+%Limitation of brownian dynamics, local phsical atomic interaction, complex to compute large systems and small time steps must be used.
+%
+%
+%Computational biology also comprise simulation tools that are able to simulate an coarse approximation of molecular trajectories as well model individual reactions for an entire biologocal system.
+%
+%Allows to model larger and longer simulation, because it greatly simplifies molecular interaction compared to BD, MD.
+%
+%In particle-based modeling each molecular agent is represented as a 3D no matter its size.
+%
+%[Show diagram]
+%
+%results are very cluttered.
+%
+%Although previous works attempted to improve the raw visualization of particle-based visualization, there is still left to address the several major grand challenges.
+%
+%Visual guidance, temporal close-ups, bladibla.
+%Interactivity.
+%
+
+
+
+% would be a challenging enterprise because the modeling setup is not streamlined, and each snapshot would require cumbersom manuall steups.
+%
+%
+%this technology 
+%
+%
+%produces unique m
+%
+%
+%does not provide any sort of correspondence between two models, and the
+%
+% is not able to produce local transition between two states since there is no correspondence between models.
+%
+%
+%
+% of from state to another there is no correspondence between two models that would allow to generate transition between two snapshots.  
+%
+%
+%modeling approach is not yet designed for the creation of animated datasets.
+%
+%Although it is possible to create a multitude of models to transition of from state to another there is no correspondence between two models that would allow to generate transition between two snapshots.
+%
+%
+%
+%
+%a mature and immature re [show images].
+%
+%
+%One 
+%
+%
+%Although it is possible to model 
+%
+%
+%Scientists at the Scripps Institute of San Diego have already produced two different states of the HIV virus, mature and immature [show images].
+%
+%
+%
+%
+% models only represent statically microscopic organism and do not feature any information about the future states.
+%
+%
+%
+%
+%
+%
+%%
+%% important details such as the shape
+%%structural information visible at multiple scales 
+%%
+%%
+%%
+%%Upon the rendering of these models it may be challenging to display 
+%%
+%%The rendering of these models 
+%%
+%%These models can represent a challenge for real-time rendering but optimization inspired from computer games may we developed and adapted to speed up the rendering and advanced composition of commodity hardware.
+%%
+%%However, these models only represent statically microscopic organism and do not feature any information about the future states.
+%%
+%%The HIV virus for instance, undergoes multiple transformation during his life cycle, and showcasing only one single state would fail at revealing the functioning of the virus.
+%%
+%%Scientists at the Scripps Institute of San Diego have already produced two different states of the HIV virus, mature and immature [show images].
+%
+%%However, this modeling approach is not yet designed for the creation of animated datasets.
+%%
+%%Although it is possible to create a multitude of models to transition of from state to another there is no correspondence between two models that would allow to generate transition between two snapshots.
+%%
+%%Additionally to produce a large number of models would be a challenging enterprise because the modeling setup is not streamlined, and each snapshot would require cumbersom manuall steups.
+%
+%
+%The models were initialy developed to serve as input for dynamic simulations tools such as molecular dynamics or brownian dynamics that require an initial structure which is valid, i.e., a logical arrangement of proteins without overlapping structures.
+%
+%Limitation of brownian dynamics, local phsical atomic interaction, complex to compute large systems and small time steps must be used.
+%
+%
+%Computational biology also comprise simulation tools that are able to simulate an coarse approximation of molecular trajectories as well model individual reactions for an entire biologocal system.
+%
+%Allows to model larger and longer simulation, because it greatly simplifies molecular interaction compared to BD, MD.
+%
+%In particle-based modeling each molecular agent is represented as a 3D no matter its size.
+%
+%[Show diagram]
+%
+%results are very cluttered.
+%
+%Although previous works attempted to improve the raw visualization of particle-based visualization, there is still left to address the several major grand challenges.
+%
+%Visual guidance, temporal close-ups, bladibla.
+%Interactivity.
+
 \section{Emulating the Machinery of Life}
 
-Biologists have recently started the ambitious enterprise to model the atomic structure of entire viruses or cells.
+Biologists from the Scripps Institute have pioneered the ambitious enterprise of capturing the atomic structure of entire viruses or cells.
+These models are valuable for scientific and educational exploration because they contain structural information that can be observed at multiple scales, such as compartments shapes, spatial arrangement of macromolecules, and atomic structure of each macro-molecule.
+Rendering such scenes interactively without compromising on the amount of displayed information is challenging.
+To speed up the scene rendering and composition on commodity hardware, we adapted several concepts from computer games such as instancing, and level-of-detail.
+However, the representations of these microscopic organisms are static and do not provide any information about the future states or important biochemical processes that are ongoing internally.
+The HIV virus, for instance, goes through multiple transformations during his life cycle [show figure], and showcasing only one single state would not suffice to revealing its functioning.
+Scientists have attempted to produced several states of the HIV virus life cycle, which now comprise representation of the virus in its mature and immature state[show figure].
+However, with this technology, the modeling process is stochastic and does not provide logical correspondence between the models, which simply forbids key-frame animation between two states at this stage.
+Additionally, producing enough models to generate an animation would be challenging and also time consuming because the modeling process is not streamlined and require complex manual setup for each model.
 
-These models are very interesting for scientific and educational exploration because they comprise structural information of multiple scales.
-
-These models can represent a challenge for real-time rendering but optimization inspired from computer games may we developed and adapted to speed up the rendering and advanced composition of commodity hardware.
-
-However, these models only represent statically microscopic organism and do not feature any information about the future states.
-
-The HIV virus for instance, undergoes multiple transformation during his life cycle, and showcasing only one single state would fail at revealing the functioning of the virus.
-
-Scientists at the Scripps Institute of San Diego have already produced two different states of the HIV virus, mature and immature [show images].
-
-However, this modeling approach is not yet designed for the creation of animated datasets.
-
-Although it is possible to create a multitude of models to transition of from state to another there is no correspondence between two models that would allow to generate transition between two snapshots.
-
-Additionally to produce a large number of models would be a challenging enterprise because the modeling setup is not streamlined, and each snapshot would require cumbersom manuall steups.
-
-
-The models were initialy developed to serve as input for dynamic simulations tools such as molecular dynamics or brownian dynamics that require an initial structure which is valid, i.e., a logical arrangement of proteins without overlapping structures.
-
-Limitation of brownian dynamics, local phsical atomic interaction, complex to compute large systems and small time steps must be used.
-
-
-Computational biology also comprise simulation tools that are able to simulate an coarse approximation of molecular trajectories as well model individual reactions for an entire biologocal system.
-
-Allows to model larger and longer simulation, because it greatly simplifies molecular interaction compared to BD, MD.
-
-In particle-based modeling each molecular agent is represented as a 3D no matter its size.
-
-[Show diagram]
-
-results are very cluttered.
-
-Although previous works attempted to improve the raw visualization of particle-based visualization, there is still left to address the several major grand challenges.
-
-Visual guidance, temporal close-ups, bladibla.
-Interactivity.
+In structural biology, dynamics simulations, such as molecular dynamics (MD), or brownian dynamics (BD) are used to reproduce the physical behaviour of groups of atoms in three dimensions, in order to understand their function.
+The initial purpose of cellPACK was to generate models that could serve as initial state in order to run large scale dynamics simulations on super computers.
+In computational biology, it exists a gap between structural and systems biology caused by the limitation of today's computers.
+Indeed, MD and BD simulations are simply too computationally expensive to reproduce the dynamics of biological systems for entire cells, and are restricted to smaller use cases in terms of size and duration.
+Systems biologists, on the other hand, are interested in studying in the dynamics of entire biological systems, but they also value quantitative information more than spatial information.
+Therefore, they often employ strictly quantitative modeling approaches, which are computationally inexpensive.
+More recently, spatial particle-based methods for modeling reaction networks have emerged.
+Their principle consists or reproducing the behaviour or spatial diffusion and reaction for a large number of molecules in order to study the changes in species quantities over time.
+In order to reduce computational costs, the reaction diffusion processes is extremely simplified.
+Particles are subject to random walk to simulate molecular crowding without having to take into account surrounding macromolecules that do not play a role in the simulated process.
+Individual reactions are triggered upon collision events between two potential reaction partners.
+Particle-based modeling is thus a very singular approach as it provides spatial information for individual proteins and allows computing complex reaction networks in a reasonable amount of time for entire cells.
+In this section, we will investigate the use of particle-based systems to showcase the dynamics of processes in three dimension in order to complement the large but static scenes modeled with cellPACK. 
 
 \subsection{Observing Multiple Time Scales at Once}
 
 Particle-based modeling, also known as agent-based modeling, reproduces entire biological systems to explore their dynamic properties.
 Particles are individually modeled and interactions between them are virtually taking place in the 3D space.
-Additionally to quantitative information which is valuable for understanding the functioning of a system, the modeling approach is also capable of producing 3D trajectory data and reaction log as output which can be used to visualization of spatial data.
-Falk et al.[] designed visualisation tools to playback the particle trajectories resulting from the simulation in 3D space.
+Additionally to quantitative information which is valuable for understanding the functioning of a system, the modeling approach is also capable of producing 3D trajectory data and reaction log as output, which can be used to visualization of spatial data.
+Falk et al.[] designed a visualisation tool to playback the particle trajectories resulting from the simulation in 3D space.
 A major challenge with this type of visualization is visual clutter due to the large number of particles diffusing in every direction.
-In order to visualize individual reactions is it therefore necessary to close-up on participating particles and also to reduce the playback speed in order to keep track of individual reactions.
+In order to visualize individual reactions it is therefore necessary to close-up on participating particles and also to reduce the playback speed in order to keep track of individual reactions.
 Because particle simulations operate at very small time steps, typically of the order of nanoseconds, the resulting number of steps can often be very large. 
-At the reduce pace required to see individual reactions, the viewing of the entire simulation frames to lead to overly long visualization sequences.
+At the reduced pace required to see individual reactions, the viewing of the entire simulation frames may lead to overly long visualization sequences.
 To shorten the duration of the visualization, it is common to only display simulation frames spaced at a constant given interval. 
 This is usually referred to as fast-forward or timelapse.
 The time-scale discrepancy between process and reaction thus complicate the visualization task as the viewer must manually switch from fast forward to normal speed in order to observe the multiple scales of a phenomenon.
-To overcome this limitation and improve the user experience when observing particle-based simulations of biochemical reactions simulation we propose a new type of visualization that enables the viewing of individual reactions while playing back the simulation in fast forward.
-We believe that effective visualization can be achieved by respecting a few guidelines which we enumerate as follows:
+To address this issue, we propose a new type of visualization that enables the viewing of individual reactions while playing back the simulation in fast forward.
+We believe that effective fast-forward visualization can be achieved by respecting a few guidelines which we enumerate as follows:
 
-.The visualization should show the simulated process in a reasonable amount of time, irrespective of the number of simulation frames.
-
-.Individual particles should move slow enough be traceable with human eyes, especially those with a high degree of interest.
-
-.Events of interested, such as reactions should be salient and last enough time in order to be seen by a human eye.
-
-.Despite eventual alterations to respect previous guidelines the visualization should be as realistic as possible to avoid misconceptions. This requirement is in accordance with the results of a study by Jenkinson et al. [14], which demonstrated that a more realistic depiction of a process can enhance the viewer’s understanding compared to a highly abstracted one.
+%\textbf{R1:} The visualization should show the simulated process in a reasonable amount of time, irrespective of the number of simulation frames.
+\textbf{R1:} Individual particles should move slow enough to be traceable with human eyes, especially those with a high degree of interest.
+\textbf{R2:} Events of interested, such as reactions should be salient and last enough time in order to be seen by a human eye.
+\textbf{R3:} Despite eventual alterations to respect the previous guidelines, the visualization should be as realistic as possible to avoid misconceptions. This requirement is in accordance with the results of a study by Jenkinson et al. [14], which demonstrated that a more realistic depiction of a process can enhance the viewer’s understanding compared to a highly abstracted one.
 
 \textbf{Speed Reduction}
 
-In order to satisfy R1 we only show simulation frames spaced at a constant given interval, for instance show one frame every thousands frames, while preserving a fast pace between two displayed snapshots.
-Fast forward visualization results in more visual clutter as the position leap between two consecutive displayed frame is greater than when showing the entire trajectory at the same pace.
-In some configurations the leap might be too large and the number of particle too high to keep track of a single particle between too consecutive frames.
-To satisfy R2 we apply a speed reduction filter to shorten the trajectories of individual particles.
-The filter consists of reducing displacements between the current position of particles and their current trajectory positions, according the speed reduction factor which is arbitrarily defined, as shown in Figure[x].
-Particles thus follow their original trajectories while keeping their distances.
-This produces a small delay between particles and their original trajectories but since the magnitude each displacement is proportional to the distance of a particle and its trajectory, this delay does not accumulate and remain constant over time.
-As a result of the shorten trajectories, particles travel less distances and their motion is much smoother and easier to follow by human eyes.
+To reduce the viewing length of a simulation, we only display trajectory snapshots spaced at a given time interval, while preserving a fast pace between two displayed snapshots.
+Fast forward visualization thus results in more visual clutter, as the position information between consecutive frames is omitted which results in large particle leaps.
+In some configurations, with a large number of particles, it might be difficult to keep track of single particles between too consecutive frames.
+To satisfy \textbf{R1} we apply a speed reduction filter to shorten the trajectories of individual particles.
+The filter consists of reducing displacements between the current position of particles and their original trajectory positions sampled from the dataset at a given time.
+The displacements are reduced according to the speed reduction factor as shown in Figure[x].
+Particles thus follow their original trajectories but are displaced over shorter distanced which also decreases their speed.
+This produces a small delay between particles and their original trajectories, however, because the magnitude of each displacement is proportional to the distance of a particle and its original trajectory, this delay does not accumulate and remain constant over time.
+As a result, particles always remain in the vicinity of their original trajectories and their motion is smoother and easier to follow by human eyes.
 
 \textbf{Reaction Highlighting}
 
 In particle-based simulation of biochemical reactions networks, reactions are punctual events that occur upon collision of two potential reaction partners.
-In the event of a reaction the resulting products will immediately be injected in the system as the operation is performed in single simulation step.
-Therefore it might be difficult to observe single reactions.
-Additionally, when viewing the simulation in fast-forward, many important reaction events might be simply omitted due to frame dropping.
+In the event of a reaction, the resulting products will immediately be injected in the system as the operation is performed in a single simulation step.
+Therefore, it might be difficult to observe single reactions.
+Additionally, when viewing the simulation in fast-forward, many important reaction events might simply be omitted due to frame dropping.
 Without showing reaction events, molecular agents will appear and disappear from the visualization without providing the necessary visual clues to understand what might have caused it.
 We therefore prolong the duration of the reactions to make them stand out and to inform the viewer about the nature these events.
-Shortly before each reaction event and until the end of the reaction as occurred we select the reaction participants and attracts them towards the reaction location.
-During this animation the original trajectories or reaction participants is omitted.
-To emphasize reaction events, reacting elements are highlighted with vivid colors, thus contrasting with the rest of the scene.
-The slow attraction animation and the color highlighting thus grantees that the viewer is informed that a reaction is about to happen.
-Once a reaction is accomplished, the products are introduced and are progressively subject to their respective original motion.
+Shortly before each reaction event, we apply attraction forces to steer the reactants towards the reaction location. 
+During this procedure the original motion of the particle is overwritten by attraction forces.
+To emphasize reaction events, reacting elements are highlighted with vivid colors to contrast with the rest of the scene.
+The slow attraction animation and the color highlighting thus guarantees that the viewer is informed that a reaction is about to happen.
+Once a reaction is accomplished, the products are introduced and their original motion is restored.
 
 \textbf{Lens Effect}
 
@@ -640,15 +787,14 @@ Because of the slow movement of the particles compared to their original traject
 To preserve a realistic impression of molecular motion despite trajectory reducing, we introduce a temporal focus+context technique that applies visual abstraction of molecular trajectories solely in the foreground (focus), while showing more realistic -yet often untraceable- motion in the background (context).
 By showing the actual particle trajectories in the background we want to create an illusion of chaos, thus informing the viewer about real diffusion speed while allowing him to observe important reaction events in the same view.
 We propose two methods to achieve this effect.
-The first method operate in object space, we define a region anchored in front of the camera in which molecular agents will be subject to higher speed reduction.
+The first method operates in object space.
+We define a region anchored in front of the camera in which molecular agents will be subject to a higher speed reduction.
 Outside of this region we progressively decrease the speed reduction until reaching the background zone where the original particle trajectories are shown.
-The second method we propose operate in image space.
-We limit the displacement of particle to a distance in pixel space with is based on the smooth pursuit eye movement limit defined by psychology research.
-When using a perspective projection in the visualization, this maximum velocity lens automatically leads to the effect that elements close to the camera appear to move much slower than those
-further away in z direction. 
+The second method we propose operates in image space.
+We limit the displacement of particles to a distance defined in pixel-space and based on the smooth pursuit eye movement limit used in psychology research.
+When using a perspective projection in the visualization, elements close to the camera appear to move much slower than those further away in z direction. 
 In fact, their screen space velocity is approximately the same, This illusion is due to the differences in pixel coverage of particles that are located in the background.
-This effect results is very harmonious results as a continuous transition between front and background is easier to acheive compared to the world lens approach which require manual fine tuning steps.
-
+This effect results in a smooth and continuous transition between the motion of front and background particles, which is more tedious to obtain with the world-space approach because it requires additional fine tuning.
 
 \subsection{Quantity-Driven Particle Animations}
 
@@ -657,47 +803,51 @@ One advantage of the agent-based approach for the visualization, is the presence
 Although the output is usually very cluttered, it is possible to apply filtering methods to improve the visualization as shown in Section[].
 However, the computation of particle-based models is much more demanding compared to quantitative modeling, because it must accounts for the reaction and diffusion of each single reacting entities, which are usually present in large quantities.
 The simulation is therefore often precomputed prior the visualization.
-As simulations are complex to setup and to compute, the creation and exploration or multiple scenario is thus slowed by this workflow.
+As simulations are complex to setup and to compute, the creation and exploration of multiple scenario is thus slowed by this workflow.
 Additionally, with large and complex model the resulting trajectory files may be very large, over xx GB for XX frame and XX individual particles, which is impractical to manipulate when dealing with a multitude of different scenario.
 
-Our goal is to digitally reproduce the dynamics of the machinery of life, and therefore we are mostly interested in mapping spatial and quantitative information to structural information in three dimensional space. 
-A more efficient workflow for this use case would be to visualize the particle positions on-the-fly as the simulation advances.
-With such approach, it would be possible to influence the course of a simulation, for instance, increase the temperature, or introduce new species, and directly observes the impact of these changes without having to run another simulation or deal with overly large files.
-Most-optimized simulation tools, such as Smoldyn[], are able to compute single simulation steps in a matter of seconds, thanks to parallel adaptation of the simulation algorithm computed on a single GPU.
-A few tools also propose \textit{in-situ} visualization of particle-based models computed in real-time on the GPU.
-However, the computation is still too demanding to deliver a smooth user experience even of high-end commodity hardware, which prohibits the use of online simulation for interactive and explanatory applications.
+Our grand vision is to digitally reproduce the dynamics of the machinery of life, and therefore we are mostly interested in mapping spatial and quantitative information to structural information in three dimensional space, rather than producing a large amount of data and run complex post-processing analysis.
+Therefore, more efficient workflow for this use case would be to visualize the particle positions on-the-fly as the simulation advances.
+With such approach, it would be possible to influence the course of a simulation, for instance, increase the temperature, or introduce new species, and to directly observe the impact of these changes without having to run another simulation or deal with overly large files.
+Most-efficient simulation tools, such as Smoldyn[], are able to compute single simulation steps in a matter of seconds, thanks to efficient parallel algorithms running on GPU.
+A few tools additionally support \textit{in-situ} visualization of particle-based models computed in real-time with such approach.
+However, the computation is still too demanding to deliver a smooth user experience even on high-end commodity hardware, which prohibits the use of online simulation for interactive and explanatory applications.
 
 Additionally, to visualize and understand a biological system, one must be able to observe the logical cascade of reactions described in the reaction network, as depicted in scientific animations.
 With particle-based modeling, it is impossible to influence where and when reactions will occur.
 Therefore, the viewing of an entire cascade of reactions may be very tedious because it requires manual spatial exploration and waiting times between successive reactions.
 To overcome this issue, we would have to gain control over where reactions might occur.
 This can only be achieved by decoupling the quantitative information from the spatial information.
-Quantitative modeling methods, such as kinetic modeling, do not feature particle trajectory data, and are much faster to compute and could easily be simulated along with a complex 3D visualization with high frequency refresh rates.
+In other words, we would need to use a modeling approach that would allow us to overwrite spatial information without influencing the course of the simulation.
+Quantitative modeling methods, such as kinetic modeling, do not feature particle trajectory data.
+They are also much faster to compute and could easily be simulated along with a complex 3D visualization with high frequency refresh rates.
 To address the previous limitations of particle-based modeling, we thus chose to explore the use of quantitative information to drive 3D particle animations in real-time.
 
-With particle-based modeling, the behaviour of individual particles directly influences the concentration of species overtime.
-Individual reactions are only triggered by collision events, for example, given a reaction A + B -> C, if a reactant A and B are closely located from each other, then a reaction is likely to occur.
-Element A and B subsequently fuse to produce element C, which increases the concentration of element C and decreases the concentration of elements A and B.
+With particle-based modeling, the behaviour of individual particles directly influences the concentration of species overtime, as reactions are only triggered by collision events
+Given a reaction \textbf{A + B -> C}, for example, when two reactants A and B are closely located from each other, then a reaction is likely to occur.
+In the event of a reaction, elements A and B will then fuse to produce element C, thus increasing the concentration of element C and decreasing the concentration of elements A and B.
+In particle-based simulations, individual agents are thus actors of their own fates.
 We propose a new type of particle system where the behaviour of particles is purely driven by quantitative information.
-In particle-based simulations, individual agents are actors of their own fates.
 We introduce a new type of agent, whose behaviour mostly depends on external parameters, and which we dub passive agents.
-The passive agents, do not play any role in the simulation process, their only function is to act as a visualization proxy to show quantitative information in three dimensions.
+As the quantitative simulation advances, the system will query the number of reaction to occur at a given time, and subsequently force passive agents to react.
+Hence, passive agents do not play any role in the simulation process, their only function is to act as a visualization proxy to show quantitative information in three dimensions.
 While the visual output is hardly distinguishable from an actual particle-based simulation, the benefits of this approach is two fold.
 Firstly, the simulation of the reaction network is very lightweight to compute, which makes this approach much more usable for interactive applications.
 Secondly, the spatial information is completely decoupled from the simulation, which means that we can have control over where reactions will occur.
 This approach grants us the freedom to dynamically trigger a cascade of reactions directly in the viewport in order to facilitate storytelling of complex reaction networks.
 
-The workflow of our passive-agents system is laid out as follows:
+The workflow of our passive-agents system is laid out as follows [Figure needed]:
 On the one hand, we have a biological system described as a reaction network and modeled with a scientific simulation software using a kinetic modeling approach.
 On the other hand, we have a 3D scene filled with potential reactants, and which is setup according to the initial conditions of the model, such as the initial quantity and location of each species.
-Each passive-agent additionally undergoes a 3D random walk type of motion to simulate the diffusion process, similarly to traditional particle-based simulation.
+Each passive-agent additionally undergoes a 3D random walk motion to simulate the diffusion process, similarly to traditional particle-based simulation.
 We then routinely query the quantitative simulation to fetch information about the number of reactions that are meant to occur at time t.
-Assuming a reaction of type A + B -> C, for example, the particle system will first randomly select two elements A and B based on their their spatial proximity.
+Assuming a reaction of type \textbf{A + B -> C}, for example, the particle system will first randomly select two elements A and B based on their spatial proximity.
 The two particles will then be subject to attraction forces until they enter in collision.
 Upon collision of the reactants, the reaction is performed, products are injected and the reactant are removed from the system.
-Finally, the reaction products return to a normal diffusion behaviour until they get chosen for a subsequent reaction defined in the model.
-By default, the reaction participants are randomly chosen in the 3D scene, but it is also possible to set a higher priority to a few elements present in the viewport, in order to show cascades of reactions without having to browse through the entire scene.
+Finally, the reaction products return to a normal diffusion behaviour until they get chosen for a subsequent reaction defined in the network.
+By default, the reaction participants are randomly chosen in the 3D scene, but it is also possible to set a reaction priority to a few elements present in the viewport, in order to show cascades of reactions without having to browse through the entire scene.
 
+\section{Conclusion and Future Work}
 
 
 %We will then exert and an attraction force to these two elements in order for 
@@ -990,13 +1140,13 @@ By default, the reaction participants are randomly chosen in the 3D scene, but i
 
 
 
-
-\section{Section 4}
-
-So what, our vision is still not done.
-
-We have large structures but cannot render then quickly enough.
-Crucial to be quick.
+%
+%\section{Section 4}
+%
+%So what, our vision is still not done.
+%
+%We have large structures but cannot render then quickly enough.
+%Crucial to be quick.
 
 
 
@@ -1262,13 +1412,13 @@ Crucial to be quick.
 %Part F temporal navigation 
 %Part D scenario interaction 
 
-\section{Using Computation Data for Storytelling}
-
-\section{Efficient Rendering of Large Structures}
-
-\section{Efficient Spatial Composition and Occlusion Management}
-
-\section{Conclusion}
+%\section{Using Computation Data for Storytelling}
+%
+%\section{Efficient Rendering of Large Structures}
+%
+%\section{Efficient Spatial Composition and Occlusion Management}
+%
+%\section{Conclusion}
 
 %Since \LaTeX\ is widely used in academia and industry, there exists a plethora of freely accessible introductions to the language.
 %Reading through the guide at \url{https://en.wikibooks.org/wiki/LaTeX} serves as a comprehensive overview for most of the functionality and is highly recommended before starting with a thesis in \LaTeX.
