@@ -57,7 +57,7 @@ Based on this knowledge, the illustrator will decide how to compose the scene, i
 The second step of the creation process is the drawing. 
 It is important not to confuse the work of a scientific illustrator with the work of an artist.
 Although they both aim at conveying a message or an idea, the artist has the freedom to hide his message behind an abstraction curtain in order to challenge the viewer.
-On the contrary, an illustrator has to convey a message as clearly as possible in order to expose scientific concepts to an uninformed audience.
+On the contrary, an illustrator has to convey a message as clearly as possible in order to expose scientific concepts to an uninformed audience.`
 This concretely means that the illustrator is bound to a set of logical guidelines in terms of composition, lighting, color-coding or storytelling.
 
 While some illustrators prefer working with paper and pencil or 2D composition software such as Photoshop, the new generation of illustrators grew with 3D rendering and animation packages such as Maya, Cinema4D or Blender, made mainstream by the popularization of digital effects in the movie industry.
@@ -376,15 +376,15 @@ Falk et al.[] proposed to enhance the playback particle trajectories with additi
 \section{Rendering and Composition of Molecular Landscapes}
 
 Up to this point, the rendering methods presented in the visualization literature have reached unprecedented levels of performance, in terms of size of supported datasets and rendering speed, thus enabling real-time rendering of large molecular structures with cellPACK[].
-The most recent presented solution is capable of rendering 25 billion atom at 3.6 fps in HD resolution.
+The most recent presented solution is capable of rendering 25 billion atoms at 3.6 fps in HD resolution.
 However, the rendering approach fails to provide a comfortable user experience as one expects between 24 and 60 Hz on average for interactive entertainment, and at least 60 Hz for dome and VR content.
 The computation should also free enough resources for eventual additional computation, as for instance, the physics simulation of the molecular bodies for real-time animation.
 Moreover, none of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit much more complex organization, such as lipid membranes, nucleic acids or fibers, which ought to be taken into account for a truer depiction of molecular landscapes.
 These structures are much more challenging to render, because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
 In order to provide a true real-time experience we decided to investigate new rendering approaches that would address all these limitations.
-We opted for a impostor-based method for the design of our rendering pipeline, which directly follows-up the work of De Lampe et al.[].
-An advantage of sphere impostors is that they do not require additional supporting structures for the rendering[] and are also much simpler to render than surfaces while providing high quality surface details.
-The optimizations which we developed are inspired from well known computer graphics technique often used in games such as level-of-detail, instancing and occlusion culling, which have been adapted to support macromolecular datasets efficiently.
+We opted for an impostor-based method for the design of our rendering pipeline, which directly follows-up the work of De Lampe et al.[].
+An advantage of sphere impostors is that they do not require additional supporting structures for the rendering and are also much simpler to render than surfaces while providing high quality surface details.
+The optimizations which we developed are inspired from well known computer graphics techniques often used in games such as level-of-detail, instancing and occlusion culling, which have been adapted to support macromolecular datasets efficiently.
 
 Word about composition and the lack of dense dataset in the literature.
 
@@ -394,51 +394,53 @@ Level-of-detail (LOD) is a method often used in computer games to cope with the 
 The principle consists of drawing simpler mesh representations for distant objects that have less pixel coverage to reveal high-frequency details. 
 From an original 3D model with a high number of polygons, proxy models are generated to create an atlas of models featuring gradually less polygons and high-frequency details.
 Upon rendering of a model, the LOD proxy is then selected based on the distance to the camera.
-The further away an object lies, the less details can actually be observe with human eyes and the less polygons should be then processed.
+The further away an object lies, the less details can actually be observed and thus less polygons should be rendered.
 This concept was applied to molecular visualization by Parulek et al.[] who presented a continuous level-of-detail for molecular surface rendering.
-Molecular surfaces such as SES[] are often use for scientific exploration of cavities and pockets.
-Because computing molecular surfaces in real-time for dynamics data is expensive, they propose to simplify the molecular structure in the most further background region.
-They seamlessly transition from highly detailed surface rendering in the region of interest for scientific exploration, to Gaussian surfaces in the context region.
-Gaussian surfaces are more trivial to compute but also provides less high frequency details needed.
+Molecular surfaces such as SES[] are often used for scientific exploration of cavities and pockets.
+Because computing SES for dynamic data in real-time is expensive, they propose to restrict the computation to a smaller subset of the surface in the focus region.
+They seamlessly transition from SES to Gaussian surfaces for the context region.
+Gaussian surfaces are more trivial to compute but also provides less high frequency details.
 To push the rendering capabilities even further they also simplify the atomic structure of the proteins for the most distant context region.
-They use clustering algorithms to simplify the atomic structure of a protein with fewer and larger spheres, as seen in figure X.
-Since the structure comprise less spheres to contribute to the surface the computation of the distance field is much less expensive, but still preserves low-frequency shape details.
-We use a similar approach to compute LOD proxies for each protein type. 
-Instead of computing and rendering Gaussian surfaces we simply render the larger spheres, or meta-atoms, resulting from the clustering obtained as 2D impostors.
-Clustering allows a reduction of the atomic dataset from 75pc for the first LOD proxy up to 99pc for the most simplified proxies.
+They use clustering algorithms to simplify the atomic structure of a protein with fewer and larger spheres, as seen in Figure X.
+Since the structure comprise less spheres to contribute to the surface, the computation of the distance field is much less expensive, but still preserves low-frequency shape details.
+We also use clustering to simplify protein structures, but we render the larger spheres, or meta-atoms, resulting from the clustering obtained as 2D impostors instead of compute a surface.
+Clustering allows a reduction of the number of spheres from 75pc for the first LOD proxy up to 99pc for the most simplified proxies.
 We also use different shading materials for original atomic structures and the proxies.
-For proteins closer to the camera and showing the entire atomic data we highlight the atom details with high-frequency illumination.
-For proteins located further away that are showing only simplified structures we only highlight low frequency details to make the meta-atoms less salient similarly so smooth Gaussian surfaces representations.
-Although simplified protein structures are much faster to render and original structures, when dealing with a large number of protein it is also important to limit the number to draw command to limit GPU-driver overhead.
-Therefore we also propose and optimized rendering pipeline that allows to switch between proxies levels on the fly and render the scene in a single draw command, thus approching zero-driver overhead.
+For proteins closer to the camera and showing the entire atomic data, we highlight the surface details using high-frequency illumination.
+For proteins located further away that are showing only simplified structures, we only highlight low frequency details to make the meta-atoms less salient similarly and the overall shape smoother.
+Although simplified protein structures are much faster to render than original structures, when dealing with a large number of proteins it is also important to limit the number of draw commands to limit GPU-driver overhead.
+Therefore, we also developed an optimized rendering pipeline which is able to render an entire set of proteins in a single draw command.
+Compared to traditional instancing method the pipeline is able to switch between different LOD proxies on-the-fly during the GPU rasterization process.
+%The pipeline is designed to switch between proxies levels on-the-fly, and to draw the scene in a single draw command.
 
 \textbf{Instancing}
 
 Instanced drawing is a concept widely used in computer graphics that aims at reducing the memory bandwidth and usage as well as reducing the GPU-driver latency cause by a large number of draw commands.
 This concept was applied by De Lampe et al.[] who used the geometry shader stage to instantiate entire atomics structure of amino acids, or residues, directly from the rendering pipeline.
-Amino-acids are the building blocks or the proteins, and there is around 20 different types of animo-acid.
-They initially store the atomic structures of each animo-acid types in the video memory, as well as the position, rotation and type of each amino acids that compose a single protein.
-With their method they are able to render entire amino-acid for a single initial per-vertex operation.
-During the vertex shader execution, amino-acid properties such as position, rotation and type are read from the main memory and passed on to the geometry shader.
-The geometry shader program then fetch amino-acid structural properties such as local atom positions and radii from the main memory, and the local positions are transformed with the reside position and rotation to determine the world atom position.
-Based on the world atom positions and new triangles are injected around the centroid to form the camera facing 2D sphere impostors similarly to Tarini et al.[]
-It is also possible to launch the execution of multiple verter shader programs in a single CPU operation, thus reducing the latency accumulation caused when sending rendering command to the GPU multiple times.
-Given a protein composed of a 4000 atoms and 250 amino acids the memory footprint of a protein would thus be reduced from 16000 numbers (4000 x 3D positions and atom type) to 2000 numbers (250 * 3D positions + atom type + 3D rotations).
-Although there is finite number of animo-acid structures, it also exists a infinite number of possible rotational conformations, which means that it is challenging to accurately depict protein structures with this approach.
+Amino-acids are the building blocks of proteins, and there is around 20 different types of amino-acid.
+They initially store the atomic structures of each amino-acid types in the video memory in a dedicated buffer, as well as the position, rotation and type of each amino acids that compose a protein, separately.
+With their method, they are able to render an entire residue with a single initial per-vertex operation.
+During the vertex shader execution, amino-acid properties such as position, rotation, and type are read from the video memory and passed on to the geometry shader.
+The geometry shader program then fetch the local atom positions for the corresponding residue from the video memory, which are then transformed with the residue position and rotation.
+For each residue atom, new triangles are injected around atom centroids to finally be processed in the final per-pixel shader stage to form 2D sphere impostors similarly to Tarini et al.[].
+It is also possible to launch the execution of multiple vertex shader programs in a single draw operation, thus reducing the latency accumulation caused when sending rendering commands to the GPU multiple times.
+Given a protein composed of 4000 atoms and 250 amino acids, the memory footprint of a protein would thus be reduced from 16000 numbers (4000 x 3D positions and atom type) to 2000 numbers (250 * 3D positions + atom type + 3D rotations).
+Although there is finite number of amino-acid structures, it also exists a infinite number of possible rotational conformations, which means that it is challenging to accurately depict protein structures with this approach.
 In order to render very large scenes efficiently it would be ideal to apply the same concept to entire proteins instead of residues to address this limitation
 Additionally, this would considerably reduce the memory footprint of the scene as only the type, position, and rotation would suffice to describe a protein.
-Finally, the geometry also introduce an considerable latency in this particular use case, for it was only designed to inject small number geometry efficiently.
+Finally, the geometry shader also introduce an considerable latency in this particular use case, for it was only designed to inject small number geometry efficiently.
 
-The tessellation stage is a feature that is now present on most recent graphics hardware, and is also available on mobile devices.
-Similarly to the geometry shader this shader stage is designed to dynamically inject primitives in the rendering pipeline, but it supports injection of up to several thousands of vertices in a much more efficiently manner.
+The tessellation shader is a feature that is now present on most recent graphics hardware, and is also available on mobile devices.
+Similarly to the geometry shader, this shader stage is designed to dynamically inject primitives on-the-fly in the rendering pipeline.
 While the geometry shader is only design to inject a few dozens of vertices maximum, the tessellation shader is able to efficiently inject thousands of vertices by dispatching the work on multiple threads.
-Initially the feature was developed to selectively increase the level-of-detail of meshes based on the camera distance based on the curvature of a surface.
+Initially, the feature was developed to selectively increase the level-of-detail of meshes based on the camera distance and surface curvature.
 The tessellation is also able to inject other types of primitives than polygons, such as lines or vertices.
 We use this feature to dynamically control the number of atoms or meta-atoms that shall be drawn, directly in the rendering pipeline.
-Similarly to De Lampe et al.[], only one vertex shader thread is required to draw a single protein.
-The previous stages of the pipeline are fetch important protein information such as position, rotation and type and these details will be passed on to the next stages of the pipeline.
-Based on the protein type and the distance to the camera which defined the level-of-detail, it is then possible to notify the tessellation engine how many sphere should be drawn for the given protein.
-The tessellation engine will then dispatch threads executions, one for each sphere to be drawn at this stage the primitive type of a spheres is treated as a single point.
+Similarly to De Lampe et al.[], only one initial vertex shader thread is required to draw an entire molecule.
+The vertex shader, which is the first stage of the pipeline, is used to fetch protein information such as position, rotation, and type from the video memory, and these will then be passed on to the next stages of the pipeline.
+Based on the protein type and distance to the camera, we firstly define which LOD will be used for a given protein.
+We then notify the tessellation engine about the number of vertices that we want to inject, one vertex per atom or meta-atom.
+The tessellation engine will then dispatch threads executions, one for each vertex.
 The $local_ID$ of each thread is used to fetch the corresponding sphere information from the main video memory, such as the local position and radius of the atom or meta-atom.
 After transforming the local sphere position with the protein position and rotation the sphere centroid is passed on to the geometry shader.
 Subsequently the geometry shader is used to inject the remaining vertices around the sphere centroids to form the 2D camera facing sphere billboard.
