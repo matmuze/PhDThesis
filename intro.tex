@@ -171,16 +171,16 @@ As the production of animated and interactive educational content is often prohi
 In biochemistry, it exists two distinct experimental protocols, respectively called dry and wet laboratories.
 Wet laboratories are where chemical agents are physically manipulated and then observed.
 Dry laboratories are where computational or mathematical methods are employed for the modelling and analysis of biochemical processes. 
-Over the last decades, \textit{in-silico} (dry laboratories) experiments have significantly increased due to the development of new software and the decreasing costs of super computers.
-%Due to computational or human limitations, it may be often impractical to accurately simulated a given process in its entirety.
+Over the last decades, \textit{in-silico} experiments (dry laboratories) have significantly increased due to the development of new software and the decreasing costs of super-computers.
+%Due to computational or human limitations, it may be often impractical to accurately simulate a given process in its entirety.
 Despite being often criticized for being too approximative, dry laboratory experiments represent a valuable source of information for researchers nonetheless.
-In 2013 Martin Karplus, Michael Levitt and Arieh Warshel were awarded the Nobel prize in Chemistry for their work of theoretical modelling for complex chemical system.
+In 2013 Martin Karplus, Michael Levitt and Arieh Warshel were awarded the Nobel prize in Chemistry for their work on theoretical modelling for complex chemical system.
 Their work highlight the importance of theoretical modelling as a tool to complement experimental techniques as wet-lab experiments are usually complex and expensive to conduct.
 The analysis of theoretical modeling brings researchers the necessary guidance to formulate new hypothesis which can be later on verified in wet laboratories, this saving the time and money needed to run too many wet lab experiments.
 As a result of the increasing popularity of dry lab experiments, a significant amount of data has already been gathered and produced.
-Data is often stored in digital format and can shared to other peers via online databases.
+Data is often stored in digital format and may be shared to other peers via online databases.
 Structural biology and Systems biology are branches or molecular biology that both heavily rely on computational method.
-Structural biology informs us about how things look, i.e., what is the atomic structure of a protein, while systems biology informs use about how things work, i.e., how micro and macromolecular interacts and to form a given physiological process.
+Structural biology informs us about how things look, i.e., what is the atomic structure of a protein, while systems biology informs us about how things work, i.e., how micro and macromolecular interacts and to form a given physiological process.
 
 %\section{Related Work}
 %
@@ -192,13 +192,13 @@ Structural biology informs us about how things look, i.e., what is the atomic st
 \subsection{Visualization of Biological Structures}
 
 Structural biology is concerned by the structure of biological macromolecules (proteins and nucleic acids), and the relationship between molecular structure and function.
-Data acquisition methods such as x-ray crystallography are traditionally used to read in details the atomic structure of proteins, i.e, the positions or atoms, their type and the type of bonds between them.
+Data acquisition methods such as x-ray crystallography are commonly used to read in details the atomic structure of proteins, i.e, the positions or atoms, their type and the type of bonds between them.
 Acquired atomic structures are often stored in digital files and shared via public data bases such as the Protein Data Bank[] to facilitate collaboration among biologists.
-This information is then processed to decrypt underlying important structural information and also used to run molecular dynamics (MD) simulations, which aims at reproducing atomic interactions and forces to observe the actual behaviour of macromolecules over time.
+This information is then processed to decrypt underlying important structural information and also used to run molecular dynamics (MD) simulations, that aims at reproducing atomic interactions and forces to observe the actual behaviour of macromolecules over time.
 Visualization is an important component of this discipline because atoms are arranged and assembled in 3 dimensional space and therefore a visual representation is often required.
 Biologists developed several types of representation to illustrate molecular structures, and they are also supported by mainstream visualization packages such as VMD[] or PyMol[].
 The simplest representation is the sticks model, where each bonds are represented as a line, and color coding is used to indicate the atom type at the line extremities or joints.
-The Van der Waals (VdW) surface, is probably the most commonly understood representation and which simply shows atoms as spheres whose radius corresponds to the atomic radius.
+The Van der Waals (VdW) surface, is probably the most commonly understood representation and simply shows atoms as spheres whose radius corresponds to the atomic radius.
 A popular representation among structural biologists is the secondary structure or ribbon diagram, it is used to reveal properties of the protein backbones such as sheets or helices.
 Finally, the molecular surface representation is used to show a continuous surface that closely surround atoms of a protein and that also close small holes between atoms that are not accessible by small solvent molecules.
 This method was first introduced to reveal information that is not salient enough with other types of representation, such as the presence of pockets and cavities buried in the protein structure and that can potentially host important reaction sites.
@@ -206,16 +206,16 @@ In scientific illustrations the shape of a protein is an important aspect to con
 Furthermore, VdW spheres and molecular surfaces can easily be stored as polygon meshes which are supported by 3D animation packages.
 BioBlender[], Molecular Maya[], ePMV[], are examples of plugins for animation packages that were specifically developed to ease the loading and rendering of molecular surface meshes.
 
-X-ray crystallography is limited in a sense that it is not capable of capturing large and complex structures such as organelles, viruses, or cells in their entirety.
+X-ray crystallography is limited in a sense that it is not capable of capturing large and complex structures such as organelles, viruses, or cells, in their entirety.
 Electron microscopy imaging, on the other hand, still does not offer enough resolution to capture individual atoms which make the segmentation task between proteins extremely challenging.
-So far, only little is known about spatial arrangement of proteins that form greater structures and their modeling would be a cumbersome and manual task.
+So far, only little is known about spatial arrangement of proteins that form greater structures and their manual modeling would be a cumbersome and time-consuming task.
 To fill the mesoscale gap between atoms and cells, scientists from the Scripps Institute in San Diego have developed cellPACK[], a tool to procedurally construct large mesoscale structures, such as viruses, or entire cells at atomic resolution.
 cellPACK incorporates the most recent knowledge obtained from biology to generate these models such as proteins structures obtained from crystallography, concentrations and spatial distribution observed \textit{in vitro}, and 3D shape of compartments acquired from electronic microscopy.
 They summarize all this data in structural descriptions which they call a recipe, and which is then used as input to generate entire models of viruses and cells via a packing method based on collisions constraints.
-Their packing algorithm uses a spatial partitioning scheme to prevent structures from overlapping with each others.
+Their packing algorithm progressively inject molecules in a 3D region and they use a spatial partitioning scheme to detect overlapping structures and find an appropriate location for incoming shapes.
 As an output their tool generates a list which contains the position, rotation, and type of all the proteins that compose the organism.
 Additionally their method also supports packing of fiber data such as DNA or RNA and is stored as control points in the resulting file.
-The initial goal of cellPACK was to generate valid protein ensemble that forms an organism, that would also comprise atomic data in order to serve as input for large-scale molecular dynamics simulation.
+The initial goal of cellPACK was to generate valid protein ensembles that forms organisms, and that also comprise atomic data in order to serve as input for large-scale molecular dynamics simulation.
 Additionally, the generated structures can also be loaded in 3D rendering and animation packages for illustration purposes.
 %, thus preventing illustrator to manually place and arrange proteins when depicting a larger protein ensemble.
 These large models are highly valuable to us, as they comprise complex data that would have to be modeled manually otherwise, thus compromising the production of illustrative content.
@@ -375,24 +375,29 @@ Falk et al.[] proposed to enhance the playback particle trajectories with additi
 
 \section{Rendering and Composition of Molecular Landscapes}
 
-Up to this point, the rendering methods presented in the visualization literature have reached unprecedented levels of performance, in terms of size of supported datasets and rendering speed, thus enabling real-time rendering of large molecular structures with cellPACK[].
+Up to this point, the rendering methods presented in the visualization literature have reached unprecedented levels of performance, in terms of size of supported datasets and rendering speed, thus enabling real-time rendering of large molecular structures generated with cellPACK[].
 The most recent presented solution is capable of rendering 25 billion atoms at 3.6 fps in HD resolution.
 However, the rendering approach fails to provide a comfortable user experience as one expects between 24 and 60 Hz on average for interactive entertainment, and at least 60 Hz for dome and VR content.
-The computation should also free enough resources for eventual additional computation, as for instance, the physics simulation of the molecular bodies for real-time animation.
+The rendering should also free enough resources for eventual additional computation, as for instance, the physics simulation of the molecular bodies for real-time animation.
 Moreover, none of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit much more complex organization, such as lipid membranes, nucleic acids or fibers, which ought to be taken into account for a truer depiction of molecular landscapes.
-These structures are much more challenging to render, because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
-In order to provide a true real-time experience we decided to investigate new rendering approaches that would address all these limitations.
+These are indeed more challenging to render, because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
+In order to provide a truer depiction of micro-organisms and improve real-time user experience, we decided to investigate new rendering approaches that would address all these limitations.
 We opted for an impostor-based method for the design of our rendering pipeline, which directly follows-up the work of De Lampe et al.[].
-An advantage of sphere impostors is that they do not require additional supporting structures for the rendering and are also much simpler to render than surfaces while providing high quality surface details.
-The optimizations which we developed are inspired from well known computer graphics techniques often used in games such as level-of-detail, instancing and occlusion culling, which have been adapted to support macromolecular datasets efficiently.
+An advantage of sphere impostors is that they do not require additional supporting structures for the rendering and are also more trivial to render than molecular surfaces, while providing high quality surface details.
+The optimizations which we developed are inspired from well-known computer graphics techniques often used in games such as level-of-detail, instancing and occlusion culling, which have been adapted to support macromolecular datasets efficiently.
 
-Word about composition and the lack of dense dataset in the literature.
+A particularity of the scenes generated with cellPACK is that they aim at reproducing molecular crowding which can be observed in vitro.
+So far, the rendering methods previously presented have only showcased protein datasets with a very low population density, which means that less macromolecules are present in the viewport at once.
+Additionally to increasing the rendering complexity, denser scenes may also cause major occlusion issues for viewing important internal structures such as the DNA for example.
+Hence, we designed an custom scene composition pipeline to adjust the visibility of proteins, while preserving important contextual information.
+The pipeline is also engineered to leverage the power of GPU, and provide a responsive user experience even with a large number of individual molecular agents.
+
 
 \textbf{Level-of-detail}
 
 Level-of-detail (LOD) is a method often used in computer games to cope with the limited polygon budget of real-time applications.
 The principle consists of drawing simpler mesh representations for distant objects that have less pixel coverage to reveal high-frequency details. 
-From an original 3D model with a high number of polygons, proxy models are generated to create an atlas of models featuring gradually less polygons and high-frequency details.
+From an original 3D model with a high number of polygons, proxy models are generated to create an atlas of model with gradually simplified geometries.
 Upon rendering of a model, the LOD proxy is then selected based on the distance to the camera.
 The further away an object lies, the less details can actually be observed and thus less polygons should be rendered.
 This concept was applied to molecular visualization by Parulek et al.[] who presented a continuous level-of-detail for molecular surface rendering.
@@ -400,116 +405,126 @@ Molecular surfaces such as SES[] are often used for scientific exploration of ca
 Because computing SES for dynamic data in real-time is expensive, they propose to restrict the computation to a smaller subset of the surface in the focus region.
 They seamlessly transition from SES to Gaussian surfaces for the context region.
 Gaussian surfaces are more trivial to compute but also provides less high frequency details.
-To push the rendering capabilities even further they also simplify the atomic structure of the proteins for the most distant context region.
+To push the rendering capabilities even further, they also simplify the atomic structure of the proteins for the most distant context region.
 They use clustering algorithms to simplify the atomic structure of a protein with fewer and larger spheres, as seen in Figure X.
 Since the structure comprise less spheres to contribute to the surface, the computation of the distance field is much less expensive, but still preserves low-frequency shape details.
-We also use clustering to simplify protein structures, but we render the larger spheres, or meta-atoms, resulting from the clustering obtained as 2D impostors instead of compute a surface.
+We also use clustering to simplify protein structures, but we render the larger spheres, or meta-atoms, resulting from the clustering, as 2D impostors instead of compute a surface.
 Clustering allows a reduction of the number of spheres from 75pc for the first LOD proxy up to 99pc for the most simplified proxies.
 We also use different shading materials for original atomic structures and the proxies.
 For proteins closer to the camera and showing the entire atomic data, we highlight the surface details using high-frequency illumination.
-For proteins located further away that are showing only simplified structures, we only highlight low frequency details to make the meta-atoms less salient similarly and the overall shape smoother.
-Although simplified protein structures are much faster to render than original structures, when dealing with a large number of proteins it is also important to limit the number of draw commands to limit GPU-driver overhead.
+For proteins located further away that are showing only simplified structures, we only highlight low frequency details to make the meta-atoms less salient and the overall shape smoother.
+Although simplified protein structures are much faster to render than original structures, when dealing with a large number of proteins it is also important to limit the number of draw commands in order to reduce GPU-driver overhead.
 Therefore, we also developed an optimized rendering pipeline which is able to render an entire set of proteins in a single draw command.
-Compared to traditional instancing method the pipeline is able to switch between different LOD proxies on-the-fly during the GPU rasterization process.
+Compared to traditional instancing methods, the pipeline is able to switch between different LOD proxies on-the-fly during the GPU rasterization process.
 %The pipeline is designed to switch between proxies levels on-the-fly, and to draw the scene in a single draw command.
 
 \textbf{Instancing}
 
 Instanced drawing is a concept widely used in computer graphics that aims at reducing the memory bandwidth and usage as well as reducing the GPU-driver latency cause by a large number of draw commands.
-This concept was applied by De Lampe et al.[] who used the geometry shader stage to instantiate entire atomics structure of amino acids, or residues, directly from the rendering pipeline.
+This concept was applied by De Lampe et al.[] who used the geometry shader stage to instantiate the atomic structure of entire amino acids, also called residues, directly from the GPU rasterization pipeline.
 Amino-acids are the building blocks of proteins, and there is around 20 different types of amino-acid.
-They initially store the atomic structures of each amino-acid types in the video memory in a dedicated buffer, as well as the position, rotation and type of each amino acids that compose a protein, separately.
+They initially store the atomic structures of each residue types in the video memory in a dedicated buffer, as well as the position, rotation and type, of each amino acids that compose a protein, in separate buffer.
 With their method, they are able to render an entire residue with a single initial per-vertex operation.
-During the vertex shader execution, amino-acid properties such as position, rotation, and type are read from the video memory and passed on to the geometry shader.
-The geometry shader program then fetch the local atom positions for the corresponding residue from the video memory, which are then transformed with the residue position and rotation.
-For each residue atom, new triangles are injected around atom centroids to finally be processed in the final per-pixel shader stage to form 2D sphere impostors similarly to Tarini et al.[].
+During the vertex shader execution, amino-acid properties such as position, rotation, and type, are read from the video memory and passed on to the next shader stage, i.e., the geometry shader.
+The geometry shader program then fetches the local atom positions for the corresponding residue from the video memory, which are then transformed with the residue position and rotation.
+For each residue atom, new triangles are injected around atom centroids, and then processed in the final per-pixel shader stage to form 2D sphere impostors, similarly to Tarini et al.[].
 It is also possible to launch the execution of multiple vertex shader programs in a single draw operation, thus reducing the latency accumulation caused when sending rendering commands to the GPU multiple times.
-Given a protein composed of 4000 atoms and 250 amino acids, the memory footprint of a protein would thus be reduced from 16000 numbers (4000 x 3D positions and atom type) to 2000 numbers (250 * 3D positions + atom type + 3D rotations).
-Although there is finite number of amino-acid structures, it also exists a infinite number of possible rotational conformations, which means that it is challenging to accurately depict protein structures with this approach.
-In order to render very large scenes efficiently it would be ideal to apply the same concept to entire proteins instead of residues to address this limitation
-Additionally, this would considerably reduce the memory footprint of the scene as only the type, position, and rotation would suffice to describe a protein.
-Finally, the geometry shader also introduce an considerable latency in this particular use case, for it was only designed to inject small number geometry efficiently.
+Given a protein composed of 4000 atoms and 250 amino acids, the memory footprint of a protein would thus be reduced from 16000 numbers (4000 * 3D positions and atom type) to 2000 numbers (250 * 3D positions + atom type + 3D rotations).
+Although there is a finite number of amino-acid structures, it also exists an infinite number of possible rotational conformations, which means that it is challenging to accurately depict protein structures with this approach.
+To address this limitation, it would be ideal to apply the same concept to entire proteins instead of residues.
+Such approach would also help to considerably reduce the memory footprint of the scene as only the type, position, and rotation would suffice to describe a single protein.
+However, the geometry shader causes a considerable latency as the number of injected geometries increases, and therefore it is only possible to instantiate a few dozens of triangle efficiently with this method.
+Indeed, a single geometry shader program is responsible of transforming and injecting multiple geometries, but this operation is completely performed in serial while it would be more efficient to distribute the workload across multiple threads instead.
 
-The tessellation shader is a feature that is now present on most recent graphics hardware, and is also available on mobile devices.
+The tessellation shader is a feature that is now available on most recent graphics hardware, and is also available on mobile devices.
 Similarly to the geometry shader, this shader stage is designed to dynamically inject primitives on-the-fly in the rendering pipeline.
-While the geometry shader is only design to inject a few dozens of vertices maximum, the tessellation shader is able to efficiently inject thousands of vertices by dispatching the work on multiple threads.
+While the geometry shader is only design to inject a few dozens of triangle maximum, the tessellation shader is able to efficiently inject thousands of vertices by dispatching the work on multiple threads.
 Initially, the feature was developed to selectively increase the level-of-detail of meshes based on the camera distance and surface curvature.
-The tessellation is also able to inject other types of primitives than polygons, such as lines or vertices.
+The tessellation engine is also able to inject other types of primitives than polygons, such as lines or vertices.
 We use this feature to dynamically control the number of atoms or meta-atoms that shall be drawn, directly in the rendering pipeline.
-Similarly to De Lampe et al.[], only one initial vertex shader thread is required to draw an entire molecule.
-The vertex shader, which is the first stage of the pipeline, is used to fetch protein information such as position, rotation, and type from the video memory, and these will then be passed on to the next stages of the pipeline.
-Based on the protein type and distance to the camera, we firstly define which LOD will be used for a given protein.
-We then notify the tessellation engine about the number of vertices that we want to inject, one vertex per atom or meta-atom.
-The tessellation engine will then dispatch threads executions, one for each vertex.
-The $local_ID$ of each thread is used to fetch the corresponding sphere information from the main video memory, such as the local position and radius of the atom or meta-atom.
-After transforming the local sphere position with the protein position and rotation the sphere centroid is passed on to the geometry shader.
-Subsequently the geometry shader is used to inject the remaining vertices around the sphere centroids to form the 2D camera facing sphere billboard.
-A nice perk of this technique is that it does not rely on supporting structures and thus work equally well with numerous large protein structures and numerous small molecular structures such as lipid membranes.
+Similarly to De Lampe et al.[], only one initial vertex shader thread is required to draw an entire molecule, but the maximum size of molecules which is supported is up to two orders of magnitude greater with our approach.
+The vertex shader, which is the first stage of the pipeline, is used to fetch protein information such as position, rotation, and type, from the video memory, and these will then be passed on to the next stages of the pipeline.
+Based on the protein type and distance to the camera, we select the corresponding LOD proxy, which informs us about the number of spheres required to draw the given protein.
+We then notify the tessellation engine about the number of vertices that we want to inject, i.e., one vertex per atom or meta-atom.
+The tessellation engine will then dispatch the execution of a thread batch comprising one thread per vertex.
+Each thread is initially given a unique ID, which is then used to fetch the corresponding sphere information from the main video memory, such as the local position and radius of atoms or meta-atoms.
+After transforming the local sphere position with the protein position and rotation, the sphere centroid is passed on to the next shader stage, i.e., the geometry shader.
+Subsequently, the geometry shader is used to inject the remaining vertices around the sphere centroids, to form the triangles of the 2D sphere billboards.
+An advantage of this technique is that it allows to render an entire scene comprised of several hundreds of thousands of proteins in a single draw command, thus approaching zero driver overhead.
+Additionally the memory footprint is considerably smaller than previous techniques, and the pipeline is also able to process large macromolecules with up to several thousands of atoms.
 
 \textbf{Occlusion Culling}
 
-When rendering large scenes, a large number of geometries are processed through the rendering pipeline which may be too overwhelming for the graphics hardware.
-The per fragment processing is the rendering stage which the most demanding and causes a bottleneck in the pipeline.
-Mesoscale datasets such as the one generated with cellPACK often result in a very dense arrangement of macro-molecules.
-Because the scenes are very dense, a large number of spheres might overlap each other at a single pixel location.
-which is turns results in a overly large number of depths tests and may slow down the rendering.
-An efficient way to reduce this computational load is occlusion culling.
-Occlusion culling is a popular method is computer graphics that ensures that instances that are not visible in the final render at not processed at all.
-It exists on modern graphics hardware a fixed functionality called hardware occlusion queries (HOQ) and which allows the user to determine the number of visible pixels of rasterized geometry based on an input depth texture.
-In some scenario the depth texture may be generated via a depth-only pre-pass or simply recylcled from the results of the previous final rendering.
-Grottel et al.[] presented an efficient rendering pipeline for large particles-based dataset, using HOQ to discard large chucks of the dataset hidden in the current viewport.
-They use an uniform grid to spatially partition the data, and perform occlusion queries for each grid cells using cells's cubes as bounding geometries.
+%is the rendering stage which the most demanding and causes a bottleneck in the pipeline.
+%Mesoscale datasets such as the one generated with cellPACK often result in a very dense arrangement of macro-molecules.
+
+Upon rendering complex scenes, a large number of geometries are processed through the rendering pipeline, which may overload the graphics hardware and cause bottlenecks.
+Per-fragment processing is by far the most demanding stage of our pipeline.
+Because the scenes are very dense, a large number of spheres overlap each other at a single pixel location,
+which in turns results in a overly large number of concurrent tests and slow down the rendering.
+An efficient way to reduce this computational load is occlusion culling, and is also widely used in computer games.
+The principle of occlusion culling is to exclude objects that are partially or completely hidden by other visible objects from the rendering pipeline, in order to spare computation.
+It exists on modern graphics hardware a fixed functionality called hardware occlusion queries (HOQ), and which allows to compute the number of visible pixels of rasterized geometry based on an input depth texture.
+The depth texture may either be generated before hand (depth-only pre-pass), or simply recycled from the previous frame.
+Grottel et al.[] presented an efficient rendering pipeline for large particles-based datasets, using HOQ to discard large chucks of the dataset hidden in the current viewport.
+They use a uniform grid to spatially partition the dataset, and perform occlusion queries for each grid cells, using cubes as bounding geometries.
 Each query result is individually read back to the application after a certain latency which is due to the processing in the graphics pipeline.
-Additionally the queries are all performed in serial resulting in a latency accumulation for each individual draw calls and caused by the GPU driver overhead.
-For the specific use case of Grottel et al.[] this approach is reasonable because of the relatively low resolution of grid cells they used (15x15x15).
-For our specific use cause, we would like to perform occlusion queries for each individual macromolecule.
-Averagely complex scenes generated with cellPACK may easily comprise up to millions of individual instances when small lipid molecules are counted and therefore HOQ is guaranteed to perform poorly with those scenes.
+Additionally, since one draw command must be issued for each single query, the GPU driver overhead causes a small latency that accumulates with the number of queries.
+For the specific use-case demonstrated by Grottel et al.[], this approach seems reasonable because of the relatively low number of queries needed (one query per grid cell with a 15x15x15 resolution).
+In our use-case, we would need to perform one occlusion query for each individual macromolecule present in the scene.
+Averagely complex scenes generated with cellPACK may easily comprise up to millions of individual instances when small lipid molecules are present, and therefore the presented approach is guaranteed to perform poorly with such scenes.
 
 A more suitable approach would have to be specifically designed to reduce execution times of individual queries and also to limit GPU-driver overhead.
-Most commonly used occlusion culling techniques are image space because they are not depending on the complexity of the geometries.
-Hierarchical Z Buffer is a method introduced by Green et al[] and is widely used to quickly compute visibility look-up based on a single input depth-map.
-Based on the input depth map they compute a series of mip-maps with a custom downsampling method to only retain the deepest values during the downsampling.
-The textures are then used to perform occlusion look-up and thus determine the visibility of an object.
-To perform occlusion queries they use a bounding volume in the form of a camera-facing square.
-Then, based on the size and position of the square they perform a series of look-up in the HiZ buffer at a specificity chosen resolution to minimize the number of texture reads.
-In case the depth of the square is deeper than all the values queried in the HiZ buffer the object in then guaranteed to be hidden and may safely be discarded from the rendering pipeline.
-Due very small number of texture look-up when sampling low-resolution mip levels this technique is very fast to execute individually.
-However, without a proper batching mechanism the overhead cause by the GPU-driver will simply be too high to allow decent rendering performance.
-Once way to perform the queries in a single CPU execution command is to use GPU computing such as CUDA or compute shader programs.
-Additionally to the low GPU-driver overhead the computation of the queries will also be executed in parallel thus speeding-up the operation.
+Hierarchical Z Buffer (HiZ buffer) is a method introduced by Green et al[] and is commonly used to efficiently perform visibility look-up's.
+Based on an input depth map, they compute mip-maps with a custom algorithm in order to only retain the deepest values for each texture down-sampling operation.
+Hence, a single pixel from a lower resolution mip-map will indicate the deepest value from the entire region covered by this pixel in higher resolution mip-maps.
+Subsequently, for each object to be queried, they compute a camera-facing bounding square.
+Based on the pixel coverage and position of the squares, they perform a series of look-up at a specific resolution in order to minimize the number of texture accesses, that tend to slow the computation.
+The use of camera-facing squares as bounding regions allows to cover the entire square with only 4 texture look-ups at the right mip resolution, thus guaranteeing a constant execution query time regardless of object sizes.
+Finally, in case the depth of a given square is deeper than all of the four values queried, the object is then guaranteed to be hidden and may safely be discarded from the rendering pipeline.
+A disadvantage of this method is that it may indicate objects as visible while actually being occluded, because it reduces large regions of an initial depth buffer to a few depth values.
+In our use case, however, we must trade-off accuracy against performance, because more accurate occlusion culling approaches are simply too computationally demanding to cope with the size of our datasets.
+However, without a proper query batching mechanism, the GPU-driver overhead caused by individual draw-commands would simply be too high to allow real-time rendering performance.
+We propose to adapt this method to run in parallel on graphics processing units in order to perform multiple queries simultaneously, and thus speeding-up the operation.
+Because only one thread execution is needed to compute a single query, we are also able to dispatch the GPU computation of multiple queries in a single command, thus approaching zero GPU overhead.
+With our most complex scene, we were able to spare up to 50pc of the rendering computation thanks to our batched occlusion queries.
  
 \textbf{Fibres Structures}
+
+%It is also worth mentioning that the proposed modelling approach does not aspire to provide a strictly accurate depiction of DNA structure.
+%Instead, we aim a showcasing an resembling representation of the structure which is fast to compute and designed for illustration purposes only.
 
 An utterly important component of living organisms are fibre structures such as DNA, RNA or (...).
 Similarly to protein data, a challenge when rendering dynamic fibre structures is memory usage and bandwidth.
 Fibres such as DNA, are composed of small molecules called nucleic acids, also known as bases, and which are made out of a few dozen atoms.
-One approach to render fibre structures could be to store the position, rotation and type of each nucleic acids and to render the bases with the same pipeline used for protein data and described above.
-However, we foresee two issue with that approach.
-Firstly, the memory footprint of DNA strands might simply be too large to store the genome data of entire cells the video memory.
-Indeed, the entire genome of E.Coli for instance is composed of xxx individual base pairs, which represents xxx Gb of data.
-Secondly, simulation tools that are able to reproduce the dynamics of DNA fiber structures are all using CPU-based algorithms.
+One approach to render fibre structures would be to store the position, rotation, and type, of each nucleic acids and to render the bases with the same pipeline used for protein data and described above.
+However, we foresee two issues with that approach.
+Firstly, the memory footprint of DNA strands might simply be too large to store the genome data of entire cells on the video memory.
+Indeed, the entire genome of E.Coli, for instance, is composed of xxx individual base pairs, which represents xxx Gb of data.
+Secondly, simulation tools that are able to reproduce the dynamics of DNA fiber structures are all CPU-based algorithms.
 Assuming that storing large static structures is already a challenging enterprise, the rendering of animated structures would very likely have to be streamed to the GPU instead.
-Interactive rendering of animated DNA structures would therefore be limited with this approach because the cost of memory transfer between CPU and GPU would slow down the rendering considerably.
+Interactive rendering of animated DNA structures would therefore be limited with this approach, because the cost of memory transfer between CPU and GPU would slow down the rendering considerably.
 
-Our solution to limit the memory footprint of fibre structures is too only update the control points of the curve instead.
-(This solution can save up to XXpc of memory space)
-Additionally since only the curve data is needed to render these structures, the simulation of the dynamics aslo becomes much more trival.
-Indeed the simulation of simple dynamic strands is much less computationally demanding than more complex DNA strands.
-Moreover, mainstream physics animation tools that are GPU-based may be used instead of CPU-based standalone simulation tools, which guarantees a considerable performance boost for the real-time simulation and simulation use case.
-The fibre rendering pipeline which we developed similarly to the protein data, uses the tessellation shader to dynamically inject the spheres that compose each individual nucleic acids.
-In order to support different types of fibers it is important to first understand their building rules.
-In the case of DNA, a well known structure is the B-DNA that exhibits the recognizable double-helix pattern.
-The structure is also a very simple to model: a spacing of 3.4Å and a rotation of 34.3 degrees between each base. 
-Based on these rules we are able to procedurally generate B-DNA strands based on path control points via GPU dynamic tessellation.
-It is important to mention that the proposed modelling approach does not aspire to provide a strictly accurate depiction of DNA structure.
-Instead we generate an resembling representation of the structure which is fast to compute and designed for illustration purposes only.
-The pipeline is designed to render an entire curve segment form only one initial per-vertex program.
-As an input, the vertex program receives the controls points information for the current segment as well as the building rule of the fibre structure.
-The building rules and the segment curvature are then processes, and each single base of the segment is given a world position and rotation.
-The tessellation engine is then informed about the number of primitives to inject in the pipeline, and the base information is passed on to the next stages of the shader.
-When processing individual spheres in the tessellation stage, the corresponding local atom position is then fetched from the memory and then transformed with the world position and rotation of the pair it belongs to.
-Finally, the sphere centroid position and radius is passed on to the next stages of the shader to create the 2D sphere impostors.
-Additionally, previous optimization initially developed for protein data such as occlusion culling and level-of-detail can also be seemlessly employ with the fiber use case.
+Our solution to limit the memory footprint of fibre structures is to only use the control points of the fibre strands as input, while generating the actual fibre structures on-the-fly.
+The rendering pipeline which we developed for the fibers relies on the tessellation shader to dynamically inject spheres impostors that compose each fibre segments, similarly to protein data.
+An advantage of our fibre rendering pipeline is that previous technologies developed to optimize the rendering of protein data, such as LOD or occlusion culling may also be seamlessly used with the fibre use-case.
+Additionally, since only the curve data is needed as input, the animation of the fiber structures becomes much more trivial to compute.
+Indeed, mainstream physics animation tools that are GPU-based may be used instead of CPU-based scientific tools, which guarantees a considerable performance boost.
+In order to support different types of fibres, it is important to first understand how their structures is organized.
+In the case of DNA fibres, a well-known structure is the B-DNA, that exhibits the recognizable double-helix pattern.
+The structure is also very simple to model: a spacing of 3.4Å and a rotation of 34.3 degrees between each nucleic acids. 
+We also define an average number of 12 nucleic acids per segments.
+Based on these knowledge, we are now able to generate B-DNA curve segments simply based on a set of curve control points.
+
+The pipeline is designed to render an entire curve segment from only one initial per-vertex program.
+As an input, the vertex program reads the controls points information for the current segment as well as the building rule of the current fibre structure.
+The building rules and the segment curvature are used to compute the position and rotation of the nucleic acids along the curve segment, and this information is then passed on to the next shader stages.
+Based on the building rules of the segment and its distance to the camera, we estimate the number of spheres which are required to draw the fibre segment.
+We then notify the tessellation engine about the number of vertices that we want to inject, i.e., one vertex per sphere.
+The tessellation engine will dispatch the execution of a thread batch comprising one thread per sphere.
+Upon processing individual spheres in the tessellation stage, the corresponding sphere information is fetched from the main video memory, such as the local position and radius of atoms or meta-atoms.
+After transforming the local sphere position with the position and rotation of the nucleic acid that it belongs to, the sphere centroid is passed on to the next shader stage, i.e., the geometry shader.
+Subsequently, the geometry shader is used to inject the remaining vertices around the sphere centroids, in order to form the triangles of the 2D sphere billboards.
 
 \textbf{Occlusion Management}
 
@@ -520,32 +535,33 @@ Without efficient means to selectively remove occluding objects, it would theref
 In scientific illustrations and visualization, cutaway views are often employed as an effective technique for occlusion management in densely packed scenes.
 However, a limitation of strict cutaway views is that important contextual information is removed.
 Illustrators must make sure that the essential information, e.g., the ratio of multiple molecular ingredients is represented, and not simply clipped away.
-While mainstream visualization and illustration software feature cutaway tools, they do not provide the means to performed advance scene composition for such scenes.
-Transparency is another approach to solve occlusion problems, although the computational cost of full-fledge transparency will be too significant for large molecular scenes featuring several hundreds of overlapping elements.
-Furthermore, due to the presence of a large number of potential occluders the use of transparency will result in overly complex images which would affect the quality of the visualization.
+While mainstream visualization and illustration software feature cutaway tools, they do not provide the means to easily perform advanced scene composition for such scenes.
+Transparency is another approach to solve occlusion problems, although the computational cost of full-fledge transparency will be too significant for large molecular scenes featuring several thousands of overlapping elements.
+Furthermore, due to the presence of a large number of potential occluders the use of transparency will likely result in overly complex images which would affect the quality of the visualization.
 
 We propose a novel method for solving occlusion problems due to molecular crowding.
 In contrast with existing techniques, we take advantage of the characteristics of complex molecular landscapes such as the scenes modeled with cellPACK.
 These models usually comprise hundreds of thousands of individual macromolecules, however many of them share the same structure.
 Therefore, by reducing the concentration of elements sharing a similar structure, we may reveal hidden structures and also preserve important information such as the structure of contextual elements and their location.
 This concept resembles the “Screen-Door Transparency” technique popular in the early days of computer graphics and where transparency is achieved by placing small holes in a polygon to reveal what is present behind.
-When reducing the concentration we also ensure that elements are removed uniformly across the scene to preserve the input proportions of the spatial distribution.
+When reducing the concentration we also ensure that elements are removed uniformly across the scene to preserve the initial proportions of the spatial distribution.
 A potential limitation of this approach is that it will communicate erroneous information about the concentration to the viewer.
 In order to avoid misconceptions, we optionally propose to display the removed elements with a ghosting effect such as transparency or contours only.
-The main difference between the ghosting effect and full fledge transparency is that only the last occluding elements are blended on top the opaque and visible elements to minimise visual clutter.
+The main difference between the ghosting effect and full fledge transparency is that only the last occluding elements are blended on top of the opaque and visible elements to minimise visual clutter.
 
 To assist the scene composition, we additionally display a bar chart over the view that provide real-time quantitative feedback about the visibility of each macromolecular type.
 A single bar comprise three distinct regions that indicates the visibility properties for a given species as show in Figure[].
 The grey region bar indicates the number of macromolecules that are currently discarded from the rendering.
 The dark green region indicates the proportion of rendered molecules that are currently visible, while the light green region indicates the proportion of them that are currently occluded by other macromolecules.
-The bar chart provides an overview of the visibility properties which then serve as guidance for composing the scene.
-For instance, if the user wishes to observe a particular species he will immediately be informed about the number of macro-molecules occluded by other structures, and will adapt the visualization accordingly.
-The modulation of the number of visible elements is also done via the quantitative view by simply dragging the border between the grey and green regions. 
-Another useful functionality for scene composition is the selection of macro-molecular types as objects of interests (OI) which guarantees occluding macro-molecules of a different type to be discarded.
+The bar chart thus provides an overview of the visibility properties which then serve as guidance for composing the scene.
+For instance, if the user wishes to observe a particular species, he will immediately be informed about the quantity of this species that are occluded by other structures, and will adapt the visualization accordingly.
+The modulation of the proportion of visible elements is also done via the quantitative view by simply dragging the border between the grey and green regions. 
+Another useful functionality for scene composition is the selection of species of interest.
+When selecting a particular macro-molecular type as species of interest, occluding elements of a different types are then guaranteed to be discarded in order to provide full-visibility for the species of interest.
 Since this method is view dependent it is necessary to compute occluding elements routinely when the camera position is updated.
-Therefore we developed a custom clipping pipeline using GPU computing to guaranty a smooth user experience even with scenes featuring a large number of macro-molecules.
-Macro-molecules that are set as OI are first rendered in a separate off-line depth texture and used as input to perform image-based occlusion queries for each of the remaining elements and detect occluders.
-Additionally to our quantitative approach for occlusion management we also provide support traditional clipping objects such as planes, cube or sphere that can are manually placed in the 3D scene.
+Therefore, we developed a custom culling pipeline using GPU computing to guaranty a smooth user experience even with scenes featuring a large number of macro-molecules.
+Macro-molecules that are set as species of interest are first rendered in a separate off-line depth texture and used as input to perform image-based occlusion queries for each of the remaining elements and detect occluders.
+Additionally to our quantitative approach for occlusion management we also provide support for traditional clipping objects such as planes, cube or sphere that can manually be placed in the 3D scene.
 
 % imitating the reaction and diffusion process for 
 %
