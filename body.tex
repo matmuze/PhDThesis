@@ -10,13 +10,6 @@
 	description={A text editor is a type of program used for editing plain text files.}
 }
 
-\chapter{Abstract}
-
-This is where the abstract begins...
-
-
-
-
 %\textbf{Importance of visualisation in the physiology}
 %Physiology describes how livings organism work, and it spans across multiple scientific fields.
 %It is therefore important to be able to communicate scientific advances efficiently between experts with various scientific background.
@@ -990,7 +983,7 @@ Data acquisition methods, such as x-ray crystallography, are commonly used to re
 Acquired atomic structures are often stored in digital files and shared via public data bases, such as the Protein Data Bank~\cite{bernstein1977protein}, to facilitate collaboration among peers.
 This information is then processed to decrypt underlying important structural information, and also used to run molecular dynamics (MD) simulations, which aim at reproducing atomic interactions and forces to observe the actual behaviour of macromolecules over time.
 Visualization is an important component of this discipline, because atoms are arranged and assembled in three dimensional space and therefore a visual representation is often required.
-Biologists developed several types of representation to illustrate molecular structures, and are supported by mainstream visualization packages such as VMD~\cite{humphrey1996vmd} or PyMol~\cite{delano2002pymol}.
+Biologists developed several types of representation to illustrate molecular structures, and are supported by mainstream visualization packages such as VMD~\cite{humphrey1996vmd} or PyMol~\cite{PyMOL}.
 The simplest representation is the sticks model, where each bond is represented as a line, and color coding is used to indicate the atom type at the line extremities or joints.
 The Van der Waals (VdW) surface, is probably the most commonly understood representation, and simply shows atoms as spheres whose radius corresponds to the atomic radius.
 A popular representation among structural biologists, is the secondary structure or ribbon diagram, it is used to reveal properties of the protein backbones, such as sheets or helices.
@@ -1092,7 +1085,7 @@ Biology, medicine, and other sciences can strongly profit from a visualization o
 %Additionally, dynamics simulations, when computed along with the visualization could enable online changes of simulation parameters, such as species quantities or temperature, and directly observe how it would affect the system.
 While the visualization of spatial trajectory data is often not crucial for the study of metabolic pathways, in specific cases, such as signalling pathways for example, such visualization might be informative to scientists that are interested in observing the spatial distribution of small signalling molecules overtime.
 Few specific tools feature three dimensional visualization of particle trajectories obtained from agent-based simulation results.
-CellBlender[] is a software conceived as a plug-in for the 3D animation package Blender, which allows model design and visualization of particle-based models computed with MCell~\cite{kerr2008fast}.
+CellBlender~\cite{cellblender} is a software conceived as a plug-in for the 3D animation package Blender, which allows model design and visualization of particle-based models computed with MCell~\cite{kerr2008fast}.
 %Via the user interface, it is possible to manually setup the model parameters, which are then fed to the external simulation module.
 The cell compartments of a given model are represented as 3D meshes and can be modeled or loaded via the Blender interface.
 Via the custom interface of the tool, expert users can specify the models parameters such as the species types, initial quantities, and diffusion speed.
@@ -1116,21 +1109,21 @@ The resulting visualization would thus have an important informative value as it
 A naive visualization of the raw trajectory data, however, may often result in an overly cluttered view due to the large number of elements randomly moving in every directions.
 Although the display of trajectory data is valuable to expert users, it results in incomprehensible visualizations to the layman.
 Therefore, it is crucial to provide guidance to ensure that the underlying information, i.e., which elements react with each other and in which order, is perceived by the viewer.
-Falk et al.[] proposed to enhance the playback particle trajectories with additional overlaid information to trace the history of individual particles, such as trajectory and previously undergone reactions.
+Falk et al.~\cite{falk2009visualization} proposed to enhance the playback particle trajectories with additional overlaid information to trace the history of individual particles, such as trajectory and previously undergone reactions.
 \textbf{Add a conclusion sentence to terminate the paragraph}
 
 \section{Rendering and Composition of Molecular Landscapes}
 
-Up to this point, the rendering methods presented in the visualization literature have reached unprecedented levels of performance, in terms of size of supported datasets and rendering speed, thus enabling real-time rendering of large molecular structures generated with cellPACK[].
+Up to this point, the rendering methods presented in the visualization literature have reached unprecedented levels of performance, in terms of size of supported datasets and rendering speed, thus enabling real-time rendering of large molecular structures generated with cellPACK~\cite{johnson2015cellpack}.
 The most recent presented solution is capable of rendering 25 billion atoms at 3.6 fps in HD resolution.
 However, the rendering approach fails to provide a comfortable user experience, as one expects between 24 and 60 Hz on average for interactive entertainment, and at least 60 Hz for dome and VR content.
 The rendering should also free enough resources for eventual additional computation, as for instance, the physics simulation of the molecular bodies for real-time animation.
 Moreover, none of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit a more complex organization, such as lipid membranes, nucleic acids or fibres, which ought to be taken into account for a truer depiction of molecular landscapes.
 These are indeed more challenging to render, because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
 In order to provide a truer depiction of micro-organisms and improve real-time user experience, we decided to investigate new rendering approaches that would address all these limitations.
-A shortcoming of the volumetric approach presented by Lindow et al.[], is that for each rendered macro-molecule, additional expensive ray-traversal routines are required during the per-fragment processing, which may unbalance parallel thread execution and cause considerable bottlenecks, especially with dense scenes composed of small individual macromolecules.
+A shortcoming of the volumetric approach presented by Lindow et al.~\cite{lindow2012interactive}, is that for each rendered macro-molecule, additional expensive ray-traversal routines are required during the per-fragment processing, which may unbalance parallel thread execution and cause considerable bottlenecks, especially with dense scenes composed of small individual macromolecules.
 We opted for an impostor-based method for the design of our rendering pipeline, which requires more individual per-fragment thread execution per macro-molecule, but is far more balanced and suitable for paralleled processing, and also does not require expensive volume sampling operation upon rendering. 
-The approach which we designed directly follows-up the work of Lampe et al.[] and focuses on reducing the GPU driver-overhead, and balancing geometry processing using the GPU programmable rendering pipeline.
+The approach which we designed directly follows-up the work of Lampe et al.~\cite{lampe2007two} and focuses on reducing the GPU driver-overhead, and balancing geometry processing using the GPU programmable rendering pipeline.
 We also optimized the rendering by adapting well-known computer graphics techniques to support molecular datasets, such as level-of-detail, instancing, and occlusion culling. 
 
 A particularity of the scenes generated with cellPACK, is that they aim at reproducing molecular crowding which can be observed in vitro, and result in dense arrangements of macromolecules.
@@ -1146,9 +1139,9 @@ The principle consists of drawing simpler mesh representations for distant objec
 From an original 3D model with a high number of polygons, proxy models are generated to create an atlas of model with gradually simplified geometries.
 Upon rendering of a model, the LOD proxy is then selected based on the distance to the camera.
 %The further away an object lies, the less details can actually be observed and thus less polygons should be rendered.
-This concept was applied to molecular visualization by Parulek et al.[] who presented a continuous level-of-detail for molecular surface rendering.
-Molecular surfaces, such as SES[] are often used for scientific exploration of cavities and pockets.
-Because computing SES for dynamic data in real-time is expensive, they propose to restrict the computation to a smaller subset of the surface in the focus region.
+This concept was applied to molecular visualization by Parulek et al.~\cite{parulek2014continuous} who presented a continuous level-of-detail for molecular surface rendering.
+Molecular surfaces, such as solvent-excluded surface (SES) are often used for scientific exploration of cavities and pockets.
+Because computing the surface for dynamic molecular datasets in real-time is expensive, they propose to restrict the computation to a smaller subset of the surface in the focus region.
 They seamlessly transition from SES to Gaussian surfaces for the context region.
 Gaussian surfaces are more trivial to compute but also provides less high frequency details.
 To push the rendering capabilities even further, they also simplify the atomic structure of the proteins for the most distant context region.
@@ -1171,13 +1164,13 @@ Therefore, we developed an optimized rendering pipeline which is able to render 
 \textbf{Instancing}
 
 Instanced drawing is a concept widely used in computer graphics that aims at reducing the memory bandwidth and usage, as well as reducing the GPU-driver latency caused by a large number of draw commands.
-This concept was applied by Lampe et al.[] who used the geometry shader stage to instantiate the atomic structure of entire amino acids, also called residues, directly from the GPU rasterization pipeline.
+This concept was applied by Lampe et al.~\cite{lampe2007two} who used the geometry shader stage to instantiate the atomic structure of entire amino acids, also called residues, directly from the GPU rasterization pipeline.
 Amino-acids are the building blocks of proteins, and there is around 20 different types of amino-acid.
 They initially store the atomic structures of each residue types in the video memory in a dedicated buffer, and they also store the position, rotation and type, of each amino acids that compose a protein, separately.
 With their method, they are able to render an entire residue with a single initial per-vertex operation.
 During the vertex shader execution, amino-acid properties such as position, rotation, and type, are read from the video memory and passed on to the next shader stage, i.e., the geometry shader.
 The geometry shader program then fetches the local atom positions for the corresponding residue from the video memory, which are then transformed with the residue position and rotation.
-For each residue atom, new triangles are injected around atom centroids, and then processed in the final per-pixel shader stage to form 2D sphere impostors, similarly to Tarini et al.[].
+For each residue atom, new triangles are injected around atom centroids, and then processed in the final per-pixel shader stage to form 2D sphere impostors, similarly to Tarini et al.~\cite{tarini2006ambient}.
 It is also possible to launch the execution of multiple vertex shader programs in a single draw operation, thus reducing the latency accumulation caused when sending rendering commands to the GPU multiple times.
 Given a protein composed of 4000 atoms and 250 amino acids, the memory footprint of a protein would thus be reduced from 16000 numbers (4000 * 3D positions and atom type) to 2000 numbers (250 * 3D positions + atom type + 3D rotations).
 \textbf{Explain this better}
@@ -1193,7 +1186,7 @@ While the geometry shader is only designed to inject a few dozens of triangle ma
 Initially, the feature was developed to selectively increase the level-of-detail of meshes based on the camera distance and surface curvature.
 The tessellation engine is also able to inject other types of primitives than polygons, such as lines or vertices.
 We use this feature to dynamically control the number of atoms or meta-atoms \textbf{use glossary for meta-atoms} that shall be drawn, directly in the rendering pipeline.
-Similarly to Lampe et al.[], only one initial vertex shader thread is required to draw an entire molecule, but the maximum number of atoms which is supported is up to two orders of magnitude greater with our approach.
+Similarly to Lampe et al.~\cite{lampe2007two}, only one initial vertex shader thread is required to draw an entire molecule, but the maximum number of atoms which is supported is up to two orders of magnitude greater with our approach.
 The vertex shader, which is the first stage of the pipeline, is used to fetch protein information such as position, rotation, and type, from the video memory, and these will then be passed on to the next stages of the pipeline.
 Based on the protein type and distance to the camera, we select the corresponding LOD proxy, which informs us about the number of spheres required to draw the given protein.
 We then notify the tessellation engine about the number of vertices that we want to inject, i.e., one vertex per atom or meta-atom.
@@ -1217,16 +1210,16 @@ An efficient way to reduce this computational load is occlusion culling, and is 
 The principle of occlusion culling is to exclude objects that are partially or completely hidden by other visible objects from the rendering pipeline, in order to spare computation.
 It exists on modern graphics hardware, a fixed functionality called hardware occlusion queries (HOQ), and which allows to compute the number of visible pixels of rasterized geometries based on an input depth texture.
 The depth texture may either be generated beforehand (depth-only pre-pass), or simply recycled from the previous frame.
-Grottel et al.[] presented an efficient rendering pipeline for large particles-based datasets, using HOQ to discard large chunks of the dataset hidden in the current viewport.
+Grottel et al.~\cite{grottel2010coherent} presented an efficient rendering pipeline for large particles-based datasets, using HOQ to discard large chunks of the dataset hidden in the current viewport.
 They use a uniform grid to spatially partition the dataset, and perform occlusion queries for each grid cells, using cubes as bounding geometries.
 Each query result is individually read back to the application after a certain latency which is due to the processing in the graphics pipeline.
 Additionally, since one draw command must be issued for each single query, the GPU driver overhead causes a small latency that accumulates with the number of queries.
-For the specific use-case demonstrated by Grottel et al.[], this approach seems reasonable because of the relatively low number of queries needed (one query per grid cell with a 15x15x15 resolution).
+For the specific use-case demonstrated by Grottel et al.~\cite{grottel2010coherent}, this approach seems reasonable because of the relatively low number of queries needed (one query per grid cell with a 15x15x15 resolution).
 In our use-case, we would need to perform one occlusion query for each individual macromolecule present in the scene.
 Averagely complex scenes generated with cellPACK may easily comprise up to millions of individual instances when small lipid molecules are present, and therefore the presented approach is guaranteed to perform poorly with such scenes.
 
 A more suitable approach would have to be specifically designed to reduce execution times of individual queries, and also to limit GPU-driver overhead.
-Hierarchical Z Buffer (HiZ buffer) is a method introduced by Green et al[] and is commonly used to efficiently perform visibility look-up's.
+Hierarchical Z Buffer (HiZ buffer) is a method introduced by Green et al.~\cite{greene1993hierarchical} and is commonly used to efficiently perform visibility look-up's.
 Based on an input depth map, they compute mip-maps with a custom algorithm, in order to only retain the deepest values for each texture down-sampling operation.
 Hence, a single pixel from a lower resolution mip-map will indicate the deepest value from the entire region covered by this pixel in higher resolution mip-maps.
 Subsequently, for each object to be queried, they compute a camera-facing bounding square.
@@ -1245,24 +1238,42 @@ With our most complex scene, we were able to save up to 50\% of the rendering co
 %It is also worth mentioning that the proposed modelling approach does not aspire to provide a strictly accurate depiction of DNA structure.
 %Instead, we aim a showcasing an resembling representation of the structure which is fast to compute and designed for illustration purposes only.
 
-An utterly important component of living organisms are fiber and polymer structures, such as DNA, RNA, \textbf{or ... ask ludo maybe}.
-Similarly to protein data, a challenge when rendering dynamic fibre structures is memory usage and bandwidth.
-Fibres such as DNA, are composed of small monomers called nucleic acids, also known as bases, and which are made out of a few dozen of atoms.
-One approach to render fibre structures would be to store the position, rotation, and type, of each nucleic acids and to render the bases with the same approach as for protein data and described above.
-However, we foresee two issues with that approach.
-Firstly, the memory footprint of DNA strands might simply be too large to store the genome data of entire cells on the video memory.
-Indeed, the entire genome of E.Coli, for instance, is composed of \textbf{xxx ask ludo} individual base pairs, which represents \textbf{xxx} GB of data.
-Secondly, simulation tools that are able to reproduce the dynamics of DNA fibre structures are all CPU-based algorithms.
-Assuming that storing large static structures is already a challenging enterprise, the rendering of animated structures would very likely have to be streamed to the GPU memory instead.
-\textbf{Ivan: This argument comes out of the blue. 
-Is it your goal to have support for animation ? Why ? Refer to earlier text.}
-Interactive rendering of animated DNA structures would therefore be limited with this approach, because the cost of memory transfer between CPU and GPU would slow down the rendering considerably.
+%and static representations fail to depict the true
+%displaying a static structure would only show a single configuration 
+%Displaying static structures may also 
+%Molecular datasets and illustrations also often depict dynamics data
+%In most cases 
+%Rendering
+%However, we foresee two issues with that approach.
+%Firstly, the memory footprint of DNA strands might simply be too large to store the genome data of entire cells on the video memory.
+% 
+% Secondly, simulation tools that are able to reproduce the dynamics of DNA fibre structures are all CPU-based algorithms.
+% Assuming that storing large static structures is already a challenging enterprise, the rendering of animated structures would very likely have to be streamed to the GPU memory instead.
+% \textbf{Ivan: This argument comes out of the blue. 
+% 	Is it your goal to have support for animation ? Why ? Refer to earlier text.}
+% Interactive rendering of animated DNA structures would therefore be limited with this approach, because the cost of memory transfer between CPU and GPU would slow down the rendering considerably.
 
-Our solution to limit the memory footprint of fibre structures is to only use the control points of the fibre strands as input, while generating the actual fibre structures on-the-fly.
-The rendering pipeline which we developed for the fibres relies on the tessellation shader to dynamically inject spheres impostors that compose each fibre segments, similarly to protein data.
+A crucial component of living organisms are fiber and polymer structures, such as DNA strands.
+These structures store and convey the genetic code of living organisms, and therefore, it is important to convey how they work, which is tightly tangled with how they look.
+Fibres structures are composed of small monomers assembled in longs chains, called nucleic acids and are only made out of a few dozen of atoms.
+One approach to render this type of dataset efficiently, would be to use instancing, similarly to protein data, and to store the position, rotation, and type, of each nucleic acids on the video memory.
+However, the large number of individual polymers contained in the entire genome, and the relatively small atomic size of individual monomers, will likely result in a considerable memory usage overhead that would limit the quantity of displayed information.
+By way of comparison, individual protein structures are on average composed of several thousands of individual atoms which is two order to magnitude larger than a nucleic acid, thus genome data is much more challenging to render efficiently in its entirety. 
+For example, the entire genome of E.Coli, a relatively small cell, is composed of \textbf{xxx ask ludo} individual base pairs, which represents \textbf{xxx} GB of data.
+
+Moreover, these macromolecules are dynamic entities, and therefore it is important to visualize structural changes overtime, to fully illustrate their functioning.
+In order to display the trajectory of a molecular dataset, the data must transit from CPU to GPU, either beforehand, or streamed during the visualization.
+In the case of visualization of large genome dataset, the trajectory information is likely to be streamed on-the-fly to the GPU, because the data contained in all the simulation snapshots might overwhelm the video memory.
+However, even on most recent graphics hardware, transferring data from CPU to GPU is still relatively slow.
+Although the video memory might be large enough to store millions of instances contained in a single frame, it does not guaranty that sequential simulation snapshots could be loaded and displayed at interactive framerates.
+
+Our solution to limit the memory footprint and bandwidth of fibre structures is to only use the control points of a spline as input, and to position the individual nucleic acids on-the-fly upon rendering, using GPU computing.
+There are existing tools that can model the structure of DNA strands simply from control points~\cite{lu20083dna}~\cite{hornus2013easy}, however none of these methods are implemented on the GPU, which means that the entire genome data must be transferred to the GPU in order to be rendered, which may stress the memory bandwidth and usage for very large datasets.
+The rendering pipeline which we developed for the fibres relies on the tessellation shader to dynamically inject nucleic acids structures along the fibre curve segments.
 An advantage of our fibre rendering pipeline is that previous technologies developed to optimize the rendering of protein data, such as LOD or occlusion culling may also be seamlessly used with the fibre use-case.
 Additionally, since only the curve data is needed as input, the animation of the fibre structures becomes much more trivial to compute.
 Indeed, mainstream physics animation tools that are GPU-based may be used instead of CPU-based scientific tools, which guarantees a considerable performance boost.
+
 In order to support different types of fibres, it is important to first understand how their structures are organized.
 In the case of DNA fibres, a well-known structure is the B-DNA, which exhibits the recognizable double-helix pattern.
 The structure is also very simple to model: a spacing of 3.4Å and a rotation of 34.3 degrees between adjacent nucleic acids. 
@@ -1281,10 +1292,15 @@ Subsequently, the geometry shader is used to inject the remaining vertices aroun
 
 \textbf{Occlusion Management}
 
+%\textbf{Cite another example outside a cell and compare protein density}
+%
+
+\textbf{TODO: Add citation here}
+
 The phenomenon of molecular crowding is used to describe as solution when high concentrations of macromolecules such as proteins are present.
-\textbf{Cite another example outside a cell and compare protein density}
-Such conditions occur routinely in living cells; for instance, the cytosol of Escherichia coli contains about 300–400 mg/mL of macromolecules.
-Therefore an accurate depiction of living organisms often results in a very dense arrangement of macromolecules as shown in \textbf{Figure X[]}.
+Such conditions occur routinely in living cells; cellular interiors are 20–30\% volume-occupied by macromolecules which corresponds to an approximate range of 200–300 mg/mL to be considered in physics theory to calculate the consequences of molecular crowding.
+The cytosol of E. Coli, for instance, contains about 300–400 mg/mL of protein and RNA molecules.
+Therefore an accurate depiction of the internal structure of cells often results in a very dense arrangement of macromolecules as shown in \textbf{Figure X[] show figure of molecular crowding e.coli goodsell}.
 Without efficient means to selectively remove occluding objects, it would therefore be impossible to observe hidden internal structures that play essential roles in the functioning of biological systems.
 In scientific illustrations and visualization, cutaway views are often employed as an effective technique for occlusion management in densely packed scenes.
 However, a limitation of strict cutaway views is that important contextual information is removed.
@@ -1305,7 +1321,7 @@ To achieve the ghosting effect, removed elements are rendered in a separate text
 Hence, only the closest occluding elements from the camera are shown, in order to minimise visual clutter one might have with full fledge transparency.
 
 To assist the scene composition, we additionally display a bar chart over the view that provide real-time quantitative feedback about the visibility of each macromolecular type.
-A single bar comprises three distinct regions that indicate the visibility properties for a given species as shown in Figure[].
+A single bar comprises three distinct regions that indicate the visibility properties for a given species \textbf{as shown in Figure[]}.
 The grey region bar indicates the number of macromolecules that are currently discarded from the rendering.
 The dark green region indicates the proportion of rendered molecules that are currently visible, while the light green region indicates the proportion of them that are currently occluded by other macromolecules.
 The bar chart thus provides an overview of the visibility properties which then serve as guidance for composing the scene.
@@ -1353,7 +1369,7 @@ In this section, we will investigate the use of particle-based systems to showca
 Particle-based modeling, also known as agent-based modeling, can model an entire biological system in order to capture its dynamic properties.
 Particles are individually modeled and interactions between them are virtually taking place in the 3D space.
 Additionally to quantitative information which is valuable for understanding the functioning of a system, the modeling approach is also capable of producing 3D trajectory data and reaction log as output, which can be used to visualization of spatial data.
-Falk et al.[] designed a visualization tool to playback the particle trajectories resulting from the simulation in 3D space.
+Falk et al.~\cite{falk2009visualization} designed a visualization tool to playback the particle trajectories resulting from the simulation in 3D space.
 A major challenge with this type of visualization is visual clutter due to the large number of particles diffusing in every direction.
 In order to visualize individual reactions it is therefore necessary to close-up on participating particles and also to reduce the playback speed in order to keep track of individual reactions.
 Because particle simulations operate at very small time steps, typically of the order of nanoseconds, the resulting number of steps can often be very large. 
@@ -1374,7 +1390,7 @@ We believe that effective fast-forward visualization can be achieved by respecti
 
 \textbf{2:} Events of interested, such as reactions should be salient and last enough time in order to be seen by a human eye.
 
-\textbf{3:} Despite eventual alterations to respect the previous guidelines, the visualization should be as realistic as possible to avoid misconceptions. This requirement is in accordance with the results of a study by Jenkinson et al. [14], which demonstrated that a more realistic depiction of a process can enhance the viewer’s understanding compared to a highly abstracted one.
+\textbf{3:} Despite eventual alterations to respect the previous guidelines, the visualization should be as realistic as possible to avoid misconceptions. This requirement is in accordance with the results of a study by Jenkinson et al.~\cite{jenkinson2012visualizing}, which demonstrated that a more realistic depiction of a process can enhance the viewer’s understanding compared to a highly abstracted one.
 
 \textbf{Speed Reduction}
 
@@ -1429,16 +1445,16 @@ This effect results in a smooth and continuous transition between the motion of 
 
 In systems biology, there exist various modeling approaches that are either deterministic, such as quantitative modeling, or stochastic, such as particle-based modeling.
 One advantage of the agent-based approach, discussed above, for the visualization, is the presence of spatial information which can easily be displayed in a 3D view.
-Although the output is usually very cluttered, it is possible to apply filtering methods to improve the visualization as shown in Section[].
+Although the output is usually very cluttered, it is possible to apply filtering methods to improve the visualization\textbf{ as shown in Section[]}.
 However, the computation of particle-based models is much more demanding compared to quantitative modeling, because it must account for the reaction and diffusion of each single reacting entities, which are usually present in large quantities.
 The simulation is therefore often precomputed prior to the visualization.
 As simulations are complex to setup and to compute, the creation and exploration of multiple scenario is thus slowed by this workflow.
 Additionally, with large and complex model the resulting trajectory files may be very large, over \textbf{xx GB for XX frame and XX} individual particles, which is impractical to manipulate when dealing with a multitude of different scenario.
 
 Our grand vision is to digitally reproduce the dynamics of the machinery of life, and therefore we are mostly interested in mapping spatial and quantitative information to structural information in three dimensional space, rather than producing a large amount of data and run complex post-processing analysis.
-Therefore, more efficient workflow for this use case would be to visualize the particle positions on-the-fly as the simulation advances.
+Therefore, a more efficient workflow for this use case would be to visualize the particle positions on-the-fly as the simulation advances.
 With such an approach, it would be possible to influence the course of a simulation, for instance, increase the temperature, or introduce new species, and to directly observe the impact of these changes without having to run another simulation or deal with overly large files.
-Most-efficient simulation tools, such as Smoldyn[], are able to compute single simulation steps in a matter of seconds, thanks to efficient parallel algorithms running on GPU.
+Most-efficient simulation tools, such as Smoldyn~\cite{andrews2010detailed}, are able to compute single simulation steps in a matter of seconds, thanks to efficient parallel algorithms running on GPU.
 A few tools additionally support \textit{in-situ} visualization of particle-based models computed in real-time with such approach.
 However, the computation is still too demanding to deliver a smooth user experience even on high-end commodity hardware, which prohibits the use of online simulation for interactive and explanatory applications.
 
@@ -1465,7 +1481,7 @@ Firstly, the simulation of the reaction network is very lightweight to compute, 
 Secondly, the spatial information is completely decoupled from the simulation, which means that we can have control over where reactions will occur.
 This approach grants us the freedom to dynamically trigger a cascade of reactions directly in the viewport in order to facilitate storytelling of complex reaction networks.
 
-The workflow of our passive-agents system is laid out as follows [Figure needed]:
+The workflow of our passive-agents system is laid out as follows \textbf{[Figure needed]}:
 On the one hand, we have a biological system described as a reaction network and modeled with a scientific simulation software using a kinetic modeling approach.
 On the other hand, we have a 3D scene filled with potential reactants, and which is setup according to the initial conditions of the model, such as the initial quantity and location of each species.
 Each passive-agent additionally undergoes a 3D random walk motion to simulate the diffusion process, similarly to traditional particle-based simulation.
