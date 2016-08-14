@@ -978,7 +978,7 @@ Structural biology informs us about how things look, i.e., what is the atomic st
 
 \subsection{Visualization of Biological Structures}
 
-Structural biology is concerned by the structure of biological macromolecules, such as proteins or DNA, for example, and the relationship between molecular structure and function.
+Structural biology is a the branch of biology which is concerned by the structure of biological macromolecules, such as proteins or DNA, for example, and the relationship between molecular structure and function.
 Data acquisition methods, such as x-ray crystallography, are commonly used to read in details the atomic structure of proteins, i.e., the positions or atoms, their type, and the type of bonds between them.
 Acquired atomic structures are often stored in digital files and shared via public data bases, such as the Protein Data Bank~\cite{bernstein1977protein}, to facilitate collaboration among peers.
 This information is then processed to decrypt underlying important structural information, and also used to run molecular dynamics (MD) simulations, which aim at reproducing atomic interactions and forces to observe the actual behaviour of macromolecules over time.
@@ -1336,31 +1336,180 @@ Additionally to our quantitative approach for occlusion management we also provi
 
 \section{Emulating the Machinery of Life}
 
-Biologists from the Scripps Institute have pioneered the ambitious enterprise of capturing the atomic structure of entire viruses or cells.
+%In structural biology, dynamics simulations, such as molecular dynamics (MD), or brownian dynamics (BD) are used to reproduce the physical behaviour of groups of atoms in three dimensions, in order to understand their function.
+%The initial purpose of cellPACK was to generate models that could serve as initial state in order to run large scale dynamics simulations on super computers.
+%\textbf{In computational biology, it exists a gap between structural and systems biology caused by the limitation of today's computers. Ivan: Incomplete statement out of context}
+%Indeed, MD and BD simulations are simply too computationally expensive to reproduce the dynamics of biological systems for entire cells, and are restricted to smaller use cases in terms of size and duration.
+%Systems biologists, on the other hand, are interested in studying the dynamics of entire biological systems, but they also value quantitative information more than spatial information.
+%Therefore, they often employ strictly quantitative modeling approaches, which are computationally inexpensive.
+%More recently, spatial particle-based methods for modeling reaction networks have emerged.
+%Their principle consists or reproducing the behaviour or spatial diffusion and reaction for a large number of molecules in order to study the changes in species quantities over time.
+%In order to reduce computational costs, the reaction diffusion processes is extremely simplified.
+%Particles are subject to random walk to simulate molecular crowding without having to take into account surrounding macromolecules that do not play a role in the simulated process.
+%Individual reactions are triggered upon collision events between two potential reaction partners.
+%Particle-based modeling is thus a very singular approach as it provides spatial information for individual proteins and allows computing complex reaction networks in a reasonable amount of time for entire cells.
+%In this section, we will investigate the use of particle-based systems to showcase the dynamics of processes in three dimension in order to complement the large but static scenes modeled with cellPACK. 
+
+
+Our grand vision is to digitally reproduce the complex mechanisms ongoing inside living organisms, and expose them to a larger audience.
+An essential part of this vision is to provide an interactive solution that would allow the viewers to directly interact with the showcased content.
+Another important aspect is the use of computational biology data to minimize manual creation of digital assets. 
+So far, we collected static models of entire viruses and cells and developed new methods to efficiently render them in real-time with a multi-scale approach.
+However, to fully accomplish our vision, the next challenge is to provide the means to animate macromolecules, in order to depict the story which is associated with their function.
+In animated movies conceived for public dissemination of cell biology, the actors of the machinery of life are traditionally animated with standard animation methods such as key frame animation.
+Because these animations must be conceived and authorised manually. the creation process in usually very expensive and time consuming.
+Furthermore, the work would have to be updated frequently if one wishes to keep the material up to date with state-of-the-art research in cell biology.
+Expert in computational biology constantly produce large amount of data for their research that contain valuable information about the function of actors of the machinery of life and that could be used automatize the creation process of animated content.
+Structural biology already provides us important information about how things look, e.g., the atomic structures of key macro-molecules.
+They also utilise this information to set-up dynamics simulations (molecular dynamics or MD) and reproduce the physical behaviour of atom in three dimensions, in order to understand the role they play in the machinery of life.
+Unfortunately, this type of modeling is computationally demanding, and is greatly limited in term of size and length by the power of nowadays computers.
+
+%Indeed, MD and BD simulations are simply too computationally expensive to reproduce the dynamics of biological systems for entire cells, and are restricted to smaller use cases in terms of size and duration.
+
+System biology, on the other hand, is the branch of biology concerned by the study of complex biological systems using computational or mathematical modeling.
+A typical system biology model comprises a reaction network between molecular agents that characterizes its functioning on the molecular level, also know as pathway.
+The reaction network describes the complex cascade of reactions that enable a given process, such as gene expression, energy production from aliments, reproduction or destruction of a cell.
+A model also comprise quantitative information such as initial concentration and reaction rates, observed \textit{in vitro}.
+This information is then used to initialize simulations programs that aim at modeling the variation in species concentration overtime.
+Based on the simulation results, expert are able to formulate hypothesis, which they can verify in wet laboratory experiments.
+System biology experts are generally interested in analysing quantitative information and merely concerned about viewing the actual structure of the individual molecular agents that are simulated.
+However, data produced by these experts contains valuable details about complex processes that could be used to efficiently produce dynamic 3D illustrations and would significantly improve the way visual communication of cell biology is traditionally done. 
+Indeed, these models already comprise enough details to procedurally layout the script of animated sequence, such as, which elements should react together, in which region, in which order, and at which rate.
+
+Standard computational models usually employ a strictly quantitative approache, which are computationally inexpensive but do not provide spatial information other than the sub-region of the cell or organism in which elements are located.
+Particle-based modeling is a computational modeling approach which has recently emerged.
+The principle behind this technique is very singular as it aims at reproducing the reaction-diffusion behaviour of each individual molecule contained in the system.
+In order to reduce computational costs, the reaction diffusion process is extremely simplified compared to traditional molecular dynamics.
+To summarize this principle, each molecule is represented as a 3D point and subject to a simple random walk motion to simulate the diffusion in a crowded environment, and reactions between agents are triggered upon collision between the bounding spheres of two particles.
+
+Particle-based modeling is thus more appealing to us compared to other modeling approaches, as it provides additional particle trajectories that can simply be played back in a virtual scene to automatically generate animated sequences.
+In this section, we will investigate on the use of system biology data combined with structural information to generate comprehensive visualization of simulated processes.
+In the first part, we will show how to overcome a major drawback of playing-back particle trajectory data, which is how to deal with the prevailing chaos that is naturally present in living cells when observing the reaction-diffusion process of large number of particles.
+Another limitation of particle-based modeling is that the simulation must be precomputed beforehand, due to the high computational cost of this method, which prevents changes of the simulation course during the visualization.
+Compared to particle-based modeling, quantitative modeling, such as kinetic modeling, has a very light computational footprint.
+In the second part, we will explore the use of an hybrid approach using particle systems and kinetic modeling to produce a similar visual output as particle-based modeling with a much lighter computational cost, thus enabling changes of the simulation parameters in real-time. 
+
+%Their principle consists or reproducing the behaviour or spatial diffusion and reaction for a large number of molecules in order to study the changes in species quantities over time.
+%In order to reduce computational costs, the reaction diffusion processes is extremely simplified.
+%Particles are subject to random walk to simulate molecular crowding without having to take into account surrounding macromolecules that do not play a role in the simulated process.
+%Individual reactions are triggered upon collision events between two potential reaction partners.
+%Particle-based modeling is thus a very singular approach as it provides spatial information for individual proteins and allows computing complex reaction networks in a reasonable amount of time for entire cells.
+
+%Therefore, they often 
+%More recently, spatial particle-based methods for modeling reaction networks have emerged.
+%Their principle consists or reproducing the behaviour or spatial diffusion and reaction for a large number of molecules in order to study the changes in species quantities over time.
+%In order to reduce computational costs, the reaction diffusion processes is extremely simplified.
+%Particles are subject to random walk to simulate molecular crowding without having to take into account surrounding macromolecules that do not play a role in the simulated process.
+%Individual reactions are triggered upon collision events between two potential reaction partners.
+%Particle-based modeling is thus a very singular approach as it provides spatial information for individual proteins and allows computing complex reaction networks in a reasonable amount of time for entire cells.
+
+
+
+
+
+
+
+
+
+, the data that they produce contains valuable procedural information which could be combined with structural information to efficiently and dynamically produce illustrative visualisations of cell biology. 
+
+
+
+
+
+ data that they produce also contains valuable procedural information which could be used to 
+
+
+
+which could be combined with structural information to efficiently and dynamically produce illustrative visualisations of cell biology. 
+
+
+ one could simply extract the scenario of an animated movie
+
+
+
+
+, but they also value quantitative information more than spatial information.
+
+
+ to model the variation of concentration in species over time.
+
+Because of the nature of this science,  
+
+
+
+
+
+
+ are focusing on the modeling of entire biological systems rather than the behaviour of macromolecular structures.
+
+
+
+on the other hand, take a more
+
+ are interested in studying the dynamics of entire biological systems, but they also value quantitative information more than spatial information.
+%Therefore, they often employ strictly quantitative modeling approaches, which are computationally inexpensive.
+
+ function.
+
+are used to reproduce the physical behaviour of groups of atoms in three dimensions, in order to understand their function.
+ 
+
+
+
+
+
+
+Traditionally the 
+
+
+
+MD designed to simulate the behaviour of macro molecules, but are limited in the number of simulated atoms and simulattion length because very demanding.
+
+Given that the largest simulation runs are limited to a few seconds it is obvious that using such animation approach 
+
+
+
+Computational models, systems described as a scenario which can be read and reused.
+
+In computational biology it exists modelling method to simulate the dynamics of macromolecules and better understand their function.
+
+
+
+
+
+
+
+
+
+Biologists from the Scripps Institute have pioneered the ambitious enterprise of capturing
+the structure of entire viruses or cells at atomic resolution.
+
+
+
+
+A resulting scene comprise information about the location 
+
+
+
+ the atomic structure of entire viruses or cells.
+
 These models are valuable for scientific and educational exploration because they contain structural information that can be observed at multiple scales, such as compartments shapes, spatial arrangement of macromolecules, and atomic structure of each macro-molecule.
+
+
+
 Rendering such scenes interactively without compromising on the amount of displayed information is challenging.
-To speed up the scene rendering and composition on commodity hardware, we adapted several concepts from computer games such as instancing, and level-of-detail.
-However, the representations of these microscopic organisms are static and do not provide any information about the future states or important biochemical processes that are ongoing internally.
-The HIV virus, for instance, goes through multiple transformations during his life cycle [show figure], and showcasing only one single state would not suffice to revealing its functioning.
-Scientists have attempted to produced several states of the HIV virus life cycle, which now comprise representation of the virus in its mature and immature state[show figure].
-However, with this technology, the modeling process is stochastic and does not provide logical correspondence between the models, which simply forbids key-frame animation between two states at this stage.
-Additionally, producing enough models to generate an animation would be challenging and also time consuming because the modeling process is not streamlined and require complex manual setup for each model.
+
+
+%To speed up the scene rendering and composition on commodity hardware, we adapted several concepts from computer games such as instancing, and level-of-detail.
+%However, the representations of these microscopic organisms are static and do not provide any information about the future states or important biochemical processes that are ongoing internally.
+%The HIV virus, for instance, goes through multiple transformations during his life cycle [show figure], and showcasing only one single state would not suffice to revealing its functioning.
+%Scientists have attempted to produced several states of the HIV virus life cycle, which now comprise representation of the virus in its mature and immature state[show figure].
+%However, with this technology, the modeling process is stochastic and does not provide logical correspondence between the models, which simply forbids key-frame animation between two states at this stage.
+%Additionally, producing enough models to generate an animation would be challenging and also time consuming because the modeling process is not streamlined and require complex manual setup for each model.
 
 \textbf{Ivan: Red thread is broken}
 
-In structural biology, dynamics simulations, such as molecular dynamics (MD), or brownian dynamics (BD) are used to reproduce the physical behaviour of groups of atoms in three dimensions, in order to understand their function.
-The initial purpose of cellPACK was to generate models that could serve as initial state in order to run large scale dynamics simulations on super computers.
-\textbf{In computational biology, it exists a gap between structural and systems biology caused by the limitation of today's computers. Ivan: Incomplete statement out of context}
-Indeed, MD and BD simulations are simply too computationally expensive to reproduce the dynamics of biological systems for entire cells, and are restricted to smaller use cases in terms of size and duration.
-Systems biologists, on the other hand, are interested in studying the dynamics of entire biological systems, but they also value quantitative information more than spatial information.
-Therefore, they often employ strictly quantitative modeling approaches, which are computationally inexpensive.
-More recently, spatial particle-based methods for modeling reaction networks have emerged.
-Their principle consists or reproducing the behaviour or spatial diffusion and reaction for a large number of molecules in order to study the changes in species quantities over time.
-In order to reduce computational costs, the reaction diffusion processes is extremely simplified.
-Particles are subject to random walk to simulate molecular crowding without having to take into account surrounding macromolecules that do not play a role in the simulated process.
-Individual reactions are triggered upon collision events between two potential reaction partners.
-Particle-based modeling is thus a very singular approach as it provides spatial information for individual proteins and allows computing complex reaction networks in a reasonable amount of time for entire cells.
-In this section, we will investigate the use of particle-based systems to showcase the dynamics of processes in three dimension in order to complement the large but static scenes modeled with cellPACK. 
 
 \textbf{Ivan: until now I do not know why I read Section 3.4, it seems unrelated to the previous thesis description.}
 
