@@ -962,6 +962,113 @@ Similarly to satellite data, or traffic data in Google Earth, the data present i
 Despite the large quantity of data available, there is yet no solution that could generate a comprehensible digital cell based on this data, and that would be both dynamic and multiscale.
 As the production of animated and interactive educational content is often time consuming and expensive and even sometimes out-of-date by the time of release, we envision that such interactive platform would be a great mean to keep general audiences and multidisciplinary experts informed about the latest knowledge of cell biology.
 
+\section{Overview of Presented Work}
+
+The central vision that drives our research is to provide the broad audience a dynamic visualization of a particular organism, such as the E.coli bacteria, which is modelled down to the tiniest atomic detail of its macromolecular composition, so that the audience can zoom into arbitrary detail and learn about its role in the organism.
+We also envision that the audience can interact with functions of life in terms of changing environmental conditions and can observe how the life-form responds to such a change. 
+To achieve this vision, our approach is to integrate up-to-date biological knowledge from several online databases that contain frequently updated scientific findings related to a particular organism. 
+For example, one database will provide us with the structural description on a microscopic spatial scale, another database will provide information on an atomic detail, yet another database will provide us with information on physiology such as reaction networks and life-cycle simulations. 
+For the E.coli bacterium, as a so-called model organism, a lot has been already discovered, so that an integration into a virtual organism seems achievable.
+All this information will contribute to the visual depiction of the integrated model.
+
+In this thesis we will present the different research projects that were driven by this vision.
+To illustrate how the different contributions of this work fit together, we laid them out in a flow diagram, as show in Figure[X], starting from input data to final visual output.
+It is worth mentioning, that all the pieces of software associated with these contributions were developed with the same visualization framework with the ambition to compile all the work achieved during this thesis in a unified solution.
+In the following section we will enumerate the key section of the master diagram and provide details about each contribution contained in these sections.
+
+Stress on Massive Zooming
+
+\subsection{Processing The Raw Data}
+
+Before diving into visualization projects we first had to review all available form of data that we could possibly us to achieve our vision, starting from the lower magnification level.
+The proteins are key actors of the machinery of life, and they all carry an essential function which is defined by their structures.
+Structural information is publicly available from a large number of protein via online databases.
+Additionally is it also possible to obtain a valid spatial arrangement of proteins that form entire cells or viruses via modeling softwares.
+This information, however, only covers spatial information.
+Details about the dynamic of biological systems driving the machinery of life, are also available via online databases, in the form of reaction networks.
+It exists several modeling approaches to simulating these processes, and the resulting information is often purely quantitative.
+Agent-based modeling, additionally provides spatial information about trajectory and reaction history of individual particles.
+The trajectory information only contains the position of particle, which is not sufficient to provide a true depiction of a given biological process, but it can also be combined with structural information to produce richer explanatory visualization.
+A major limitation this trajectory data is that it must be precomputed beforehand due to computational limitation, which prohibits the viewer from interacting with the data.
+Up to this point, there was still no solution available in computational biology that was capable of operating in real-time while production spatial particle-based output, therefore we had to come up with an alternative solution.
+Kinetic modeling is a non-spatial modeling approach which is very lightweight to compute compared to agent-based simulation, allowing for complex interaction patterns to be calculated simultaneously with the rendering, and thus allowing the user to steer the simulation parameters on the fly.
+The spatial component, however, is entirely missing from the model description, it contains only the quantities and relationships.
+Therefore we developed a new type of particle system which drives particle behaviour based on the results of a quantitative simulation, while integrating components such as motion patterns and binding reaction patterns to allow for a spatial 3D visualization of the depicted processes [Le Muzic et al. 2014].
+Although the difference between the visual output of our methods and genuine agent-based simulation is undistinguishable, our method allows us more control over the course of the simulation in real-time, and with a much lower memory footprint.
+
+\subsection{Filtering}
+
+\textbf{Filtering Complex Trajectory Data}
+
+Displaying a large number of macro-molecular elements moving along a computed trajectory will result of an overly cluttered view, because of the chaotic nature of the forces that drive their motion.
+Consequently, when observing a the resulting trajectory of a simulated process, it is almost impossible to keep track of individual elements and observe key reaction events that enable that same process. 
+Indeed, the cycle of reaction network of biological systems operates at a much greater time scale than individual particles, and with direct visualization one can observe motion at only one of these scales, either the entire process or particle behaviour.
+We have investigated how to simultaneously convey two phenomena that reside at different temporal scale levels. 
+In particular we have aimed at developing a technique that can show the complexity of diffusion in detail, but simultaneously gives the viewer the opportunity to see the outcome of the diffusion process in terms of physiologically-relevant events.
+An event can be a reaction or, as in our demonstrational case, it could be an assisted transfer of a molecule through a membrane protein from one side of the membrane to the other side [Le Muzic et al. 2015a]. 
+The key idea has been inspired by the illusion used in a scientific animation of artist Drew Berry, where the frontal molecules in the 3D view were acting at much slower rates than the molecules in the background. 
+This physically unrealistic, but visually convincing trick conveyed to the viewer the diffusion dynamics as well as the particular reaction in the focus. 
+We have formalized this effect by introducing a temporal lens in which the molecular paths were increasingly simplified and the elements were exhibiting less of the fast erratic movements. 
+At the same time the lens artificially prolonged the duration of the physiological event, so that it is well perceivable by the audience. 
+While such an approach locally deforms the playback time of the diffusion, introducing visible temporal inconsistency is very unlikely. 
+The probability that there will be two consecutive reactions involving the same reactants is extremely small. 
+So the large gap in temporal scales between diffusion and reaction (or generally event) in fact allows us to perform the otherwise risky local deformation of time.
+
+\textbf{Filtering Redundant Information}
+
+Another issue that derives from such densely crowded environments is the overall presence of large number bodies that may to obstruct the view to key macromolecules and important reaction events. 
+A particularity of these molecular bodies is that many of them actually share the same protein type and thus have an identical molecular structure.
+%Watching a scene of macromolecules, one can just see only the most frontal atoms.
+Our technique, called Visibility Equalizer [Le Muzic et al. 2016], allows to see inside dense arrangement of proteins, by giving the viewer an explicit control over the visibility of entire groups of molecules sharing a similar structure. 
+Rather than completely displaying of removing entire sets of proteins, we introduced the concept of fuzzy visibility which allows to reduce the concentration of visible elements of a given type, and thus reveal the internals of a cell while preserving important contextual information.
+As molecular landscapes are hierarchically organized, it is possible to control the visibility of intermediate hierarchy nodes in addition to the visibility of the leaves. 
+While this smart visibility technique works well for structures defined by spatial reference points, such as proteins, structures defined as 1D or 2D manifolds (linear strands of nucleic acids and lipid membranes) would require an extension to the visibility equalizer.
+
+\subsection{Visual Mapping}
+
+
+\textbf{Shape Mapping}
+
+The next operation of the pipeline is the visual mapping of the filtered elements which will determine visual properties such as shape, or color, and is a critical step to achieve expressiveness and effectiveness.
+In the presented work, we gave a special focus on conveying multiple scales when observing digitally reproduced biological phenomenon. 
+In an aforementioned contribution, we conceived a new technique to observe phenomenon occurring at different time scale, additionally we have also investigated into spatial zooming approaches that seamlessly abstract a detailed representation on one scale into structural characteristics of another scale.
+For this we have utilized multiple levels of detail for the molecular structure in order to reduce high frequency details and a visual clutter when observing large molecular landscapes in their entirety~\cite{cellView}. 
+The shape simplification proxies of the proteins were computed with k-means clustering, which provides high quality results.
+Since clustering is computationally expensive, we also developed an alternative shape simplification specifically designed for efficient real-time simplification of dynamic data~\cite{le2014illustrative}.
+This heuristic worked quite well in our experiments, and it does not come with any additional memory footprint as compared to the clustering-based level-of-detail structure. 
+However, this heuristic does not always provide similar quality as the precomputed methods for the same compression ratio.
+Moreover, it is likely to fail for complex sparse linear structures such as bacterial genetic macromolecules.
+
+
+\textbf{Color Mapping}
+
+Color is a strong visual cue, which we extensively use in the visualizations that we produced.
+In a large scene comprising many macro-molecular elements, the function the color coding can have multiple folds, it can either be used to discriminate atoms with different physio-chemical proprieties, such as charge or hydrophobic, structural properties such as the type of atom, amino-acid, or chain, of spatial properties such as the membership to a given subregion of an organism.
+Often these properties are associated with the level of zoom, indeed when looking closely to a molecule it is likely that we are interested in observing highly detailed structural properties, such as the atom type, as we zoom-out form the molecule we start to see other neighbouring elements also coloured accordingly. 
+Since the single atom details are becoming less visible in
+
+Each scale of our multi-scale models is interesting on its own and illustrators would often use color coding to categorize or otherwise characterize elements forming one level of scale. For example on a level of cellular compartments, organelles would be colored with a distinct hue to be able to visually group them. Inside a compartment, at the zoom level where individual proteins are discernible, one would color each protein with a different hue, to convey their abundance. This means that a particular zoom level is associated with a canonical coloring strategy. We have extended the categorization by hue in the multi-scale scenario by employing a hierarchical tree-color scheme. This allows us to continuously change the coloring for each scale during zooming. For the scale, which is characteristic for the current zoom level, the structures will be made most distinct [Waldin, Le Muzic et al. 2016].
+
+
+\subsection{Dynamic Visual Guidance}
+
+Color is a strong visual cue, which we extensively use in the presented visualizations.
+The function the color coding can be two-fold, indicate information such as physio-chemical properties or membership to a given subregion of a cell, but it can also be used as a mean of visual guidance to steer the viewer's gaze toward interesting events in a dense dynamic scene of interacting molecules that are presented on a large projection display. 
+Several traditional highlighting cues fail in such display setups as the guidance should be effective both for the foveal as well as the peripheral vision. 
+The latter one is especially sensitive to dynamics, and not so much to other visual variables, but the scene already contains motion as a dynamic property. 
+We have therefore developed a special type of dynamic guidance based on subtle flicker that is effective to guide the viewer to interesting events, is unobtrusive, does not use any visual variables that encode the data, and incurs only a minimal visual modification to the presented scene [Waldner et al. 2014a].
+We have demonstrated the usefulness of the new guidance technique on following a reaction pathway in the context of a dynamic diffusing environment that would normally fully distract the audience.  
+We are currently investigating how to make the flicker entirely invisible to the foveal vision of the audience, and yet to make it an effective guiding method utilizing the more sensitive flicker perception of the peripheral vision. Such a guidance will be maximally subtle without needing any additional hardware and still be very effective.
+
+
+\subsection{Rendering}
+
+Rendering details go here
+
+
+
+
+
 \section{Background and Related Work}
 
 In biochemistry, it exists two distinct experimental protocols, respectively called dry and wet laboratories.
