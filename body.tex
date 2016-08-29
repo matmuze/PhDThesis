@@ -1395,9 +1395,10 @@ These structures store and convey the genetic code of living organisms, and ther
 Fibres structures are composed of small monomers assembled in longs chains, called nucleic acids and are only made out of a few dozen of atoms.
 One approach to render this type of dataset efficiently, would be to use instancing, similarly to protein data, and to store the position, rotation, and type, of each nucleic acids on the video memory.
 However, the large number of individual polymers contained in the entire genome, and the relatively small atomic size of individual monomers, will likely result in a considerable memory usage overhead that would limit the quantity of displayed information.
-By way of comparison, individual protein structures are on average composed of several thousands of individual atoms which is two order to magnitude larger than a nucleic acid, thus genome data is much more challenging to render efficiently in its entirety. 
-For example, the entire genome of E.Coli, a relatively small cell, is composed of \textbf{xxx ask ludo} individual base pairs, which represents \textbf{xxx} GB of data.
-
+%By way of comparison, individual protein structures are on average composed of several thousands of individual atoms, which is two order of magnitude larger than a single nucleic acid.
+%, thus genome data is much more challenging to render efficiently in its entirety. 
+%For example, the entire genome of E.Coli, a relatively small cell, is composed of $4,641,652$ individual base pairs, which represents \textbf{xxx} GB of data.
+%
 Moreover, these macromolecules are dynamic entities, and therefore it is important to visualize structural changes overtime, to fully illustrate their functioning.
 In order to display the trajectory of a molecular dataset, the data must transit from CPU to GPU, either beforehand, or streamed during the visualization.
 In the case of visualization of large genome dataset, the trajectory information is likely to be streamed on-the-fly to the GPU, because the data contained in all the simulation snapshots might overwhelm the video memory.
@@ -1428,11 +1429,6 @@ After transforming the local sphere position with the position and rotation of t
 Subsequently, the geometry shader is used to inject the remaining vertices around the sphere centroids, in order to form the triangles of the 2D sphere billboards.
 
 \textbf{Occlusion Management}
-
-%\textbf{Cite another example outside a cell and compare protein density}
-%
-
-\textbf{TODO: Add citation here}
 
 The phenomenon of molecular crowding is used to describe as solution when high concentrations of macromolecules such as proteins are present.
 Such conditions occur routinely in living cells; cellular interiors are 20–30\% volume-occupied by macromolecules which corresponds to an approximate range of 200–300 mg/mL to be considered in physics theory to calculate the consequences of molecular crowding.
