@@ -1504,96 +1504,6 @@ Additionally to our quantitative approach for occlusion management we also provi
 %Particle-based modeling is thus a very singular approach as it provides spatial information for individual proteins and allows computing complex reaction networks in a reasonable amount of time for entire cells.
 
 
-%
-%
-%
-%
-%
-%
-%
-%, the data that they produce contains valuable procedural information which could be combined with structural information to efficiently and dynamically produce illustrative visualisations of cell biology. 
-%
-%
-%
-%
-%
-% data that they produce also contains valuable procedural information which could be used to 
-%
-%
-%
-%which could be combined with structural information to efficiently and dynamically produce illustrative visualisations of cell biology. 
-%
-%
-% one could simply extract the scenario of an animated movie
-%
-%
-%
-%
-%, but they also value quantitative information more than spatial information.
-%
-%
-% to model the variation of concentration in species over time.
-%
-%Because of the nature of this science,  
-%
-%
-%
-%
-%
-%
-% are focusing on the modeling of entire biological systems rather than the behaviour of macromolecular structures.
-%
-%
-%
-%on the other hand, take a more
-%
-% are interested in studying the dynamics of entire biological systems, but they also value quantitative information more than spatial information.
-%%Therefore, they often employ strictly quantitative modeling approaches, which are computationally inexpensive.
-%
-% function.
-%
-%are used to reproduce the physical behaviour of groups of atoms in three dimensions, in order to understand their function.
-% 
-%
-%
-%
-%
-%
-%
-%Traditionally the 
-%
-%
-%
-%MD designed to simulate the behaviour of macro molecules, but are limited in the number of simulated atoms and simulattion length because very demanding.
-%
-%Given that the largest simulation runs are limited to a few seconds it is obvious that using such animation approach 
-%
-%
-%
-%Computational models, systems described as a scenario which can be read and reused.
-%
-%In computational biology it exists modelling method to simulate the dynamics of macromolecules and better understand their function.
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%Biologists from the Scripps Institute have pioneered the ambitious enterprise of capturing
-%the structure of entire viruses or cells at atomic resolution.
-%
-%
-%
-%
-%A resulting scene comprise information about the location 
-%
-%
-%
-% the atomic structure of entire viruses or cells.
-%
 %These models are valuable for scientific and educational exploration because they contain structural information that can be observed at multiple scales, such as compartments shapes, spatial arrangement of macromolecules, and atomic structure of each macro-molecule.
 %
 %
@@ -1779,21 +1689,91 @@ By default, the reaction participants are randomly chosen in the 3D scene, but i
 	It would be great to indicate where a satisfactory solution has been provided and where a new technology is urgently needed.
 	The section afterwards should be this n << consideration.}
 
-\section{n << N Considerations for Biological Visualization}
-
-The biological structural models feature, analogously to the real-world structure, several instances of the same type. For example one protein which consists of 5k atoms consists of only 20 different aminoacids and which consist of only 6 different elements (C,N,O,H,S, Se). While structural composition of HIV contains 20M of atoms (CNO), primarily located in the proteins consists of only ca 40 different structures. Erythrotytes (red blood cells) contain hemoglobin molecules so that \sfrac{2}{3} of their structure is made out of this single one protein. Cells contain few organelles, often more than once, such as mitochondria for example. So there is often the situation that while there are only few types of structural “building blocks”, n, there are many many instances of it, N. This can be utilized in visualization in many different contexts:
-
-Visual Storytelling: David Goodsell is illustrating in one image an entire evolution of a process, for example illustration with antibodies shows on the top left their free occurrence , in the center middle they attack a virus structure, and on the bottom right there is already a virus destroyed. Several instances of one antibody protein in different scenarios that form one linear story.
-Another example of visual storytelling is that we can tell a story about a process using any structural building block, we do not need to use a particular one. This gives us freedom for designing explanatory storytelling visualization techniques.
-
-Rendering: we can render one object many times, we can use instancing and reduce the GPU driver overhead resulting into an immense speedup if n << N.
-
-Memory management, instancing naturally reduces the memory requirements for storing the same object only once instead of multiple times.
-
-Occlusion management: we can utilize this characteristic when we want to cut away some part of the data. We can remove some instances of a particular building block as long as we keep few of them in the scene so that the viewer understands their spatial distribution in the cut-away area from the visible ones.
-
-Advanced light interactions: for example, while unrealistic given the spatial scale we deal with in case of molecules, we can still compute their density and “transparency” from a particular direction. This means we can precalculate all directions of interaction and use this information many times for each instance. While this is probably not a feasible approach for single-instance scenarios, it might be an interesting acceleration structure for multi-instance scenes.
-Procedural modelability: if the condition of n << N is fullfilled then the phenomenon can be procedurally modelled. Modeling 
 
 \section{Conclusion and Future Work}
 
+The initial aim of this PhD project was to develop a visualization platform that would keep the audience and multidisciplinary experts informed about state-of-the-art knowledge in cell biology, using 3D rendered animations as mean of communication.
+We intended to use as much available scientific data as a possible to reduce the amount of manual work traditionally needed for creating digital assets for such content, and make this enterprise possible only with a small team of researchers.
+We also aimed a providing interaction, which is not usually present in traditional visual communication of cell biology, although it is clear that it would have a strong and beneficial impact on the learning experience.
+Therefore, the presented techniques have a strong emphasis on GPU-computing in order to deliver a slick and responsive user experience with high frequency refresh rates. 
+To achieve this ambitious enterprise, we first identified and isolated the most challenging parts of the pipeline and we focused on addressing them individually.
+In some cases, these challenges where addressed by improving current state-of-the-art techniques, such as large scale molecular rendering, but we also presented novel concepts to solve visualization problems that have not yet been investigated in the context of cell biology, such as our omniscient intelligence, illustrative time-lapse or visibility equalizers.  
+
+\textbf{Summary}
+
+We first proposed a novel technique to render large-scale molecular datasets, while preserving atomic-scale details when zooming in.
+Previous methods utilized the concept of instancing but also relied on ray casting, which fails to deliver high frequency refresh rates. 
+We proposed to utilize the rasterization pipeline instead because it features a powerful on-the fly tessellation engine that allows us to dynamically control the level-of-detail and reduce GPU-driver overhead. 
+Fiber structures tend to have a more complex structure than proteins, as a follow-up, we extended this technique to support these structure, such as DNA for example.
+We also enhanced the rendering times by proposing an occlusion culling scheme inspired by state-of-the art technique used in computer games. 
+Up to this point, the scenes used to showcase rendering techniques were made up for benchmarking purposes and not realistic modelled to reflect the high protein density usually present inside living cells.
+Our technique has proven to deliver fast framerates even when using realistic whole-cell atomic structures provided by the Scripps Institute of San Diego, and modelled with cellPACK.
+Because the showcased scenes are modelled according to genuine scientific information, they aim at reproducing the phenomenon of molecular crowding and therefore feature a large number of densely packed proteins.
+As a result, when displaying the entire datasets, only the most frontal atoms are visible, thus hiding important structural information buried internally.
+We also proposed and novel solution to solve occlusion problems when visualizing whole-cell structural models.
+We utilize the fact that many macromolecules present inside the cells actually share a similar atomic structure to reduce the concentration of displayed elements of a given type and clear the view to reveal hidden structures.
+While the exact number of displayed elements is overridden, important information about the localization of these structures and the proportions are preserved.
+
+So far, we only addressed challenges that are concerned with the visualization of static datasets.
+However, to truly express the function of these structures, we must animate them to communicate where they travel and how they interact with their surroundings.
+In computational biology, it exists a modeling technique, called particle-based modeling, that can reproduce biological systems on the scale of entire cells while providing spatial information such as 3D trajectory and reaction history.
+When directly viewing the results of such simulation, it is very difficult to observe the behaviour of individual particles because of the large number of elements present in the system, and because of their fast and erratic diffusion motion.
+A solution to this problem would be to increase the temporal resolution of the visualization to observe individual particles, and to constantly go back and forth between two temporal scales to observe either the simulated process or single particles.
+To improve the visualization of multi-scale processes, we propose a novel time-lapse method that is designed to visualize the results of a simulation at the temporal resolution of the system, while applying a speed reduction filter to particles so that their motion can comfortably be perceived by human eyes.
+The filtering is only applied in the focus region while the original motion is preserved in the context area.
+This partition helps to preserve the original impression of chaos and prevent us from misguiding the viewer.
+This illusion was first introduced by the scientific illustrator Drew Berry in one of his movie, we then formalized this concept and applied it in the context of scientific visualization.
+A major downside of particle-based modeling is the large computational footprint, which obliges us to precompute the simulation before visualizing it.
+This constraint prohibits us from providing a truly interactive experience where the viewer would be able to interact with the simulation parameters and instantly observe the changes.
+Kinetic modeling is a strictly quantitative modeling approach, which is much faster to compute, but does not provide spatial information.
+In order to utilize kinetic modeling to generate 3D spatial animations, we invented a new type of particle system that is able to convert the quantitative information into a spatial representation enhanced with structural information. 
+We introduced the notion of passive agents, which unlike traditional agents, have their behaviour dictated by the omniscient intelligence, a controlling mechanism which utilize the quantitative information to dispatch reaction order to the agents.
+The particle system relies on GPU computing to routinely perform diffusion motion displacement and neighbouring search, allowing us to emulate the behaviour of several million molecules in real-time, while provide a similar visual output as genuine particle-based modeling.
+Since spatial data and simulation are decoupled, we thus gain control over what particular elements are going to react and when.
+With particle-based modeling, this behaviour is stochastic, which means that when focusing on a given particle we have no guaranty that the particle will undergo a complete reaction cycle described in the pathway in a reasonable amount of time, which is impractical for story-telling.
+With the passive agents we have the power to focus on a single element and to force him to undergo an entire reaction cycle, thus facilitating the viewing of the dynamics of a given process.
+
+\textbf{Lessons Learned}
+
+In the course of this thesis, we have learned that biological structural models feature, analogously to the real-world structure, several instances of the same type.
+For example, one protein which is made out of 5k atoms consists of only 20 different amino-acids which themselves consist of only 6 different elements (C, N, O, H, S, Se). 
+On a few orders of magnitude higher, the structural composition of the HIV, for instance, comprises around 20M atoms, but only contains 40 distinct protein structures in total.
+Erythrotytes (red blood cells) contain hemoglobin molecules so that \sfrac{2}{3} of their structure is made out of this one protein only. 
+Cells also contain organelles, a sub-cellular entity that performs specific functions, and they often comprise more than instance of these organelles, such as mitochondria for example. 
+The presence of so called "building block", or structures (n) repeated several times (N), is a recurrent phenomenon in biology and is also occurring on several magnification levels, from atoms up to entire cells.
+This n << N specificity can be used to our advantage for visualization in many different contexts:
+
+\textbf{Rendering}: we can render one object many times, we can use instancing and reduce the GPU driver overhead resulting into an immense speed-up if n << N.
+
+\textbf{Memory management}: instancing naturally reduces the memory footprint for storing the same object only once instead of multiple times, which is crucial for rendering a scene using consumer level graphics hardware.
+
+\textbf{Occlusion management}: we can utilize this characteristic when we want to cut away some part of the data. We can remove some instances of a particular building block as long as we keep few of them in the scene so that the viewer understands their spatial distribution in the cut-away area from the visible ones.
+
+\textbf{Visual story telling}: we can tell a story about a process using any structural building block, we do not need to use a particular one. This gives us freedom for designing explanatory storytelling visualization techniques.
+
+\textbf{Future Work}
+
+The models which we utilized to showcase the dynamics of biological systems are only simple yet realistic demonstration models, which do not truly compare in complexity with the systems which we initially wanted to showcase.
+Although we showed that the techniques we designed are able to support real scientific data, we yet have to combine structural and physiological composition for entire cells instead.
+This ambitious enterprise could only be achieved in tight collaboration with biology experts.
+To facilitate the collection and validation of information from different online sources, it would also be interesting to develop automated means to collect this information and compile it into a meta-model comprising both structural and procedural information.
+Hence, once new information is available, the system would be able to scan all the sources and update the model accordingly, thus saving us from tedious and cumbersome manual operations.
+
+We also need to figure out how to scale upward with the models that we are able to render.
+So far, we are able to render viruses or prokaryotic cells such as HIV, Mycoplasma mycoides or Escherichia Coli. 
+Eukaryotes are the cells that compose living organisms such as plants and animals, therefore it is important to explain their mechanism to understand how we work.
+These cells, however, are much bigger than prokaryotes as they contains membrane bound organelles such as Mitochondria or the Golgi apparatus which is may be as large as a bacteria, which means that they are also much more challenging to render.
+To render these larger structures we would need new ways of representing shapes other than spheres while preserving the massive zooming continuum.
+We would also need to work even closer with the scientists to help them gather and extract important information from the raw data they collect.
+
+An important aspect which we have not yet explored and would be worth investigating in future work is accurate real-time collision detection for large scale molecular dataset.
+Although particle-based modeling or passive agents provides us the 3D trajectory of macromolecules, these approaches only consider molecules as a simple 3D point and the notion of shape or collision with surrounding bodies is simply ignored.
+Thanks to the democratization of graphics hardware it is now possible to perform large scale rigid-body collision-detection for up to several million of individual bodies, in real-time and on commodity hardware.
+It would be worthwhile to integrate such system with large scale molecular landscapes, not only it would correct overlapping bodies when viewing dynamic data, but it would also allow us to model large structures similarly to the ones modelled with cellPACK, on-the-fly.
+Indeed, the computational footprint of cellVIEW does not allow us to generate models in real-time, however, with such technology we would be able to overcome this limitation and to progressively model a sub-region of a cell which is visible in the viewport as we travel into the scene.
+This would also allow us to discard structural information which is not currently visible and address the memory space limitation of graphics hardware and visualize even larger structures than the one we currently support.
+
+Finally, we have also started to investigate on how to efficiently perform story-telling to visually explain biological networks that are usually described as cryptic diagrams and only understandable by domain experts.
+While we have successfully accomplished the task of showing how elements of a system move and interact with other elements, it is now clear to us that showcasing only a realistic view of a system might suffice to efficiently and visually communicate this type of information.
+With our omniscient intelligence, we have showed how to distort the normally stochastic behaviour to present a complete reaction cycle in a reasonable amount of time.
+We now have to start thinking about new methods to morph this with more traditional 2D information and possibly provide intermediate views and transitions between realistic 3D representation and static 2D reaction diagrams.
