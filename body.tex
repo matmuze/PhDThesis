@@ -21,8 +21,8 @@ Moreover, there is also a growing interest from the general audience to understa
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.95\linewidth]{graphics/goodsell_mitochondrion}
-	\caption{}
+	\includegraphics[width=0.85\linewidth]{graphics/goodsell_mitochondrion}
+	\caption{A painting made by David S. Goodsell of a cross-section revealing the internals of a mitochondrion. The view focuses on the outer and inner membrane of the organelle (green). The genome is shown in yellow, and the remaining proteins are both coloured according to their type and location. Note how the Goodsell arranged the scene to ensure that all the key elements are visible in a single image, and how the visual mapping of shapes and colors contribute to the clarity of the image.}
 	\label{fig:david-s}
 \end{figure}
 
@@ -130,7 +130,7 @@ Although data-collection and real-time rendering are important challenges that f
 \end{figure*}
 
 The central vision of this project is to engineer a solution that would provide interactive visualization of digitally reproduced cellular lifeforms in order to spread state-of-the-art knowledge of cell biology more easily to the broad audience.
-Similarly to map navigation tools, we want to offer boundless exploration through the environment and massive zooming from the tiniest atom to the entire organism, so that the audience can query any region of a cell and learn about it, on-demand.
+Similarly to map navigation tools, we want to offer boundless exploration through the environment and massive zooming from the tiniest atom to the entire organism, so that the audience can query any region of a cell and learn about it, on-demand, see Figure \ref{fig:teasernew}.
 We also envision the whole model to be dynamic in order to explain the complex machinery of processes that allow the cells to function, live and reproduce.
 
 The scenario that explain how physiological processes work is far from linear as processes are designed to respond to multiple type of environmental changes.
@@ -141,10 +141,28 @@ A good starting point for our enterprise would be to begin with small unicellula
 These are so-called model organisms because we already have an extensive knowledge about their functioning and structure, so the integration of this information into a visual depiction seems within reach. 
 
 In this thesis we will present different research projects that were all driven by this vision.
-%It is worth mentioning, that all the pieces of software associated with these contributions were developed with the same visualization framework with the ambition to compile all the work we achieved in a unified solution.
 To illustrate how the different contributions of this PhD project fit together, we laid them out in a flow diagram, as show in Figure~\ref{master-diagram}, starting from input data to final visual output.
 The figure also contain a list of all the relevant publication for this thesis, also including second authors publications not included in this final work.
-The contributions are encapsulated into blocks that correspond to the stages of a classic computer visualization pipeline, and which we describe as follows:
+The contributions are encapsulated into blocks that correspond to the stages of a classic computer visualization pipeline, and which are described in further detail below:
+
+It is worth mentioning, that all the pieces of software associated with these contributions were developed with the same visualization framework, cellVIEW, with the ambition to compile all the work we achieved in a unified solution.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.99\linewidth]{graphics/teaser_new}
+\caption{Multiscale visualization of the HIV virus with cellVIEW, a program developed in the course of this PhD project. This image show the massive zooming capabilities from entire organisms down to single atoms, while also revealing intermediate
+	 structures such as organelles, compartments and macromolecules.}
+\label{fig:teasernew}
+\end{figure}
+
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.7\linewidth]{graphics/Picture4}
+%\caption{}
+%\label{fig:picture4}
+%\end{figure}
+
 
 %\pagebreak
 
@@ -279,7 +297,15 @@ So far, only little is known about spatial arrangement of proteins that form gre
 To fill the mesoscale gap between atoms and cells, scientists from the Scripps Institute in San Diego have developed cellPACK~\cite{johnson2015cellpack}, a tool to procedurally construct large mesoscale structures, such as viruses, or entire cells, at atomic resolution.
 cellPACK incorporates the most recent knowledge obtained from biology to generate these models, such as proteins structures obtained from crystallography, concentrations and spatial distribution observed \textit{in vitro}, and 3D shape of compartments acquired from electron microscopy.
 
-They summarize all this data in structural descriptions which they call a recipe, which is then used as input to generate entire models of viruses and cells via a packing method based on collisions constraints.
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{graphics/cellpack}
+\caption{The principle of cellPACK: first recipes are made based on available information acquired \textit{in vitro}, such as protein structures, concentrations, distribution and compartment. Then the software generates a plausible assemblage of molecules based on collision constraints in order to generate a larger structure featuring structural information down to the level of atoms, which would not be possible to acquire otherwise with traditional methods such as X-ray crystallography.}
+\label{fig:cellpack}
+\end{figure}
+
+
+They summarize all this data in structural descriptions which they call a recipe, which is then used as input to generate entire models of viruses and cells via a packing method based on collisions constraints, this concept is depicted in Figure \ref{fig:cellpack}.
 Their algorithm is designed to progressively insert molecules inside given compartments.
 They use a spatial partitioning scheme to detect overlapping structures and find an appropriate location to insert new shapes, guaranteeing no overlap with previously inserted elements.
 As an output, their tool generates a list which contains the position, rotation, and type of all the macromolecules that compose the organism.
@@ -301,7 +327,9 @@ To keep up with the increasing size of atomic datasets, visualization experts de
 Tarini et al.~\cite{tarini2006ambient} introduced a novel visualization technique inspired from 2D billboards, a popular concept in computer games.
 The technique consists of drawing camera-facing 2D sphere impostors rather than tessellated 3D spheres for rendering individual atoms.
 As a result, to render a molecule which comprises 1000 atoms, for example, only 4000 vertices ---4 vertices per atom--- are needed to form the camera facing quads and to draw very detailed and smooth ensembles of spheres, while polygon meshes would require a number of vertices up to one or two orders of magnitude higher.
+A rendered image of a protein 
 With their approach, they were able to interactively render large datasets macromolecules at a much lower cost than tessellated shapes.
+
 
 Shortly afterwards, Lampe et al.~\cite{lampe2007two} extended the billboard technique by leveraging the programmable GPU rendering pipeline to reduce memory bandwidth usage and GPU driver overhead. 
 Instead of storing the entire atomic structure of a protein on the GPU, they only store the position of amino-acids which are the building blocks of proteins.
@@ -327,10 +355,17 @@ However, none of these surface-based methods is yet able to compete in terms of 
 
 \subsection{Visualization of Biological Systems}
 
+\begin{figure}
+\centering
+\includegraphics[width=0.4\linewidth]{graphics/Reductive_TCA_cycle}
+\caption{Pathway reaction cycle describing the process of energy production during aerobic respiration and which takes place in the mitochondria.}
+\label{fig:reductivetcacycle}
+\end{figure}
+
 Systems biology is the branch of biology concerned with computational or mathematical modeling of complex biological systems.
 The organization of biological systems spans several scales; on the level of single cells they typically describe signalling or regulatory functions of living cells, such as energy production, gene expression, and ability to divide or die.
 Such systems consists of a reaction network between molecular agents such as enzymes, metabolites, or proteins.
-The reaction network is denoted as pathway.
+The reaction network is denoted as pathway, an example is provided in Figure \ref{label}.
 Based on the pathway description, scientists reproduce the dynamics of a system \textit{in silico}, via simulation tools, and observe the changes in species concentrations over time.
 The results of the simulation are then further analysed to predict and understand how these systems change over time and under varying conditions, and potentially develop solutions to health issues.
 The complex reaction networks are usually described with a custom markup language, such as SBML~\cite{hucka2003systems}, and used as input for the simulation tools.
@@ -389,8 +424,16 @@ Additionally, it is also possible to use custom meshes to show the shapes of the
 %To a certain extent, this information could also have an informative value for the laymen because it depicts complex processes in the form of a 3D animations.
 %The viewing of actual three dimensional molecular interactions, such as the ones observed in scientific animations, could then be used as a mean to automatically generate expressive illustration of the simulated system.
 
-This trajectory data could therefore be utilized to digitally reproduce the functioning of cells for explanatory purposes.
-Indeed, the resulting visualization carry important information as it allows the depiction of complex biological systems in the form of 3D diffusion and reaction animations that can be embedded in their molecular environment.
+\begin{figure}
+\centering
+\includegraphics[width=0.99\linewidth]{graphics/figures-20160926T220833Z/figures/Teaser}
+\caption{Playback of the trajectory data generated from MCell, and rendered in cellVIEW. The model was only designed for demonstration purposes and depicts a mitochondrion from outside (left) and inside (right). The models features channel proteins diffusing on the outer membrane of the organelle (red), and small ATP molecules (green) exiting the organelle through the channel proteins. The process which only is partially depicted here is the production of energy (ATP) in the core of the organelle that is then released outside the matrix in order to be consumed elsewhere in the cell.}
+\label{fig:teaser}
+\end{figure}
+
+
+Although this type of modeling technique was invented for scientific purposes, we envision that the generated data could also be utilized to digitally reproduce the functioning of cells for explanatory purposes.
+Indeed, the resulting visualization carry important information as it allows the depiction of complex biological systems in the form of 3D diffusion and reaction animations that can be embedded in their molecular environment, see Figure \ref{teaser}.
 Falk et al.~\cite{falk2009visualization} developed a framework to playback particle trajectories with additional overlaid information to trace the history of individual particles, such as trajectory and previously undergone reactions.
 A direct approach to visualizing raw trajectory data, however, may often result in an overly cluttered view due to an overwhelmingly large number of elements diffusing randomly in every directions, and may often be close to incomprehensible, even for expert users.
 To provide a clearer overview of the spatial information, Falk et al.~\cite{falk20103d} followed up their previous work and proposed a novel volume-based representation of the agents density to better observe migration pattern of a selected species.
@@ -412,7 +455,14 @@ In order to provide a truer depiction of micro-organisms and improve real-time u
 A shortcoming of the volumetric approach presented by Lindow et al.~\cite{lindow2012interactive}, is that for each rendered macro-molecule, additional expensive ray-traversal routines are required during the per-fragment processing, which may unbalance parallel thread execution and cause considerable bottlenecks, especially with dense scenes composed of small individual macromolecules.
 We opted for an impostor-based method for the design of our rendering pipeline, which requires more individual per-fragment thread execution per macro-molecule, but is far more balanced and suitable for parallel processing and also does not require expensive volume sampling operation upon rendering. 
 The approach which we designed directly follows-up the work of Lampe et al.~\cite{lampe2007two} and focuses on reducing the GPU driver-overhead caused when the CPU host programs issues to many draw calls to the GPU.
-We also optimized the rendering by adapting well-known computer graphics techniques to support molecular datasets, such as level-of-detail, instancing, and occlusion culling. 
+We also optimized the rendering by adapting well-known computer graphics techniques to support molecular datasets, such as level-of-detail, instancing, and occlusion culling, allowing us to render up to several billion atoms with a steady 60 Hz refresh rate, see Figure \ref{fig:unity-2015-06-22-01-20-37-65}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"graphics/large_scene"}
+	\caption{Stress-test of the rendering achieved with a virtual dataset made out of 250 smaller blood plasma datasets, and comprising up to 15 billion atoms in total. The level-of-detail ensure a fast framerate when looking at the dataset entirely and the occlusion queries optimize the performance when closely looking at a sub-region of the dataset.}
+	\label{fig:unity-2015-06-22-01-20-37-65}
+\end{figure}
 
 A particularity of the scenes generated with cellPACK is that they aim at reproducing molecular crowding which can be observed \textit{in vitro} and result in dense arrangements of macromolecules.
 So far, state-of-the-art methods that are able to render up to several billion atoms interactively have only showcased protein datasets with a low population density, which means that less macromolecules are present in the viewport at once.
@@ -420,13 +470,34 @@ Besides increasing the computational complexity of the rendering, denser scenes 
 Hence, we also propose a custom scene composition pipeline to adjust the visibility of proteins, while preserving important contextual information.
 The pipeline is also engineered to leverage the power of GPU computing in order to provide a responsive user experience even with a large number of macromolecules.
 
-%TODO Insert Figure cellPACK vs Goodsell
+\begin{figure}
+\centering
+\includegraphics[width=0.95\linewidth]{graphics/hiv}
+\caption{Goodsell vs cellVIEW}
+\label{fig:hiv}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.95\linewidth]{graphics/Picture10}
+	\caption{Goodsell vs cellVIEW}
+	\label{fig:hiv}
+\end{figure}
+
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.7\linewidth]{graphics/screen_4000x4000_2015-08-10_11-20-06}
+%\caption{}
+%\label{fig:screen4000x40002015-08-1011-20-06}
+%\end{figure}
+%
 
 \textbf{Level-of-detail}
 
 Level-of-detail (LOD) is a method often used in computer games to cope with the limited polygon budget of real-time applications.
 The principle consists of drawing simpler mesh representations for distant objects that have less pixel coverage to reveal high-frequency details. 
-From an original 3D model with a high number of polygons, proxy models are generated to create an atlas of meshes with gradually simplified geometries.
+From an original 3D model with a high number of polygons, proxy models are generated to create an atlas of meshes with gradually simplified geometries, as visual explanation if shown in Figure \ref{fig:lod}.
 Upon rendering of a model, the LOD proxy is then selected based on the distance to the camera.
 %The further away an object lies, the less details can actually be observed and thus less polygons should be rendered.
 
@@ -453,8 +524,13 @@ In most complex use-cases, however, there may be up to several thousand differen
 Issuing that many draw operations would thus unnecessarily compromise the efficiency of the rendering pipeline.
 Therefore, we developed an optimized rendering pipeline which is able to render an entire set of macromolecules with different structures and LOD levels in a single draw command, thus removing GPU-driver overhead.
 
-%TODO Isert Reference Figure LOD
-
+\begin{figure}
+\centering
+\includegraphics[width=0.99\linewidth]{graphics/lod}
+\caption{The level-of-detail concept (LOD) applied to macromolecules. Using a clustering algorithm simplified atomic structure are generated, with fewer and larger spheres called meta-atoms.
+Impostors are used to generate the spheres and thus the computational footprint for rendering the proxies is greatly reduced to only a few dozen of spheres for the most simplified proxies.}
+\label{fig:lod}
+\end{figure}
 
 \textbf{Instancing}
 
@@ -495,15 +571,7 @@ An advantage of this technique is that it allows to render an entire scene compr
 Additionally, the memory footprint is considerably smaller than previous techniques, and the pipeline is also able to process large macromolecules with up to several thousands of atoms.
 
 %TODO Figure Methodology ??
-
 %TODO Figure Benchmark
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.7\linewidth]{"graphics/Unity 2015-06-22 01-20-37-65"}
-%\caption{}
-%\label{fig:unity-2015-06-22-01-20-37-65}
-%\end{figure}
-%Reference Figure \ref{fig:unity-2015-06-22-01-20-37-65}
 
 \textbf{Occlusion Culling}
 
@@ -598,15 +666,29 @@ The tessellation engine will dispatch the execution of a thread batch comprising
 Upon processing individual spheres in the tessellation stage, the corresponding sphere information is fetched from the main video memory, such as the local position and radius of atoms or meta-atoms.
 After transforming the local sphere position with the position and rotation of the corresponding nucleic acid, the sphere centroid is passed on to the next shader stage, i.e., the geometry shader.
 Subsequently, the geometry shader is used to inject the remaining vertices around the sphere centroids, in order to form the triangles of the 2D sphere billboards.
+A final render of our fast genome rendering pipeline is shown in Figure \ref{fig:picture11}.
 
-%TODO Insert Figure DNA
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{graphics/Picture11}
+\caption{Screen capture of the genome of mycoplasma rendered in real-time with cellVIEW at more than 60 frame per second, and comprising over 1 million pairs of nucleic acids.
+	The control points of the DNA curve are uploaded to the GPU and the nucleic acids are dynamically instantiated along the spline from the GPU rendering pipeline. }
+\label{fig:picture11}
+\end{figure}
 
 \textbf{Occlusion Management}
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.5\linewidth]{graphics/download}
+%	\caption{A realistic depiction of molecular crowding inside the E. coli bacterial cytoplasm by McGuffee and Elcock~\cite{mcguffee2010diffusion}}
+%	\label{fig:download}
+%\end{figure}
 
 The phenomenon of molecular crowding is used to describe a solution when high concentrations of macromolecules such as proteins are present.
 Such conditions occur routinely in living cells; cellular interiors are 20–30\% volume-occupied by macromolecules which corresponds to an approximate range of 200–300 mg/mL to be considered in physics theory to calculate the consequences of molecular crowding.
 The cytosol of E. Coli, for instance, contains about 300–400 mg/mL of protein and RNA molecules.
-Therefore an accurate depiction of the internal structure of cells often results in a very dense arrangement of macromolecules as shown in \textbf{Figure X[] show figure of molecular crowding e.coli goodsell}.
+Therefore an accurate depiction of the internal structure of cells often results in a very dense arrangement of macromolecules. % as shown in Figure \ref{fig:download}.
 Without efficient means to selectively remove occluding objects, it would therefore be impossible to observe hidden internal structures that play essential roles in the functioning of biological systems.
 In scientific illustrations and visualizations, cutaway views are often employed as an effective technique for occlusion management in densely packed scenes.
 However, a limitation of strict cutaway views is that important contextual information is removed.
@@ -615,11 +697,13 @@ While mainstream visualization and illustration software feature cutaway tools, 
 Transparency is another approach to solve occlusion problems, however the computational cost of this technique will be too significant for large molecular scenes featuring several thousands of overlapping elements per pixel.
 Furthermore, due to the presence of a large number of potential occluders the use of transparency will likely result in overly complex images which would affect the quality of the visualization.
 
+
+
 We propose a novel method for solving occlusion problems due to molecular crowding.
 In contrast with existing techniques, we take advantage of the characteristics of complex molecular landscapes such as the scenes modeled with cellPACK.
 These models usually contain hundreds of thousands of individual macromolecules, however, many of them share the same structure.
 Therefore, by reducing the concentration of elements sharing a similar structure, we may reveal hidden features and also preserve important information such as the type of contextual elements and their location.
-This concept resembles the “Screen-Door Transparency” technique popular in the early days of computer graphics, and where transparency is achieved by placing small holes in a polygon to reveal what is present behind.
+This concept of a "fuzzy visibility" resembles the “screen-door transparency” technique popular in the early days of computer graphics, and where transparency is achieved by placing small holes in a polygon to reveal what is present behind.
 When reducing the concentration of macromolecules, to reveal structures that are located behind, we also ensure that elements are removed uniformly across the scene to preserve the proportions of the correct spatial distribution.
 A potential limitation of this approach is that it will communicate erroneous quantitative information to the viewer.
 In order to avoid misconceptions, we optionally propose to display the removed elements with a ghosting effect such as transparency or contours only.
@@ -627,12 +711,13 @@ To achieve the ghosting effect, removed elements are rendered in a separate text
 Hence, only the closest occluding elements from the camera are shown, in order to minimise visual clutter one might have with full fledge transparency.
 
 To assist the scene composition, we additionally display a bar chart over the view that provide real-time quantitative feedback about the visibility of each macromolecular type.
-A single bar comprises three distinct regions that indicate the visibility properties for a given species \textbf{as shown in Figure[]}.
+A single bar comprises three distinct regions that indicate the visibility properties for a given species, as shown in Figure \ref{fig:visibility-equalizer}.
 The grey region bar indicates the number of macromolecules that are currently discarded from the rendering.
 The dark green region indicates the proportion of rendered molecules that are currently visible, while the light green region indicates the proportion of them that are currently occluded by other macromolecules.
 The bar chart thus provides an overview of the visibility properties which then serve as guidance for composing the scene.
 For instance, if the user wishes to observe a particular species, he will immediately be informed about the quantity of this species that are occluded by other structures, and will adapt the visualization accordingly.
 The modulation of the proportion of visible elements is also done via the quantitative view by simply dragging the border between the grey and green regions. 
+A screen-capture of the visibility equaliser is shown in
 
 Another useful functionality for scene composition is the selection of species of interest.
 When selecting a particular macro-molecular type as species of interest, occluding elements of a different types are then guaranteed to be discarded in order to provide full-visibility for the species of interest.
@@ -641,7 +726,51 @@ Therefore, we developed a custom culling pipeline using GPU computing to guarant
 Macro-molecules that are set as species of interest are first rendered in a separate off-line depth texture and used as input to perform image-based occlusion queries for each of the remaining elements and detect occluders.
 Additionally to our quantitative approach for occlusion management we also provide support for traditional clipping objects such as planes, cube or sphere that can manually be placed in the 3D scene.
 
-%TODO Insert figure equalizer
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.99\linewidth]{"graphics/visibility equalizer"}
+		\caption{}
+		\label{fig:sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.99\linewidth]{"graphics/visibility equalizer2"}
+		\caption{}
+		\label{fig:sub2}
+	\end{subfigure}
+	\caption{The concept of Visibility Equalizer. For each group of similar macromolecules is displayed a stack of bar that informs us about their visibility. 
+		The gray bar tells us the percentage of instances that have been clipped, either by a clipping plane or the "fuzzy visibility". The dark green bar informs us about the number of instance currently visible on the screen, and the light green bar about the number of instances rendered but occluded by other molecules. By dragging the bar the user can thus easily modify the visibility of entire groups of proteins and intuitively compose and inspect a given dataset only with a limited set of user interactions.}
+	\label{fig:test1}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.99\linewidth]{"graphics/Picture4"}
+		\caption{}
+		\label{fig:sub1}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.99\linewidth]{"graphics/Picture8"}
+		\caption{}
+		\label{fig:sub2}
+	\end{subfigure}
+	\caption{The HIV + blood plasma dataset composed with the visibility equalizer. (a) The inside of the HIV capsid (blue proteins surrounded by yellow capsid proteins) is set a object of interest, which ensure occluders to be removed dynamically from any point of view. (b) Demonstration of the concept of "fuzzy visibility". Above the clipping plane positioned manually the user can decide to override the concentration of displayed elements. Additionally we also propose to render the ghost of the removed elements to reduce visual clutter only the first visible removed molecules are drawn.}
+	\label{fig:test2}
+\end{figure}
+
+
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.7\linewidth]{"graphics/visibility equalizer2"}
+%\caption{}
+%\label{fig:equalizer-results}
+%\end{figure}
+%Reference Figure \ref{fig:equalizer-results} here.
 
 \section{Emulating the Machinery of Life}
 \label{sec:section4}
@@ -746,7 +875,7 @@ But in order to visualize individual reactions, it is necessary to have a close-
 We are therefore facing the following conundrum: we can either observe the entire process in a reasonable amount of time without seeing individual reactions, or we can slow down the simulation and observe individual particles thus increasing the viewing length.
 A complete overview of the process would therefore require to constantly change the temporal resolution back and forth, as there is currently no technique that would enable us to see two phenomenon occurring at two different time scale in a single view.
 
-To address this issue, we propose a new type of visualization for particle-data inspired from animated illustrations of cell biology, and which respects the following guidelines:
+To address this issue, we propose a new type of visualization for particle-data inspired from animated illustrations of cell biology and that respects the following guidelines:
 \begin{enumerate}
 	\item The viewing length should be minimum and therefore the trajectory data should be played back in fast-forward.	
 	\item Individual particles should move slow enough to be traceable with human eyes, especially those with a high degree of interest.	
@@ -754,11 +883,24 @@ To address this issue, we propose a new type of visualization for particle-data 
 	\item Despite eventual alterations to respect the previous guidelines, the visualization should be as realistic as possible to avoid misconceptions.
 \end{enumerate}
 
-The last requirement was formulated in accordance with the results of a study by Jenkinson et al.~\cite{jenkinson2012visualizing}, which demonstrated that a more realistic depiction of a process can enhance the viewer’s understanding compared to a highly abstracted one, we also observed the same principle in animated movies as shown in Figure [x].
+The last requirement was formulated in accordance with the results of a study by Jenkinson et al.~\cite{jenkinson2012visualizing}, which demonstrated that a more realistic depiction of a process can enhance the viewer’s understanding compared to a highly abstracted one, we also observed the same principle in animated movies as shown in Figure \ref{fig:apoptosis}.
 
-%TODO Insert figure timelapse here
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphics/figures-20160926T220833Z/figures/Apoptosis}
+	\caption{Screenshot of frame m and m+3 of a molecular animation \textit{Apoptosis} made by Drew Berry~\ref{Apoptosis}. Mind how the main reaction is forced to remain fairly stationary
+		(upper arrow), while molecules in the background move very quickly (lower arrow). Illustrative timelapse is inspired by this effects, and aims at reproducing it based on real scientific data only.}
+	\label{fig:apoptosis}
+\end{figure}
 
 \textbf{Speed Reduction}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/SpeedReduction}
+	\caption{The speed reduction principle. The black dots represent the non-filtered trajectory and the red line the reduced one. When sampling the next position from the raw trajectory, we downscale the displacement that would originally move the particle to the sampled position. This approach has the advantage of smoothing the trajectory while causing a minimum amount of latency. The displacement toward the raw-trajectory is downscale by a the speed reduction factor which controls the smoothness of the motion.}
+	\label{fig:speedreduction}
+\end{figure}
 
 To reduce the viewing length of a simulation, the trajectories of the particles are played-back in fast-forward.
 To achieve this, we only display snapshots of the trajectory at a fixed interval.
@@ -766,11 +908,13 @@ Thus, the spatial information between two displayed snapshots is simply omitted,
 Because of the increased speed of the particles, it might be difficult to keep track of individual particles between two consecutive frames, which prevents the viewer from observing key reaction events.
 In accordance with our guideline rule number 2, we apply a speed reduction filter to shorten the trajectories of individual particles.
 The filter mechanism consists of reducing displacements between the current position of particles and their original trajectory positions sampled from the dataset at a given time.
-The displacements are reduced according to the speed reduction factor as shown in Figure[x].
+The displacements are reduced according to the speed reduction factor as shown in Figure \ref{fig:speedreduction}.
 Particles thus follow their original trajectories but are displaced over shorter distances and their speed is decreased.
 As a result, the particle motion is much smoother and easier to follow by human eyes while preserving a fast playback speed.
 The speed reduction filter also causes a small delay between particles and their original trajectories, however, because of the chaotic nature of the Brownian motion particle, this delay is hardly noticeable.
 Indeed, diffusing molecules have a rather short overall trajectory travel compared to entities with a more linear motion, and therefore even if the particle lags behind its original trajectory it is almost certain to be located in its vicinity.
+
+
 
 %As a result, particles always remain in the vicinity of their original trajectories and their motion is smoother and easier to follow by human eyes.
 %because the magnitude of each displacement is proportional to the distance of a particle and its original trajectory, this delay does not accumulate and remains constant over time.
@@ -791,15 +935,28 @@ To emphasize reaction events, reacting elements are highlighted with vivid color
 The slow attraction animation and the color highlighting thus guarantees that the viewer is informed that a reaction is about to happen.
 Once a reaction is accomplished, the products are introduced and their original motion is restored.
 
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.5\linewidth]{graphics/movement}
+%\caption{}
+%\label{fig:movement}
+%\end{figure}
+
+
 \textbf{Lens Effect}
 
-\textbf{Figure maybe ?}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{graphics/SphericalLens}
+\caption{The spherical object-space modifies the speed reduction of the particles based on their distance to the centre of a virtual sphere. Inside the sphere the trajectories of the particles are reduced so that the viewer can visually keep track of them. Outside the lens the particles are subject to their original chaotic motion thus conveying a true impression of chaos and stochastic motion.}
+\label{fig:sphericallens}
+\end{figure}
 
 Because of the slow movement of the particles compared to their original trajectories, the viewer may be misguided about the true diffusion properties of molecular agents.
 To preserve a realistic impression of molecular motion despite trajectory reducing, we introduce a temporal focus+context technique that applies visual abstraction of molecular trajectories solely in the foreground (focus), while showing more realistic ---yet often untraceable--- motion in the background (context).
 By showing the actual particle trajectories in the background we want to create an illusion of chaos, thus informing the viewer about their real diffusion speeds while allowing him to observe important reaction events in the same view.
 We propose two methods to achieve this effect.
-The first method operates in object space.
+The first method operates in object space and is described in Figure \ref{fig:sphericallens}.
 We define a region anchored in front of the camera in which molecular agents will be subject to a significant speed reduction.
 Outside of this region we progressively decrease the speed reduction until reaching the background zone where the original particle trajectories are shown.
 The second method we propose operates in image space.
@@ -847,7 +1004,7 @@ Firstly, the simulation of the reaction network is very lightweight to compute, 
 Secondly, the spatial information is completely decoupled from the simulation, which means that we can have control over where reactions will occur.
 This approach grants us the freedom to dynamically trigger a cascade of reactions directly in the viewport in order to facilitate storytelling of complex reaction networks.
 
-The workflow of our passive-agents system is laid out as follows \textbf{[Figure needed]}:
+The workflow of our passive-agents system is shown in Figure \ref{fig:figure21} and is laid out as follows:
 On the one hand, we have a biological system described as a reaction network and modeled with a scientific simulation software using a kinetic modeling approach.
 On the other hand, we have a 3D scene filled with potential reactants, and which is setup according to the initial conditions of the model, such as the initial quantity and location of each species.
 Each passive-agent additionally undergoes a 3D random walk motion to simulate the diffusion process, similarly to traditional particle-based simulation.
@@ -858,7 +1015,14 @@ Upon collision of the reactants, the reaction is performed, products are injecte
 Finally, the reaction products return to a normal diffusion behaviour until they get chosen for a subsequent reaction defined in the network.
 By default, the reaction participants are randomly chosen in the 3D scene, but it is also possible to set a reaction priority to a few elements present in the viewport, in order to show cascades of reactions without having to browse through the entire scene.
 
-%TODO Insert passive agents here
+\begin{figure}
+\centering
+\includegraphics[width=0.8\linewidth]{graphics/figure2_1}
+\caption{Workflow of the passive agents principle. A biological process is represented as a metabolic network model, which is numerically simulated. The controlling module, called Omniscient Intelligence, (OI) routinely reads the results from the quantitative simulation, and dispatches 	reaction events to the agents. The agents are diffusion in the 3D scene, passively waiting for reaction order from the OI. Upon reaction events two reaction agents are steered towards each others and forced to react. Finally the position and rotation of the molecules are passed to the rendered which render the set of particles according to their structural information. Via user input it is also possible to interact with the simulation parameters and affect the visual output.}
+\label{fig:figure21}
+\end{figure}
+
+Reference Figure \ref{fig:figure21}
 
 \section{Conclusion and Future Work}
 \label{sec:section5}
