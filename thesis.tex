@@ -124,19 +124,23 @@
 
 \begin{abstract}
 	
-	Macromolecules such as proteins are the building blocks of the machinery of life, and therefore are essential to the comprehension of physiological processes.	
-	As knowledge in this area grows with the advances of modern science, efficient communication of this information is becoming a necessity.	
-	Visual communication such as illustrations and animations are often utilized because they can easily be understood with almost no background knowledge of biology.
-	However, their realization requires numerous month of manual work which is both expensive and time consuming.	
-	Computational biology experts produce everyday large amount of data that is publicly available and that contains valuable information about the structure, and also the function of these macromolecules.	
-	Instead on relying on manual work to generate illustrative visualizations of the machinery of life, we envision a solution that would utilize all the data already available and that would streamline the production as much as possible.
+	Macromolecules, such as proteins, are the building blocks of the machinery of life, and therefore are essential to the comprehension of physiological processes.
+	In physiology, illustrations and animations are often utilized as a mean of communication because they can easily be understood with little background knowledge.
+	However, their realization requires numerous months of manual work, which is both expensive and time consuming.	
+	Computational biology experts produce everyday large amount of data that is publicly available and that contains valuable information about the structure and also the function of these macromolecules.	
+	Instead of relying on manual work to generate illustrative visualizations of the cell biology, we envision a solution that would utilize all the data already available in order to streamline the creation process.
 
-	In this thesis are presented several contributions that aim at enabling our vision, and address the challenges that we have encountered along the way.
-	First a novel rendering pipeline that allows interactive rendering of large molecular datasets comprising hundreds of millions of macromolecules.
-	Furthermore, a new scene composition approach to improve spatial exploration of dense whole-cell structures modelled at atomic resolution.
-	Third, a solution to visualize timelapse of dynamic and large scale molecular agent simulation that also reveal invisible information that is only observable at higher temporal resolutions.
-	And finally, a new type of agent-based system that is capable of providing a similar visual output as regular but expensive agent-based simulation methods, which allows us to visualize and interact with the simulation of a biological system in real-time.
-	These new visualization technologies are showcased with accurate scientific data which was collected with the help of experts, and were also designed and validated in collaboration with renowned scientific illustrators.
+	In this thesis are presented several contributions that aim at enabling our vision.
+	First, a novel GPU-based rendering pipeline that allows interactive visualization of realistic molecular datasets comprising up to hundreds of millions of macromolecules.
+	The rendering pipeline is embedded into a popular game engine and well known computer  graphics optimizations were adapted to support this type of data, such as level-of-detail, instancing and occlusion queries.
+	Secondly, a new method for authoring cutaway views and improving spatial exploration of crowded molecular landscapes. 
+	The system relies on the use of clipping objects that are manually placed in the scene and on visibility equalizers that allows fine tuning of the visibility of each species present in the scene.	
+	Agent-based modeling produces trajectory data that can also be combined with structural information in order to animate these landscapes.
+	The snapshots of the trajectories are often played in fast-forward to shorten the length of the visualized sequences, which also renders potentially interesting events occurring at a higher temporal resolution invisible.
+	The third contribution is a solution to visualize time-lapse of agent-based simulations that also reveals hidden information that is only observable at higher temporal resolutions.
+	And finally, a new type of particle-system that utilize quantitative models as input and generate missing spatial information to enable the visualization of molecular trajectories and interactions. 
+	The particle-system produces a similar visual output as traditional agent-based modeling tools for a much lower computational footprint and allows interactive changing of the simulation parameters, which was not achievable with previous methods.
+%	These new visualization technologies are showcased with accurate scientific data which was collected with the help of experts, and were also designed and validated in collaboration with renowned scientific illustrators.
 		
 \end{abstract}
 
