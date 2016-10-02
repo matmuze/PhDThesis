@@ -1,6 +1,6 @@
 % Copyright (C) 2014-2016 by Thomas Auzinger <thomas@auzinger.name>
 
-\documentclass[draft,final]{vutinfth} % Remove option 'final' to obtain debug information.
+\documentclass[final]{vutinfth} % Remove option 'final' to obtain debug information.
 
 % Load packages to allow in- and output of non-ASCII characters.
 \usepackage{lmodern}        % Use an extension of the original Computer Modern font to minimize the use of bitmapped letters.
@@ -25,7 +25,11 @@
 \usepackage{hyperref}  % Enables cross linking in the electronic document version. This package has to be included second to last.
 \usepackage[acronym,toc]{glossaries} % Enables the generation of glossaries and lists fo acronyms. This package has to be included last.
 
+\usepackage[final]{pdfpages}
 \usepackage{epstopdf}
+
+\usepackage{appendix}
+\renewcommand\appendixname{New Name}
 
 % Define convenience functions to use the author name and the thesis title in the PDF document properties.
 \newcommand{\authorname}{Mathieu Le Muzic} % The author name without titles.
@@ -145,7 +149,24 @@
 \end{abstract}
 
 \begin{kurzfassung}
-	\todo{Super cool abstract in German goes here.}
+	Makromoleküle, wie z.B. Proteine, sind die grundlegenden Bausteine von der Maschinen des Lebens und somit essentiell für das Verständnis von physiologischen Prozessen.
+	Illustrationen und Animationen dienen häufig als Mittel für die Kommunikation in der Physiologie, weil sie einfach und mit wenig Hintergrundwissen zu verstehen sind.
+	Ihre Entwicklung braucht jedoch oft Monate von teurer und zeitintensiver manueller Arbeit.
+	Experten aus dem Bereich von Computational Biology produzieren jeden Tag riesige Mengen von öffentlich zugänglichen Daten, welche wertvolle Informationen über die Strukturen und Funktionen von Makromoleküle enthalten.
+	Wir haben die Vision den Erstellungsprozess von illustrativen Visualisierungen im Bereich der Zellbiologie zu optimieren, wobei die gesamten verfügbaren Daten benutzt werden, anstatt auf rein manuelle Arbeit angewiesen zu sein.
+	
+	Im Rahmen dieser Arbeit werden mehrere Ansätze vorgestellt, welche darauf abzielen diese Vision zu realisieren.
+	Der erste Teil dieser Arbeit beschreibt eine Rendering Pipeline, welche interaktive Visualisierung von realistischen molekularen Datensätze ermöglicht mit Hunderten Millionen Markromolekülen.
+	Die Rendering Pipeline ist in einer weit verbreiteten Spiele Engine entwickelt und bekannte Computergraphik Optimierungen wie level-of-detail, instancing und occlusion queries wurden adaptiert wurden um die molekularen Datensätze zu unterstützen.
+	Im zweiten Teil dieser Arbeit wird eine neue Methode für die Erstellung von Cutaway Views präsentiert, welche die räumlichen Erkundung von überfüllten molekularen Landschaften verbessert.
+	Die Methode basiert auf der Benutzung von Clipping-Objekten, welche manuell in der Szene platziert werden und einem Visibility-Equalizer, welcher den visuellen Feinabgleich von den verschiedenen Objekten in der Szene ermöglicht.
+	Um solche Szene zu animieren wird häufig agenten-basierte Modellierung eingesetzt, welche Raumkurven produziert die mit mit strukturellen Information kombiniert werden können.
+	Momentaufnahmen von den Raumkurven werden häufig im Schnellablauf abgespielt um die Länge der visualisierten Sequenz zu verkürzen, wodurch jedoch auch potentiell interessante Ereignisse nicht mehr sichtbar sein können.
+	Im dritten Teil dieser Arbeit wird ein Ansatz präsentiert, der Zeitrafferaufnahmen von agentenbasierten Simulationen visualisiert, welcher versteckte Informationen aufdeckt, die nur mit eine höheren zeitlichen Auflösung sichtbar wären.
+	Der letzte Teil dieser Arbeit beschreibt einen neuen Typ von Partikelsystemen, welcher quantitative Modelle als Input benutzt und fehlender räumliche Information generiert, um die Visualisierungen von Molekularen Raumkurven und Interaktionen zu visualisieren.
+	Das Partikelsystem produziert einen ähnlichen visuellen Output, wie traditionelle agentenbasierten Modelle, allerdings mit geringeren Rechenaufwand.
+	Zusätzlich erlaubt das System interaktiv Simulationsparameter zu verändern, was mit bisherigen Methoden nicht möglich gewesen ist.
+	
 \end{kurzfassung}
 
 
@@ -161,23 +182,26 @@
 
 \input{body.tex} % The body of the thesis
 
+
+
+
 \backmatter
 
 % Use an optional list of figures.
-\listoffigures % Starred version, i.e., \listoffigures*, removes the toc entry.
+%\listoffigures % Starred version, i.e., \listoffigures*, removes the toc entry.
 
 % Use an optional list of tables.
-\listoftables % Starred version, i.e., \listoftables*, removes the toc entry.
+%\listoftables % Starred version, i.e., \listoftables*, removes the toc entry.
 
 % Use an optional list of alogrithms.
-\listofalgorithms
-\addcontentsline{toc}{chapter}{List of Algorithms}
+%\listofalgorithms
+%\addcontentsline{toc}{chapter}{List of Algorithms}
 
 % Add an index.
 \printindex
 
 % Add a glossary.
-\printglossaries
+%\printglossaries
 
 % Add a bibliography.
 \bibliographystyle{alpha}

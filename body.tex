@@ -10,9 +10,9 @@
 	description={A text editor is a type of program used for editing plain text files.}
 }
 
-\chapter{Overview}
+\part{Overview}
 
-\section{Introduction}
+\chapter{Introduction}
 
 Biochemistry lies at the root of complex biological systems that describe the machinery of life.
 In order to understand how we work, we must first understand the complete cascade of events starting from the atomic level.
@@ -25,7 +25,6 @@ Moreover, there is also a growing interest from the general audience to understa
 	\caption{A painting made by David S. Goodsell of a cross-section revealing the internals of a mitochondrion. The view focuses on the outer and inner membrane of the organelle (green). The genome is shown in yellow, and the remaining proteins are both coloured according to their type and location. Note how the Goodsell arranged the scene to ensure that all the key elements are visible in a single image, and how the visual mapping of shapes and colors contribute to the clarity of the image.}
 	\label{fig:david-s}
 \end{figure}
-
 
 Visual communication is undeniably efficient for educating a non-expert audience about the how physiological processes function.
 A quick glance into physiological textbooks is enough to realize that they would be close to useless without any illustrations.
@@ -92,7 +91,7 @@ Indeed, since the visualized output would directly derive from the data, it woul
 What is truly needed is a solution that would collect and use all this data and enable real-time visualization and interaction with the showcased models. 
 Although data-collection and real-time rendering are important challenges that first comes in mind, this ambitious enterprise also comprises many interesting visualization-related challenges which we tried to address and which we will present in this work.
 
-\subsection{Scope and Contributions}
+\section{Scope and Contributions}
 
 \begin{figure*}
 	\centering	
@@ -109,21 +108,21 @@ Although data-collection and real-time rendering are important challenges that f
 		This thesis is based on the following publications:		
 		\begin{list}{}{}			
 			\label{fig:list-contributions}
-			\item[\textbf{1}]\textbf{Mathieu Le Muzic}, Julius Parulek, Anne-Kristin Stavrum, and Ivan Viola. Illustrative visualization of molecular reactions using omniscient intelligence and passive agents. In \textit{Computer Graphics Forum}, pages 141–150, 2014. 
+			\item[\textbf{A}]\textbf{Mathieu Le Muzic}, Julius Parulek, Anne-Kristin Stavrum, and Ivan Viola. Illustrative visualization of molecular reactions using omniscient intelligence and passive agents. In \textit{Computer Graphics Forum}, pages 141–150, 2014. 
 			
-			\item[\textbf{2}]\textbf{Mathieu Le Muzic}, Manuela Waldner, Julius Parulek, and Ivan Viola. Illustrative timelapse: A technique for illustrative visualization of particle-based simulations. In \textit{IEEE Pacific Visualization Symposium} (PacificVis), pages 247–254, 2015.
+			\item[\textbf{B}]\textbf{Mathieu Le Muzic}, Manuela Waldner, Julius Parulek, and Ivan Viola. Illustrative timelapse: A technique for illustrative visualization of particle-based simulations. In \textit{IEEE Pacific Visualization Symposium} (PacificVis), pages 247–254, 2015.
 			
-			\item[\textbf{3}]\textbf{Mathieu Le Muzic}, Ludovic Autin, Julius Parulek, and Ivan Viola. cellVIEW: a tool for illustrative and multi-scale rendering of large biomolecular datasets. In \textit{Proceedings of the Eurographics Workshop on Visual Computing for Biology and Medicine}, pages 61–70, 2015.
+			\item[\textbf{C}]\textbf{Mathieu Le Muzic}, Ludovic Autin, Julius Parulek, and Ivan Viola. cellVIEW: a tool for illustrative and multi-scale rendering of large biomolecular datasets. In \textit{Proceedings of the Eurographics Workshop on Visual Computing for Biology and Medicine}, pages 61–70, 2015.
 			
-			\item[\textbf{4}]\textbf{Mathieu Le Muzic}, Peter Mindek, Johannes Sorger, Ludovic Autin, David S. Goodsell, and Ivan Viola. Visibility equalizer cutaway visualization of mesoscopic biological models. In \textit{Computer Graphics Forum}, pages 161–170. 2016.				
+			\item[\textbf{D}]\textbf{Mathieu Le Muzic}, Peter Mindek, Johannes Sorger, Ludovic Autin, David S. Goodsell, and Ivan Viola. Visibility equalizer cutaway visualization of mesoscopic biological models. In \textit{Computer Graphics Forum}, pages 161–170. 2016.				
 		\end{list}			
 		
 		The following article are also related to this thesis:	
 		\begin{list}{}{}			
-			\item[\textbf{B}]Manuela Waldner, \textbf{Mathieu Le Muzic}, Matthias Bernhard, Werner Purgathofer, and Ivan Viola. Attractive flicker—guiding attention in dynamic
+			\item[\textbf{I}]Manuela Waldner, \textbf{Mathieu Le Muzic}, Matthias Bernhard, Werner Purgathofer, and Ivan Viola. Attractive flicker—guiding attention in dynamic
 			narrative visualizations. In \textit{IEEE Transactions on Visualization and Computer Graphics}, pages 256–265, 2014.	
 			
-			\item[\textbf{A}]Nicholas Waldin, \textbf{Mathieu Le Muzic}, Manuela Waldner, Eduard Gröller, David S. Goodsell, Autin Ludovic, and Ivan Viola. Chameleon: Dynamic Color Mapping for Multi-Scale Structural Biology Models. In \textit{Proceedings of the Eurographics Workshop on Visual Computing for Biology and Medicine}, pages 61–70, 2016.						
+			\item[\textbf{II}]Nicholas Waldin, \textbf{Mathieu Le Muzic}, Manuela Waldner, Eduard Gröller, David S. Goodsell, Autin Ludovic, and Ivan Viola. Chameleon: Dynamic Color Mapping for Multi-Scale Structural Biology Models. In \textit{Proceedings of the Eurographics Workshop on Visual Computing for Biology and Medicine}, pages 53–62, 2016.						
 		\end{list}		
 	}	
 	\label{master-diagram}	
@@ -166,7 +165,7 @@ It is worth mentioning, that all the pieces of software associated with these co
 
 %\pagebreak
 
-\textbf{Preparing The Raw Data}
+\subsection{Preparing The Raw Data}
 
 In our particular use case, the input data is coming from various sources, and needs to be unified before being visualized.
 Structural information of large number of macromolecules, is publicly available via online databases.
@@ -178,7 +177,7 @@ However, particle-based modeling has a high computational footprint, which prohi
 Quantitative modelling, such as Kinetic modeling is usually much more lightweight to compute but only provides quantitative and relational information, and the spatial component is entirely missing from the model description.
 Therefore we developed a new type of solution which is able to generate 3D particle animation driven by the results of a quantitative simulation, thus allowing us to visualize spatial information and to interact with the simulation parameters in real-time.~\cite{le2014illustrative}.
 
-\textbf{Filtering}
+\subsection{Filtering}
 
 The data is now ready to enter the visualization pipeline and consist of positions of single atoms for the macro-molecular structures on the one hand, and the combined trajectory and reaction history of individual molecules on the other hand.
 Because of the chaotic nature of the forces driving the motion of molecules inside living cells, the raw visualization of such data often results in an overly complex visual output, which is challenging to comprehend.
@@ -194,7 +193,7 @@ A characteristic of molecular bodies is that many of them actually share the sam
 Our technique, called Visibility Equalizer~\cite{le2016visibility}, allows user to see inside dense arrangements of proteins, by giving the viewer an explicit control over the visibility of entire groups of molecules sharing a similar structure. 
 Rather than completely displaying or removing entire sets of proteins, we introduced the concept of fuzzy visibility which allows to reduce the concentration of visible elements of a given type, and thus reveal the internals of a cell while preserving important contextual information.
 
-\textbf{Mapping}
+\subsection{Mapping}
 
 The next operation of the pipeline is the mapping, and will determine visual properties such as shape or color.
 Because the data we want to visualize features multiple scales, down to single atoms and up to entire cells, it is important to adapt the visual representation accordingly to ensure an optimal comprehension of the scene at any given zoom level.
@@ -209,7 +208,7 @@ It can either be used to discriminate atoms with different physio-chemical prope
 Often these properties can only be optimally observed at single zoom level.
 Therefore we developed a novel coloring approach that optimises the color coding based on the current zoom level to ensure that only the most relevant information is revealed when exploring large molecular landscapes features multiple scales~\cite{waldin2016chameleon}.
 
-\textbf{Dynamic Visual Guidance}
+\subsection{Dynamic Visual Guidance}
 
 Traditional focus+context approaches are commonly utilized to highlight key interactions between molecular agents when observing an ongoing biological system.
 However, these may fail when observing the results on a large projection displays because they should be effective both for the foveal as well as the peripheral vision, especially when viewing large ensembles of particles that exhibit very chaotic motion patterns.
@@ -229,7 +228,7 @@ When it comes to the geometric representation of a single macromolecule, we mode
 We also utilize level-of-detail to switch between simplified protein structure proxies on-the-fly according to the distance or a molecule to the camera~\cite{le2014illustrative}.
 Further acceleration techniques have also been designed to optimise the rendering speed even further, such as occlusion culling and as well as a new rendering pipeline dedicated to linear nucleic-acids macromolecules~\cite{le2015cellview}. 
 
-\subsection{Contributions of Co-authors}
+\section{Contributions of Co-authors}
 
 All manuscripts that constitute this thesis were written during the PhD project and the author of this thesis is also their main author. 
 Ivan Viola, the main supervisor of this thesis, coauthored all manuscripts. 
@@ -243,18 +242,18 @@ Paper 3 was co-authored by Ludovic Autin, who generated all the mesoscale models
 Paper 4 was co-authored by Peter Mindek as second first author since we deemed that both author contributed equally to the success of this article, this mention is also present in the publication.
 Paper 4 also received additional help from Johannes Sorger for the writing of the manuscript, and the design choices were also influenced by the feedback we received from Ludovic Autin and David S. Goodsell.
 
-\subsection{Thesis Structure}
+\section{Thesis Structure}
 
 This thesis consists of two parts.
 The first part summarizes individual contributions and findings and also aims at describing how these single pieces fit together as part of a bigger picture.
 The second part contains the published articles.
 The first part starts with an overview of previous work related to visualization of structural and systems biology, with an emphasis on multi-scale visualization. 
 A more detailed overview of related works is contained in the individual papers in the second part of this thesis. 
-Following the related work, we provide in-depth details about the contributions, starting with the visualization of strictly static and structural information in section \ref{sec:section3}.
-In the following section, we present our work that is concerned with the visualization of large scales structures enhanced with procedural information obtained from real scientific data. 
-Finally, we conclude the first part of the thesis in Section~\ref{sec:section5}
+Following the related work, we provide in-depth details about the contributions, starting with the visualization of strictly static and structural information in Chapter \ref{sec:section3}.
+In the following Chapter, we present our work that is concerned with the visualization of large scales structures enhanced with procedural information obtained from real scientific data. 
+Finally, we conclude the first part of the thesis in Chapter 5~\ref{sec:section5}
 
-\section{Background and Related Work}
+\chapter{Background and Related Work}
 
 In biochemistry, it exists two distinct experimental protocols, respectively called dry and wet laboratories.
 Wet laboratories are where chemical agents are physically manipulated and then observed.
@@ -272,7 +271,7 @@ Data is often stored in digital format and may be shared with peers via online d
 Structural biology and Systems biology are branches of molecular biology that both heavily rely on computational methods.
 Structural biology informs us about how things look, i.e., what is the atomic structure of a protein, while systems biology informs us about how things work, i.e., what are the micro and macromolecules interactions that influence the functioning of living organisms.
 
-\subsection{Visualization of Biological Structures}
+\section{Visualization of Biological Structures}
 
 Structural biology is the branch of biology that is concerned by the structure of biological macromolecules, such as proteins or DNA, for example, and focuses on understanding the relationship between the structure of molecules and their function.
 Data acquisition methods, such as x-ray crystallography, are commonly used to read in details the atomic structure of proteins, i.e., the positions or atoms, their type, and the type of bonds between them.
@@ -386,7 +385,7 @@ However, none of these surface-based methods is yet able to compete in terms of 
 
 %\textbf{TODO: Read Bara's STAR report and try to enrich this section a little bit more}
 
-\subsection{Visualization of Biological Systems}
+\section{Visualization of Biological Systems}
 
 \begin{figure}
 \centering
@@ -474,7 +473,7 @@ An advantage of this approach is that it significantly reduces visual clutter an
 However, this approach was only designed for a certain type of domain users, rather than a general audience.
 Although it may help reducing overall visual clutter, it also removes individual particle behaviour, which would be crucial to showcase in order to ensure that the underlying information, i.e., the actual function of each actor of the system, is perceived by the viewer.
 
-\section{Rendering and Composition of Molecular Landscapes}
+\chapter{Rendering and Composition of Molecular Landscapes}
 \label{sec:section3}
 
 \begin{figure}
@@ -491,8 +490,6 @@ The rendering should also leave enough resources free for eventual additional co
 Moreover, none of the techniques mentioned above have proved to efficiently support other types of molecular structures that exhibit a more complex organization, such as lipid membranes, nucleic acids or fibres, which ought to be taken into account for a truer depiction of molecular landscapes.
 These are indeed more challenging to render, because the assembling blocks of these structures are considerably smaller and also more numerous than with protein data.
 
-
-
 In order to provide a truer depiction of micro-organisms and improve real-time user experience, we decided to investigate new rendering approaches that would address all these limitations.
 A shortcoming of the volumetric approach presented by Lindow et al.~\cite{lindow2012interactive}, is that for each rendered macro-molecule, additional expensive ray-traversal routines are required during the per-fragment processing, which may unbalance parallel thread execution and cause considerable bottlenecks, especially with dense scenes composed of small individual macromolecules.
 We opted for an impostor-based method for the design of our rendering pipeline, which requires more individual per-fragment thread execution per macro-molecule, but is far more balanced and suitable for parallel processing and also does not require expensive volume sampling operation upon rendering. 
@@ -507,7 +504,6 @@ So far, state-of-the-art methods that are able to render up to several billion a
 Besides increasing the computational complexity of the rendering, denser scenes may also cause major occlusion issues because important internal structures, such as DNA for example, may be hidden by surrounding elements.
 Hence, we also propose a custom scene composition pipeline to adjust the visibility of proteins, while preserving important contextual information.
 The pipeline is also engineered to leverage the power of GPU computing in order to provide a responsive user experience even with a large number of macromolecules.
-
 
 \begin{figure}
 	\centering
@@ -530,7 +526,7 @@ The pipeline is also engineered to leverage the power of GPU computing in order 
 %\end{figure}
 %
 
-\textbf{Level-of-detail}
+\section{Level-of-detail}
 
 Level-of-detail (LOD) is a method often used in computer games to cope with the limited polygon budget of real-time applications.
 The principle consists of drawing simpler mesh representations for distant objects that have less pixel coverage to reveal high-frequency details. 
@@ -569,7 +565,7 @@ Impostors are used to generate the spheres and thus the computational footprint 
 \label{fig:lod}
 \end{figure}
 
-\textbf{Instancing}
+\section{Instancing}
 
 Instanced drawing is a concept widely used in computer graphics that aims at reducing the memory bandwidth and footprint, as well as reducing the GPU-driver latency caused by a large number of draw commands.
 This concept was applied by Lampe et al.~\cite{lampe2007two} who used the geometry shader stage to instantiate the atomic structure of entire amino acids, also called residues, directly from the GPU rasterization pipeline.
@@ -610,7 +606,7 @@ Additionally, the memory footprint is considerably smaller than previous techniq
 %TODO Figure Methodology ??
 %TODO Figure Benchmark
 
-\textbf{Occlusion Culling}
+\section{Occlusion Culling}
 
 %is the rendering stage which the most demanding and causes a bottleneck in the pipeline.
 %Mesoscale datasets such as the one generated with cellPACK often result in a very dense arrangement of macro-molecules.
@@ -646,7 +642,7 @@ We propose to adapt this method to run in parallel on graphics processing units,
 Because only one thread execution is needed to compute a single query, we are also able to dispatch the GPU computation of multiple queries in a single command, thus approaching zero GPU-driver overhead.
 With our most complex scene, we were able to save up to 50\% of the rendering computation thanks to our batched occlusion queries.
 
-\textbf{Fibres Structures}
+\section{Fibres Structures}
 
 %It is also worth mentioning that the proposed modelling approach does not aspire to provide a strictly accurate depiction of DNA structure.
 %Instead, we aim a showcasing an resembling representation of the structure which is fast to compute and designed for illustration purposes only.
@@ -711,9 +707,7 @@ After transforming the local sphere position with the position and rotation of t
 Subsequently, the geometry shader is used to inject the remaining vertices around the sphere centroids, in order to form the triangles of the 2D sphere billboards.
 A final render of our fast genome rendering pipeline is shown in Figure \ref{fig:picture11}.
 
-
-
-\textbf{Occlusion Management}
+\section{Occlusion Management}
 
 %\begin{figure}
 %	\centering
@@ -800,11 +794,6 @@ Therefore, we developed a custom culling pipeline using GPU computing to guarant
 Macro-molecules that are set as species of interest are first rendered in a separate off-line depth texture and used as input to perform image-based occlusion queries for each of the remaining elements and detect occluders.
 Additionally to our quantitative approach for occlusion management we also provide support for traditional clipping objects such as planes, cube or sphere that can manually be placed in the 3D scene.
 
-
-
-
-
-
 %\begin{figure}
 %\centering
 %\includegraphics[width=0.7\linewidth]{"graphics/visibility equalizer2"}
@@ -813,7 +802,7 @@ Additionally to our quantitative approach for occlusion management we also provi
 %\end{figure}
 %Reference Figure \ref{fig:equalizer-results} here.
 
-\section{Emulating the Machinery of Life}
+\chapter{Emulating the Machinery of Life}
 \label{sec:section4}
 %In structural biology, dynamics simulations, such as molecular dynamics (MD), or brownian dynamics (BD) are used to reproduce the physical behaviour of groups of atoms in three dimensions, in order to understand their function.
 %The initial purpose of cellPACK was to generate models that could serve as initial state in order to run large scale dynamics simulations on super computers.
@@ -893,13 +882,13 @@ In order to reduce computational costs, the reaction diffusion process is extrem
 To summarize this principle, each molecule is represented as a 3D point and subject to a simple random walk motion to simulate the diffusion in a crowded environment, and reactions between agents are triggered upon collision between the bounding spheres of two particles.
 
 Particle-based modeling is thus more appealing to us compared to other modeling approaches, as it provides additional particle trajectories that can simply be played back in a virtual scene to automatically generate animated sequences.
-In this section, we will investigate the use of system biology data combined with structural information to generate comprehensive visualization of simulated processes.
+In this chapter, we will investigate the use of system biology data combined with structural information to generate comprehensive visualization of simulated processes.
 In the first part, we will show how to overcome a major drawback of playing-back particle trajectory data, which is how to deal with the prevailing chaos that is naturally present in living cells when observing the reaction-diffusion process of large number of particles.
 Another limitation of particle-based modeling is that the simulation must be precomputed beforehand, due to the high computational cost of this method, which prevents changes of the simulation course during the visualization.
 Compared to particle-based modeling, quantitative modeling, such as kinetic modeling, has a very light computational footprint.
 In the second part, we will explore the use of an hybrid approach using particle systems and kinetic modeling to produce a similar visual output as particle-based modeling with a much lighter computational cost, thus enabling changes of the simulation parameters in real-time. 
 
-\subsection{Observing Multiple Time Scales Simultaneously}
+\section{Observing Multiple Time Scales Simultaneously}
 
 In particle-based modeling, also known as agent-based modeling, the reaction-diffusion is explicitly simulated for each individual particle present in the system.
 In a single simulation step, the simulation routine performs a random displacement for each particle to mimic the diffusion phenomenon in crowded environment, and also trigger reactions events upon collision of two neighbouring particles.
@@ -1008,7 +997,7 @@ When using a perspective projection in the visualization, elements close to the 
 In fact, their screen space velocity is approximately the same, this illusion is due to the differences in pixel coverage of particles that are located in the background.
 This effect results in a smooth and continuous transition between the motion of front and background particles, which is more tedious to obtain with the world-space approach because it requires additional fine tuning.
 
-\subsection{Quantity-Driven Particle Animations}
+\section{Quantity-Driven Particle Animations}
 
 In systems biology, there exist various modeling approaches that are either deterministic, such as quantitative modeling, or stochastic, such as particle-based modeling.
 One advantage of the agent-based approach is, as discussed above, is the presence of spatial information that can easily be displayed in a 3D view.
@@ -1067,7 +1056,7 @@ By default, the reaction participants are randomly chosen in the 3D scene, but i
 
 Reference Figure \ref{fig:figure21}
 
-\section{Conclusion and Future Work}
+\chapter{Conclusion}
 \label{sec:section5}
 
 The initial aim of this PhD project was to develop a visualization platform that would keep the audience and multidisciplinary experts informed about state-of-the-art knowledge in cell biology, using 3D rendered animations as mean of communication.
@@ -1077,7 +1066,7 @@ Therefore, the presented techniques have a strong emphasis on GPU-computing in o
 To achieve this ambitious enterprise, we first identified and isolated the most challenging parts of the pipeline and focused on addressing them individually.
 In some cases, these challenges where addressed by improving current state-of-the-art techniques, such as large scale molecular rendering, but we also presented novel concepts to solve visualization problems that have not yet been investigated in the context of cell biology, such as our omniscient intelligence, illustrative time-lapse or visibility equalizers.  
 
-\subsection{Summary}
+\section{Summary}
 
 We first proposed a novel technique to render large-scale molecular datasets, while preserving atomic-scale details when zooming in.
 Previous methods utilized the concept of instancing but also relied on ray casting, which fails to deliver high frequency refresh rates. 
@@ -1113,7 +1102,7 @@ Since spatial data and simulation are decoupled, we thus gain control over what 
 With particle-based modeling, this behaviour is stochastic, which means that when focusing on a given particle we have no guaranty that the particle will undergo a complete reaction cycle described in the pathway in a reasonable amount of time, which is impractical for story-telling.
 With the passive agents we have the power to focus on a single element and to force him to undergo an entire reaction cycle, thus facilitating the viewing of the dynamics of a given process.
 
-\subsection{Lessons Learned}
+\section{Lessons Learned}
 
 In the course of this thesis, we have learned that biological entities tend to feature a large number of elements sharing a similar structure, and that we can often use this specificity to our advantage when addressing visualization challenges.
 For example, cells are composed of multiple sub-cellar entities, such as Mitochondria or Golgi apparatus, and which are present in multiple instances.
@@ -1132,7 +1121,7 @@ We can remove some instances of a particular building block as long as we keep f
 \textbf{Visual Story-telling}: we can tell a story about a process using any structural building block, we do not need to use a particular one and and follow the course of a realistic particle behaviour that may not always reveal important information.
 This gives us freedom for designing explanatory storytelling visualization techniques.
 
-\subsection{Future Work}
+\section{Future Work}
 
 The models which we utilized to showcase the dynamics of biological systems are only simple yet realistic demonstration models, which do not truly compare in complexity with the systems which we initially wanted to showcase.
 Although we showed that the techniques we designed are able to support real scientific data, we yet have to combine structural and physiological composition for entire cells instead.
@@ -1159,4 +1148,49 @@ While we have successfully accomplished the task of showing how elements of a sy
 With our omniscient intelligence, we have showed how to distort the normally stochastic behaviour to present a complete reaction cycle in a reasonable amount of time.
 We now have to start thinking about new methods to morph this with more traditional 2D information and possibly provide intermediate views and transitions between realistic 3D representation and static 2D reaction diagrams.
 
-\chapter{Published Articles}
+
+\part{Selected Publications}
+
+\renewcommand\appendixname{Paper}
+\appendix
+
+
+
+\chapter{Illustrative Visualization of Molecular Reactions using Omniscient Intelligence and Passive Agents}
+
+\begin{flushright}
+	Published in \cite{le2014illustrative} by the Eurographics Association.
+\end{flushright}
+
+\includepdf[pages=-]{papers/published/eurovis2014.pdf}
+
+
+\chapter{Illustrative Timelapse: \\
+	A Technique for Illustrative Visualization 	of Particle-Based Simulations}
+
+\begin{flushright}
+	Published in \cite{le2015illustrative} by IEEE.
+\end{flushright}
+
+\includepdf[pages=-]{papers/published/pacificvis2015.pdf}
+
+
+\chapter{cellVIEW: \\
+	A Tool for Illustrative and Multi-Scale Rendering \\
+	of Large Biomolecular Datasets}
+
+\begin{flushright}
+	Published in \cite{le2015cellview} by the Eurographics Association.
+\end{flushright}
+
+\includepdf[pages=-]{papers/published/vcbm2015.pdf}
+
+
+\chapter{Visibility Equalizer: \\
+	Cutaway Visualization of Mesoscopic Biological Models}
+
+\begin{flushright}
+	Published in \cite{le2016visibility} by the Eurographics Association.
+\end{flushright}
+
+\includepdf[pages=-]{papers/published/eurovis2016.pdf}
